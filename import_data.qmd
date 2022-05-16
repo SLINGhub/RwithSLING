@@ -1,0 +1,114 @@
+# Import data into R
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("_common.R")
+```
+
+Throughout this workshop we will use datasets that we often us encounter during our work. These include pre-processed MS datasets and study metadata of different types and formats.
+
+```{r setup}
+#| message: false
+
+library(here)
+library(SLINGtools)
+library(tidyverse)
+library(readxl)
+
+```
+
+## Read CSV files
+
+### Read a *perfect* CSV file
+
+Perfect refers here a tidy, consistent table without missing values. A few considerations when importing data files:
+
+-   The first row should contains the column names, all subsequent rows data/values
+-   White spaces before or after text fields can (and often will) cause issues downstream, therefore I suggest to trim whitespaces, e.g. by setting `trim_ws = TRUE`
+-   In omics datasets, often rows correspond to samples, and columns to compounds (features).
+
+```{r}
+#| label: read-flat-CSV
+
+data_file_path <- here("data/Testdata_Lipidomics_flat_wide.csv")
+d_wide <- readr::read_csv(data_file_path, trim_ws = TRUE)
+```
+
+By default `read_csv()` outputs a summary of the import. Note that `read_csv` will by default *guess* the type of data each column. The output provides then a summery of the assigned data types (see below). In the example above, we see that all columns describing the samples are text (`<char>)`, and all columns with lipid names are numeric (`<dbl>`).
+
+::: {.callout-note}
+## Basic data types in R that can occur in tables
+
+| Type             | Short    | Description             | Example(s)           |
+|------------------|----------|-------------------------|----------------------|
+| Numeric (double) | `<dbl>`  | Floating point number   | `3.14159`            |
+| Character        | `<char>` | Character (text) string | `"S1P d18:1", "BQC"` |
+| Logical          | `<lgl>`  | True or False, 1 or 0   | `TRUE; FALSE`        |
+| Integer          | `<int>`  | Number without digits   | `3L; 7011L; -13L`    |
+| Factor           | `<fct>`  | Categorical data        | `BQC; TQC; SPL`      |
+
+Moreover there are data and time types, i.e. date `<dt>`, time `<tm>` and datetime `<dttm>`
+:::
+
+You can print tables in the console or in R notebook (.Rmd), which will also show the column types:
+
+```{r}
+#| label: output-read-flat-CSV
+d_wide
+```
+
+### Read CSVs with missing values
+
+Data files often contain missing values, i.e. as empty cells. `read_csv()` assigns empty/missing values during the import to the specific value `NA` (*Not Available*). Missing values will in general not affect to data type guessed by `read_csv()`, except all values or missing in a column (see later).
+
+However, it might be that your data file contains specific text for missing values, for instance "*ND"*, "*LOD"* or lowercase *"na"*. Results from e.g. clinical chemistry labs frequently indicate not available data with a short text such as *"clotted"*, *"hemolytic"*, *"no received"* to explain why a value was not reported. What happens when we import such a file using default `read_csv`?
+
+```{r}
+#| label: read-flat-CSV-ND
+data_file_path <- here("data/Testdata_Lipidomics_flat_wide_with_differentNA.csv")
+d_wide <- readr::read_csv(data_file_path, trim_ws = TRUE)
+
+```
+
+`read_csv()` was mislead by the presence of unknown text values and guessed the data types wrongly as `<char>` for some columns. We also have two columns of the type `<lgl>`, which stand for logical (`TRUE`/`FALSE`), what happend here? All peak areas of e.g. CE 16:2 were missing and `read_csv` has no way to guess what is the intended data type, in which case it chooses `<lgl>`as default.
+
+We will not be able to perform any calculations for columns that are text or logical. We therefore need to explicitly tell R what values to interpret as missing values (`NA`). We can do this by providing a list of texts that should be interpreted as `NA` via the `na` parameter:
+
+```{r}
+#| label: read-flat-CSV-na
+data_file_path <- here("data/Testdata_Lipidomics_flat_wide_with_differentNA.csv")
+d_wide <- readr::read_csv(data_file_path, 
+                          trim_ws = TRUE, 
+                          na = c("ND", "LOD"))
+print(d_wide)
+
+```
+
+::: {.callout-note appearance="minimal"}
+Missing values can be a source of difficult to trace erros. Defined and careful dealing with missing values is therefore important. Also note, that there is no way to have different types of missing values in the standard R data table formats.
+:::
+
+## Importing an Excel table
+
+Importing Excel is easy too via the help of external packages such as `readxl`. Note that you will need to define which sheet to import (e.g. below `Sheet1`). The same considerations about missing values and white spaces as detailed before apply here too.
+
+```{r}
+#| label: read-flat-XLS
+data_file_path <- here("data/Testdata_Lipidomics_flat_wide.xlsx")
+d_wide <- readxl::read_xlsx(data_file_path,
+                            sheet = "Sheet1",
+                            trim_ws = TRUE, 
+                            na = c("ND"))
+print(d_wide)
+
+```
+
+
+::: {.callout-important appearance="default"}
+## Check your imported data
+
+Check integrity of your imported data, that data types were correctly assigned and that missing values were corrently handled. Do not assume the imported data is fine without having reason to do so.
+:::
+
+

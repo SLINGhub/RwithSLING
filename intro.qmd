@@ -1,0 +1,49 @@
+# Introduction
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("_common.R")
+```
+
+## Prerequisites
+
+Following software need to be installed on your computer to work with the examples shown in this online book:
+
+-   `R` Version 4.1 (or higher) <https://cloud.r-project.org/>. Check your R version by running following command in your console:
+    ```{r r-version}
+    R.Version()$version.string
+    ```
+
+-   `RStudio` Version 2022.02 or higher <https://www.rstudio.com/products/rstudio/download/#download>. Check your `RStudio` version by either looking clicking *About RStudio* under the menu *Help*, or by running following command in your console
+
+    ```{r rstudio-version}
+    #| eval: false
+    
+    rstudioapi::versionInfo()$version
+    ```
+
+Following software are only needed for specific chapters/examples:
+
+-   `Git` <https://git-scm.com/downloads>
+-   For Windows: `Rtools` \<https://cran.r-project.org/bin/windows/Rtools/
+
+## Frequently used R packages
+
+See also \@ref(Installing R packages)
+
+Following R packages will be often used in the given examples and it is thus recommended to install them before starting with this book
+
+-   `here`
+-   `tidyverse`(installs `ggplot2, dplyr, tidyr, tibble, readr, forcats, stringr, purrr`)
+-   `readxl`
+-   `remotes`
+
+Run this in your R command line to install these packages:
+
+```{r}
+#| eval: false
+
+pkg_list <- c("here", "tidyverse", "readxl", "remotes")
+install.packages(pkg_list)
+```

@@ -1,0 +1,44 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "RwithSLING"
+  author: 
+  - name: "Bo Burla"
+    affiliation: "Singapore Lipidomics Incubator @ NUS"
+  date: "5/13/2022"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - part: part1.qmd
+      chapters: 
+      - import_data.qmd
+      - datawrangling.qmd
+    - part: part2.qmd
+      chapters: 
+      - import_MSdatasets.qmd
+    - references.qmd
+
+  page-footer:
+    left: |
+      R with was written by Singapore Lipidomics Incubator (SLING).
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      light: 
+        - cosmo
+        - RwithSLING.scss
+      dark: darkly
+      code-link: true
+
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
