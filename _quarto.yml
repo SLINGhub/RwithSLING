@@ -11,11 +11,11 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: part1.qmd
+    - part: tutorials.qmd
       chapters: 
       - import_data.qmd
       - datawrangling.qmd
-    - part: part2.qmd
+    - part: recipes.qmd
       chapters: 
       - import_MSdatasets.qmd
     - references.qmd

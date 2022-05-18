@@ -1,21 +1,18 @@
----
-title: "My Document"
-format: html
-knitr:
-  opts_chunk: 
-    collapse: true
-    comment: "#>"
----
+# Subsetting tables
 
-# Importing and Manipulating Tables
+```{r}
+#| results: "asis"
+#| echo: false
+source("_common.R")
+```
+
+
 
 ```{r setup}
 #| echo: false
 library(here)
 library(SLINGtools)
 library(tidyverse)
-options(tibble.print_min = 4L,tibble.print_max = 4L)
-
 ```
 
 ## Import an Agilent MassHunter CSV file using `SLINGtools`

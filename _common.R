@@ -18,7 +18,8 @@ options(dplyr.print_min = 6, dplyr.print_max = 6)
 options(
   #crayon.enabled = TRUE,
   pillar.bold = TRUE,
-  stringr.html = FALSE
+  stringr.html = FALSE,
+  pillar.max_footer_lines = 3
 )
 
 ggplot2::theme_set(ggplot2::theme_gray(12))

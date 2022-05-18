@@ -37,7 +37,7 @@ d_wide <- readr::read_csv(data_file_path, trim_ws = TRUE)
 
 By default `read_csv()` outputs a summary of the import. Note that `read_csv` will by default *guess* the type of data each column. The output provides then a summery of the assigned data types (see below). In the example above, we see that all columns describing the samples are text (`<char>)`, and all columns with lipid names are numeric (`<dbl>`).
 
-::: {.callout-note}
+::: callout-note
 ## Basic data types in R that can occur in tables
 
 | Type             | Short    | Description             | Example(s)           |
@@ -104,11 +104,8 @@ print(d_wide)
 
 ```
 
-
 ::: {.callout-important appearance="default"}
 ## Check your imported data
 
 Check integrity of your imported data, that data types were correctly assigned and that missing values were corrently handled. Do not assume the imported data is fine without having reason to do so.
 :::
-
-

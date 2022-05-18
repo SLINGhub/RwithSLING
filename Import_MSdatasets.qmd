@@ -11,7 +11,7 @@ The R package [SLINGtools](https://github.com/SLINGhub/SLINGtools) provided help
 ```{r}
 #| label: read-areas-MassHunter-CSV
 library(SLINGtools)
-data_file_path <- here("data/Testdata_Lipidomics_MHQuant_Detailed.csv")
+data_file_path <- here::here("data/Testdata_Lipidomics_MHQuant_Detailed.csv")
 d_wide <- SLINGtools::read_peakareas_MassHunterCSV(data_file_path)
 print(d_wide)
 ```
@@ -24,7 +24,7 @@ Detail [MassHunter Quant](https://www.agilent.com/en/product/software-informatic
 
 ```{r}
 #| label: read-full-MassHunter-CSV
-data_file_path <- here("data/Testdata_Lipidomics_MHQuant_Detailed.csv")
+data_file_path <- here::here("data/Testdata_Lipidomics_MHQuant_Detailed.csv")
 d_all_long <- SLINGtools::read_MassHunterCSV(data_file_path)
 print(d_all_long)
 ```
