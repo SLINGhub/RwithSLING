@@ -32,7 +32,8 @@ Following software are only needed for specific chapters/examples:
 
 See also \@ref(Installing R packages)
 
-Following R packages will be often used in the given examples and it is thus recommended to install them before starting with this book
+Following R packages will be often used in the given examples and it is thus recommended 
+to install them before starting with this book
 
 -   `here`
 -   `tidyverse`(installs `ggplot2, dplyr, tidyr, tibble, readr, forcats, stringr, purrr`)
