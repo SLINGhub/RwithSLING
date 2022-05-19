@@ -10,7 +10,6 @@ _main.rds
 _book
 !LICENSE.md
 !CODE_OF_CONDUCT.md
-*.html
 !plausible.html
 search_index.json
 libs

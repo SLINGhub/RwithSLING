@@ -30,7 +30,6 @@ print(d_orig)
 
 ```{r select-rename-columns}
 #| results: markup
-
 d_subset <- d_orig |> dplyr::select(`AnalysisID` = "DataFileName", 
                              AcqTimeStamp, Compound = Feature, 
                              Area = Intensity)

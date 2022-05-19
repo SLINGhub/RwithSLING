@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.309">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>RwithSLING - 3&nbsp; Subsetting tables</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<link href="./recipes.html" rel="next">
+<link href="./import_data.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link class="quarto-color-scheme" id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link class="quarto-color-scheme" href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="site_libs/bootstrap/bootstrap-dark.min.css">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Subsetting tables</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">RwithSLING</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/SLINGhub/RwithSLING/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a href="./tutorials.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Import data into R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Subsetting tables</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a href="./recipes.html" class="sidebar-item-text sidebar-link">Recipes</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#import-an-agilent-masshunter-csv-file-using-slingtools" id="toc-import-an-agilent-masshunter-csv-file-using-slingtools" class="nav-link active" data-scroll-target="#import-an-agilent-masshunter-csv-file-using-slingtools"> <span class="header-section-number">3.1</span> Import an Agilent MassHunter CSV file using <code>SLINGtools</code></a></li>
+  <li><a href="#select-and-rename-columns" id="toc-select-and-rename-columns" class="nav-link" data-scroll-target="#select-and-rename-columns"> <span class="header-section-number">3.2</span> Select and rename columns</a></li>
+  <li><a href="#filter-table-for-specific-text" id="toc-filter-table-for-specific-text" class="nav-link" data-scroll-target="#filter-table-for-specific-text"> <span class="header-section-number">3.3</span> Filter table for specific text</a></li>
+  <li><a href="#convert-long-table-to-wide-table-format" id="toc-convert-long-table-to-wide-table-format" class="nav-link" data-scroll-target="#convert-long-table-to-wide-table-format"> <span class="header-section-number">3.4</span> Convert long table to wide table format</a></li>
+  <li><a href="#split-column" id="toc-split-column" class="nav-link" data-scroll-target="#split-column"> <span class="header-section-number">3.5</span> Split column</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/datawrangling.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Subsetting tables</span></h1>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<pre><code>#&gt; here() starts at E:/OneDrive - National University of Singapore/Data/Projects/RwithSLING
+#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+#&gt; ✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+#&gt; ✔ tibble  3.1.6     ✔ dplyr   1.0.8
+#&gt; ✔ tidyr   1.2.0     ✔ stringr 1.4.0
+#&gt; ✔ readr   2.1.2     ✔ forcats 0.5.1
+#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#&gt; ✖ dplyr::filter() masks stats::filter()
+#&gt; ✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<section id="import-an-agilent-masshunter-csv-file-using-slingtools" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="import-an-agilent-masshunter-csv-file-using-slingtools"><span class="header-section-number">3.1</span> Import an Agilent MassHunter CSV file using <code>SLINGtools</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_MHQuant_Detailed.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>d_orig <span class="ot">&lt;-</span> <span class="fu">read_MassHunterCSV</span>(data_file_path)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading 'Testdata_Lipidomics_MHQuant_Detailed.csv' ... </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Imported  215 samples with 428 transitions</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_orig)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 92,020 × 14</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   DataFileName      DataName SampleType AcqTimeStamp        VialPosition Feature</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;  </span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 001_EQC_TQC prer… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 14:0</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 001_EQC_TQC prer… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 15:0</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 001_EQC_TQC prer… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 16:0</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 001_EQC_TQC prer… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 16:1</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 001_EQC_TQC prer… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 16:2</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 001_EQC_TQC prer… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 17:0</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 92,014 more rows, and 8 more variables: IonPolarity &lt;fct&gt;,</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   PrecursorMZ &lt;dbl&gt;, ProductMZ &lt;dbl&gt;, CollisionEnergy &lt;dbl&gt;, RT &lt;dbl&gt;,</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Intensity &lt;dbl&gt;, FWHM &lt;dbl&gt;, MI &lt;lgl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="select-and-rename-columns" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="select-and-rename-columns"><span class="header-section-number">3.2</span> Select and rename columns</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d_subset <span class="ot">&lt;-</span> d_orig <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">`</span><span class="at">AnalysisID</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"DataFileName"</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                             AcqTimeStamp, <span class="at">Compound =</span> Feature, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">Area =</span> Intensity)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_subset)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 92,020 × 4</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   AnalysisID              AcqTimeStamp        Compound   Area</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                   &lt;dttm&gt;              &lt;chr&gt;     &lt;dbl&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 001_EQC_TQC prerun 01.d 2018-04-12 18:28:00 CE 14:0    1532</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 001_EQC_TQC prerun 01.d 2018-04-12 18:28:00 CE 15:0     515</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 001_EQC_TQC prerun 01.d 2018-04-12 18:28:00 CE 16:0  127953</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 001_EQC_TQC prerun 01.d 2018-04-12 18:28:00 CE 16:1   40374</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 001_EQC_TQC prerun 01.d 2018-04-12 18:28:00 CE 16:2    1340</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 001_EQC_TQC prerun 01.d 2018-04-12 18:28:00 CE 17:0    7227</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 92,014 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filter-table-for-specific-text" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="filter-table-for-specific-text"><span class="header-section-number">3.3</span> Filter table for specific text</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>d_subset <span class="sc">|&gt;</span> <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"149_BQC_PQC17.d "</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 0 × 4</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 4 variables: AnalysisID &lt;chr&gt;, AcqTimeStamp &lt;dttm&gt;, Compound &lt;chr&gt;,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Area &lt;dbl&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>d_subset <span class="sc">|&gt;</span> <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"149-bQC_PQC17.d"</span>,Compound <span class="sc">==</span> <span class="st">"TG 48:1 [-18:1]"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 0 × 4</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 4 variables: AnalysisID &lt;chr&gt;, AcqTimeStamp &lt;dttm&gt;, Compound &lt;chr&gt;,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Area &lt;dbl&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1"</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1 "</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE  18:1"</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="st">"Ce 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1"</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_trim</span>(<span class="st">"CE 18:1 "</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "CE 18:1"</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_trim</span>(<span class="st">"   CE    18:1 "</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "CE    18:1"</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_squish</span>(<span class="st">"   CE    18:1 "</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "CE 18:1"</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"IS"</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (ISTD)"</span>, <span class="at">pattern =</span> <span class="st">"IS"</span>)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"ISTD"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"LPC"</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"Acylcarnitine 18:1"</span>, <span class="at">pattern =</span> <span class="st">"Acylcarnitine"</span>,<span class="at">replacement =</span> <span class="st">"CAR"</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "CAR 18:1"</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"TG 48:2 [SIM] Results"</span>, <span class="at">pattern =</span> <span class="st">" Results"</span>,<span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "TG 48:2 [SIM]"</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"112_BQC_A9334.d"</span>, <span class="at">pattern =</span> <span class="st">".d"</span>,<span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "112_BQC_A9334"</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_to_lower</span>(<span class="st">"CE 18:1"</span>)</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "ce 18:1"</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>Sample_ID <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(Sample<span class="sc">-</span>ID <span class="ot">&lt;-</span> <span class="dv">1</span>)</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in Sample - ID &lt;- 1 : object 'Sample' not found</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>d_subset <span class="sc">|&gt;</span> <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"149_BQC_PQC17.d"</span>, <span class="fu">str_detect</span>(Compound, <span class="st">"IS|LPI"</span>) )</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 17 × 4</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   AnalysisID      AcqTimeStamp        Compound                         Area</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;           &lt;dttm&gt;              &lt;chr&gt;                           &lt;dbl&gt;</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 149_BQC_PQC17.d 2018-04-13 22:53:00 CE 18:1 d7 (ISTD)              631595</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 149_BQC_PQC17.d 2018-04-13 22:53:00 Cer d18:1/16:0 d31 (ISTD)       34780</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 149_BQC_PQC17.d 2018-04-13 22:53:00 DG 15:0_18:1 d7 (ISTD) [-15:0]  23812</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 149_BQC_PQC17.d 2018-04-13 22:53:00 DG 15:0_18:1 d7 (ISTD) [-18:1]  25833</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 149_BQC_PQC17.d 2018-04-13 22:53:00 Hex2Cer d18:1/16:0 d3 (ISTD)    23393</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 149_BQC_PQC17.d 2018-04-13 22:53:00 HexCer d18:1/16:0 d3 (ISTD)    150238</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 11 more rows</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>d_subset <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(AnalysisID, <span class="st">"BQC|TQC"</span>) , <span class="fu">str_detect</span>(Compound, <span class="st">"IS"</span>)) <span class="ot">-&gt;</span> temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="convert-long-table-to-wide-table-format" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="convert-long-table-to-wide-table-format"><span class="header-section-number">3.4</span> Convert long table to wide table format</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d_area_temp <span class="ot">&lt;-</span> d_subset <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"Compound"</span> ,<span class="at">values_from =</span> <span class="st">"Area"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="split-column" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="split-column"><span class="header-section-number">3.5</span> Split column</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>d_area <span class="ot">&lt;-</span> d_area_temp <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> AnalysisID,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"seq_no"</span>, <span class="st">"QCtype"</span>, <span class="st">"sample_name"</span>), </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">extra =</span> <span class="st">"merge"</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(seq_no, QCtype, sample_name, AnalysisID, <span class="fu">everything</span>())</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>d_area</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 215 × 433</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   seq_no QCtype sample_name   AnalysisID AcqTimeStamp        `CE 14:0` `CE 15:0`</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dttm&gt;                  &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 001    EQC    TQC prerun 0… 001_EQC_T… 2018-04-12 18:28:00      1532       515</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 002    EQC    TQC prerun 0… 002_EQC_T… 2018-04-12 18:39:00      1029       911</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 003    EQC    TQC prerun 0… 003_EQC_T… 2018-04-12 18:51:00       685       649</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 004    EQC    TQC prerun 0… 004_EQC_T… 2018-04-12 19:02:00      1283       576</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 005    EQC    TQC prerun 0… 005_EQC_T… 2018-04-12 19:13:00       946       732</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 006    EBLK   Extracted Bl… 006_EBLK_… 2018-04-12 19:25:00       132        75</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 209 more rows, and 426 more variables: `CE 16:0` &lt;dbl&gt;,</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;dbl&gt;, `CE 17:1` &lt;dbl&gt;,</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d_BQC <span class="ot">&lt;-</span> d_area <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">==</span> <span class="st">"BQC"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>d_res1 <span class="ot">&lt;-</span> d_BQC <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="sc">-</span>seq_no<span class="sc">:-</span>AcqTimeStamp,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">sd</span>(.)<span class="sc">/</span><span class="fu">mean</span>(.)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>d_res1</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 428</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   `CE 14:0` `CE 15:0` `CE 16:0` `CE 16:1` `CE 16:2` `CE 17:0` `CE 17:1`</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      18.8      24.7      35.5      17.0      28.0      29.7      22.0</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 421 more variables: `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;,</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, `CE 18:2` &lt;dbl&gt;, `CE 18:3` &lt;dbl&gt;,</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 20:1` &lt;dbl&gt;, `CE 20:2` &lt;dbl&gt;, `CE 20:3` &lt;dbl&gt;, `CE 20:4` &lt;dbl&gt;, …</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>d_BQC_areas <span class="ot">&lt;-</span> d_BQC <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>seq_no<span class="sc">:-</span>AcqTimeStamp)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>d_res2 <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map_df</span>(d_BQC_areas, <span class="at">.f =</span> <span class="sc">~</span> <span class="fu">sd</span>(.)<span class="sc">/</span><span class="fu">mean</span>(.)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>d_res2</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 428</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   `CE 14:0` `CE 15:0` `CE 16:0` `CE 16:1` `CE 16:2` `CE 17:0` `CE 17:1`</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      18.8      24.7      35.5      17.0      28.0      29.7      22.0</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 421 more variables: `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;,</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, `CE 18:2` &lt;dbl&gt;, `CE 18:3` &lt;dbl&gt;,</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 20:1` &lt;dbl&gt;, `CE 20:2` &lt;dbl&gt;, `CE 20:3` &lt;dbl&gt;, `CE 20:4` &lt;dbl&gt;, …</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>d_res3 <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> d_BQC_areas, </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                 <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="at">CV =</span> <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">mean</span>(x) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">RobustCV =</span> <span class="fu">mad</span>(x)<span class="sc">/</span><span class="fu">median</span>(x) <span class="sc">*</span> <span class="dv">100</span>))</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(d_res3)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           CE 14:0  CE 15:0  CE 16:0  CE 16:1  CE 16:2  CE 17:0  CE 17:1</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       18.84556 24.74707 35.45259 16.95613 28.02984 29.65326 22.01251</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 12.88981 21.75741 38.36699 13.41322 28.47009 34.32963 20.10973</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           CE 18:0  CE 18:1 CE 18:1 d7 (ISTD)  CE 18:2  CE 18:3   CE 20:1</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       19.71472 10.24106          11.74730 16.23165 21.40130 12.224234</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 20.60468 10.76775          13.90369 12.95179 13.16322  8.725951</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           CE 20:2  CE 20:3  CE 20:4  CE 20:5  CE 22:0  CE 22:1  CE 22:4</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       15.93254 14.80080 16.34990 38.63596 49.17848 49.61242 17.58396</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 14.13583 14.30584 17.51334 20.71680 64.33925 53.04413 21.78626</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           CE 22:5   CE 22:6  CE 24:4 Cer d18:0/16:0 Cer d18:0/18:0</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       14.96940 12.984984 31.88878       27.75213       34.78015</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 11.58575  8.480649 29.06162       17.17297       18.69709</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Cer d18:0/20:0 Cer d18:0/22:0 Cer d18:0/22:0 [284] Cer d18:0/24:1</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV             19.34740       12.33288             20.26151       16.60024</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV       17.66644       13.21949             13.89814       11.53537</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Cer d18:0/24:1 [284] Cer d18:1/16:0 Cer d18:1/16:0 d31 (ISTD)</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   20.67131       13.86076                  30.81716</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             17.47794       18.98580                  27.95638</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Cer d18:1/17:0 Cer d18:1/18:0 Cer d18:1/20:0 Cer d18:1/22:0</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV             43.39816       18.92896       22.23855       14.87070</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV       32.56859       22.55349       22.38314       12.42018</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Cer d18:1/24:0 Cer d18:1/24:1 Cer d18:1/25:0 Cer d18:1/26:0</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV            19.081253       22.00200       9.355901       16.49305</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV       9.979294       12.51704       6.074033       11.55002</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Cer d18:2/22:0 Cer d18:2/24:0 Cer d18:2/24:1 COH [161)  COH [95)</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV             15.25108             NA       18.56841 10.341370 10.043430</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV       14.63039             NA       15.30993  6.889555  8.084858</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 14:0_18:1 [-14:0] DG 14:0_18:1 [-18:1] DG 14:0_18:2 [-14:0]</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   53.51307             49.42056             45.54338</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             35.56217             51.71998             61.15940</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 14:0_18:2 [-18:2] DG 15:0_18:1 d7 (ISTD) [-15:0]</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   42.05353                      11.267651</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             37.74869                       6.860265</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 15:0_18:1 d7 (ISTD) [-18:1] DG 16:0_16:0 [-16:0]</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                             14.17982             20.61418</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                       16.00941             22.62948</span></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 16:0_16:1 [-16:0] DG 16:0_16:1 [-16:1] DG 16:0_18:1 [-16:0]</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   29.11118             28.12616             37.85582</span></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             25.60134             26.73448             42.34989</span></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 16:0_18:1 [-18:1] DG 16:0_18:2 [-16:0] DG 16:0_18:2 [-18:2]</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   39.02255             28.69311             25.88991</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             35.93187             28.34402             17.08906</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 16:0_20:3 [-20:3] DG 16:0_20:4 [-20:4] DG 16:0_22:5 [-22:5]</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   38.08898             33.87264             34.55000</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             37.86131             36.18389             32.29021</span></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 16:0_22:6 [-22:6] DG 16:1_18:1 [-16:1] DG 16:1_18:1 [-18:1]</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                    45.5142             29.27760             30.60982</span></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV              40.7185             31.39297             38.78603</span></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 18:0_18:1 [-18:0] DG 18:0_18:1 [-18:1] DG 18:0_18:2 [-18:0]</span></span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   29.20332             34.44538             27.87783</span></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             25.52857             32.23892             17.75930</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 18:0_18:2 [-18:2] DG 18:0_20:4 [-20:4] DG 18:1_18:1 [-18:1]</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   23.74355             27.04907             41.65060</span></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             16.94391             22.11652             23.04181</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 18:1_18:2 [-18:1] DG 18:1_18:2 [-18:2] DG 18:1_18:3 [-18:3]</span></span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   32.75341             34.00186             34.23070</span></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             18.52316             33.71194             25.11232</span></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 18:1_20:3 [-20:3] DG 18:1_20:4 [-18:1] DG 18:1_20:4 [-20:4]</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   33.17060             21.26132             18.78078</span></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             24.19469             17.38769             20.07755</span></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          DG 18:2_18:2 [-18:2] DG 18:2_20:3 [-20:3] DG 18:2_20:4 [-20:4]</span></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                   26.15986             22.40378             15.15811</span></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV             24.56809             23.52355             20.07444</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Diisooctyl Phthalate GM3 d18:1/16:0 GM3 d18:1/18:0 GM3 d18:1/20:0</span></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                    4.28832       25.03012       11.09238       18.62980</span></span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV              4.05493       12.82206       10.04107       21.73299</span></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          GM3 d18:1/22:0 GM3 d18:1/24:0 GM3 d18:1/24:1 Hex2Cer d18:1/16:0</span></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV             21.98111       31.41482       27.96784           26.56259</span></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV       25.77280       34.56335       21.74252           15.45703</span></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Hex2Cer d18:1/16:0 d3 (ISTD) Hex2Cer d18:1/18:0 Hex2Cer d18:1/20:0</span></span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                           14.21246           19.34467           25.13186</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                     15.81212           16.38222           21.94611</span></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Hex2Cer d18:1/22:0 Hex2Cer d18:1/24:0 Hex2Cer d18:1/24:1</span></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                 21.31885           26.22365           29.77217</span></span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV           23.89893           17.03538           23.96224</span></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Hex3Cer d18:1/16:0 Hex3Cer d18:1/18:0 Hex3Cer d18:1/20:0</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                10.939306           44.23664           37.89149</span></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV           9.416301           36.14971           36.61174</span></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Hex3Cer d18:1/22:0 Hex3Cer d18:1/24:0 Hex3Cer d18:1/24:1</span></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                 24.07977           23.99686           20.33080</span></span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV           26.36708           28.27004           23.80753</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          HexCer d18:1/16:0 HexCer d18:1/16:0 d3 (ISTD) HexCer d18:1/18:0</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                31.75498                    16.57795          20.23743</span></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV          22.53090                    17.43308          17.48617</span></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          HexCer d18:1/20:0 HexCer d18:1/22:0 HexCer d18:1/24:0</span></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                20.06439          11.91279          9.425181</span></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV          26.18968          12.58540         11.965828</span></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          HexCer d18:1/24:1  LPC 14:0 LPC 15:0 LPC 16:0  LPC 16:1  LPC 17:0</span></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV               10.206379 32.607869 18.62610       NA 22.171688 23.738569</span></span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV          9.615355  4.205618 13.66712       NA  8.879139  9.215611</span></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           LPC 17:1  LPC 18:0 LPC 18:1 LPC 18:1 d7 (ISTD) LPC 18:2 LPC 18:3</span></span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       27.688541 16.102907 7.942218           3.848798 39.81584 10.93214</span></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV  9.349596  7.898196 7.862337           4.050861 14.07605  6.58989</span></span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           LPC 19:0 LPC 19:1 LPC 20:0 LPC 20:1 LPC 20:2 LPC 20:3 LPC 20:4</span></span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       30.978975 6.693737 62.55981 8.495556 15.59849 16.44787 46.86692</span></span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV  6.520337 6.488933 11.13163 8.849198 11.60871 16.77692 26.19395</span></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          LPC 20:5 LPC 22:0  LPC 22:1 LPC 22:5 LPC 22:6 LPC 24:0 LPC 26:0</span></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       16.76480 19.56457  9.672084 16.79169 29.16983 16.82922 15.20643</span></span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 13.47905 15.29155 10.987358 17.03403 22.29459 13.74373 15.33903</span></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          LPC O-16:0 LPC O-18:0 LPC O-18:1 LPC O-20:0 LPC O-20:1 LPC O-22:0</span></span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV         11.41660   9.761429  12.098855   19.43242  11.152119   20.79914</span></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV   11.07316  10.201032   7.434764   10.84307   9.923341   20.01306</span></span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          LPC O-22:1 LPC O-24:0 LPC P-16:0 LPC P-18:0 LPC P-18:1 LPC P-20:0</span></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV        10.069599   38.36622   7.088695  10.794176  12.196105   9.767569</span></span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV   7.498699   45.83611   8.258499   9.624488   9.240221   9.066431</span></span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           LPE 16:0 LPE 18:0  LPE 18:1 LPE 18:1 d7 (ISTD) LPE 18:2 LPE 20:4</span></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       38.906343 38.44495 36.001432           4.671964 35.62724 20.93769</span></span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV  7.654789 12.46258  7.966259           4.582686 11.33394 23.57916</span></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          LPE 22:6 LPE P-16:0 LPE P-18:0 LPE P-18:1 LPI 20:4 LPS 16:0 LPS 18:0</span></span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       21.13052   35.14855   6.179243   22.83041 77.81525 13.10732 15.36867</span></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 16.76197   16.73557   4.580738   24.97126 25.84031 10.59271 18.78913</span></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          LPS 18:1 LPS 18:2 PC 31:0  PC 31:1  PC 32:0  PC 32:1  PC 32:2  PC 32:3</span></span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       13.76528 44.09307 17.1266 34.70796 10.80382 19.55211 33.04779 45.31158</span></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 17.14907 25.47155 11.0157 24.66769 11.78498 23.59507 11.98098 17.68925</span></span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PC 33:1 PC 33:1 d7 (ISTD)  PC 33:2  PC 34:0   PC 34:1  PC 34:2</span></span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       11.79133          13.38308 14.80331 19.89576 11.234404 6.565694</span></span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 10.12328          14.37698 12.08003 13.93989  5.779942 5.478580</span></span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PC 34:2 + 2O PC 34:2 + O\\PC O-34:3 +2O\\PC P-34:2 +2O  PC 34:3</span></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV          13.606771                                  25.65998 24.57799</span></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV     9.105301                                  11.38876 19.01932</span></span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PC 34:4  PC 34:5  PC 35:1  PC 35:2  PC 35:3  PC 35:4  PC 35:5</span></span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       34.00850 33.78116 22.45082 20.06817 24.33311 25.80891 49.69263</span></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 12.82943 16.25634 10.23086 10.31646 13.85077 14.09562 22.16584</span></span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PC 36:1  PC 36:2  PC 36:3 PC 36:4 a PC 36:4 b  PC 36:5  PC 36:6</span></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       17.79616 6.820233 13.15664  22.37150  11.37750 41.08030 49.35705</span></span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 14.47255 3.921130 11.08014  23.97226  13.54413 17.83294 12.60335</span></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PC 36:7  PC 37:4  PC 37:5   PC 37:6  PC 38:3  PC 38:4</span></span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       46.3832 17.46144 34.08827 33.969907 27.27143 7.600213</span></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 16.4902 15.66963 10.17536  7.523333 19.26180 8.847579</span></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PC 38:5|PC 38:6 [M+2]  PC 38:6   PC 38:7  PC 38:8  PC 39:5  PC 39:6</span></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                    26.29924 25.43405 39.029840 63.88728 13.24649 34.59223</span></span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV              11.44151 14.19751  9.319981 13.38285 11.31561 13.73835</span></span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PC 39:7 PC 40:4|PC 40:5 [M+2]|PC 40:6 [M+4] PC 40:5|PC 40:6 [M+2]</span></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       39.80407                            17.31056             27.443386</span></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 13.03777                            10.79246              9.678151</span></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PC 40:6  PC 40:7  PC 40:8 PC O-32:0 PC O-32:1 PC O-32:2 PC O-34:1</span></span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       28.08587 25.83923 21.28075  8.262337  13.40002  10.96172  7.233822</span></span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 16.93964 12.08728 14.92128  6.168879  13.91455  10.77404  6.694328</span></span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PC O-34:2 PC O-34:4 PC O-36:1 PC O-36:2 PC O-36:4 PC O-36:5 PC O-38:4</span></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV        14.55280  8.809532 11.481795  7.499541  9.875485  25.13043  12.42407</span></span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV  14.21416  7.045549  9.142275  8.055080 11.681651  12.38661  10.01497</span></span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PC O-38:5 PC O-38:6 PC O-40:5 PC O-40:6 PC O-40:7 PC P-32:0 PC P-32:1</span></span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       12.015245  27.22660   13.3647  21.55577 29.032971  8.529705  13.37200</span></span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV  9.295322  22.50816   15.7880  18.55302  8.610196  6.636770  10.46215</span></span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PC P-34:1 PC P-34:2 PC P-34:3 PC P-36:2 PC P-36:4 PC P-36:5 PC P-38:4</span></span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV        32.59940 10.207299  8.809532  9.435911  15.01004  34.14205  9.860074</span></span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV  14.03636  9.589348  7.045549  8.266795  15.67201  25.16666  8.331922</span></span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PC P-38:5 PC P-40:5 PC P-40:6  PE 32:1 PE 33:1 d7 (ISTD)  PE 34:0</span></span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       11.406587  22.09308  25.65189 43.51990          13.44847 54.79672</span></span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV  9.365612  17.60481  21.34888 26.80694          12.29445 42.39760</span></span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PE 34:1  PE 34:2  PE 34:3  PE 35:1  PE 35:2  PE 36:1  PE 36:2</span></span>
+<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       43.42634 44.94312 46.78253 52.85273 51.58630 51.18932 46.83725</span></span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 22.83727 14.11247 22.39979 25.42750 26.33861 16.61432 11.71637</span></span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE 36:3|PE 36:4 [M+2] PE 36:4 a PE 36:4 b  PE 36:5  PE 37:5  PE 38:3</span></span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                    48.47005  51.41779  41.32365 53.95644 54.22919 54.28192</span></span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV              15.24133  21.69683  24.58997 15.86735 43.28890 31.91084</span></span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PE 38:4  PE 38:5  PE 38:6  PE 40:4 PE 40:5|PE 40:6 [M+2]  PE 40:6</span></span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       36.29099 48.59333 47.67888 45.08334              48.15318 51.33414</span></span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 21.15195 14.59733 18.23781 16.74270              15.49997 21.73483</span></span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PE 40:7 PE O-34:1 PE O-34:2 PE O-36:2 PE O-36:3 PE O-36:5 PE O-38:4</span></span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       50.11948   11.4331  19.52642  14.19799  13.16833  23.45311  18.27781</span></span>
+<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 16.24886   14.7875  15.69503  16.35482  12.73556  26.61979  15.13847</span></span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE O-38:5 PE O-40:5 PE O-40:6 PE O-40:7 PE P-16:0/18:1 [FA]</span></span>
+<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV        8.512177  17.99182  26.66014  12.23185            34.08199</span></span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 10.616985  21.72662  19.67035  11.15400            19.87367</span></span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-16:0/18:1 [head group] PE P-16:0/18:2 [FA]</span></span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          32.97456            17.05716</span></span>
+<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    22.99707            22.52871</span></span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-16:0/18:2 [head group] PE P-16:0/20:4 [FA]</span></span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          16.74042            15.77507</span></span>
+<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    19.42925            14.61916</span></span>
+<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-16:0/20:4 [head group] PE P-16:0/22:5 [FA]</span></span>
+<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          17.71363            26.07754</span></span>
+<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    18.62171            15.40465</span></span>
+<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-16:0/22:5 [head group] PE P-16:0/22:6 [FA]</span></span>
+<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          25.18871            74.90779</span></span>
+<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    26.48616            24.23630</span></span>
+<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-16:0/22:6 [head group] PE P-18:0/18:1 [FA]</span></span>
+<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          83.32800            49.02805</span></span>
+<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    22.42374            22.89761</span></span>
+<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-18:0/18:1 [head group] PE P-18:0/18:2 [FA]</span></span>
+<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          50.13220            40.24889</span></span>
+<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    17.68675            11.15637</span></span>
+<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-18:0/18:2 [head group] PE P-18:0/20:4 [FA]</span></span>
+<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          39.47986            11.04731</span></span>
+<span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    26.65202            10.71139</span></span>
+<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-18:0/20:4 [head group] PE P-18:0/22:5 [FA]</span></span>
+<span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          15.36288            10.40167</span></span>
+<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    19.60771            12.65888</span></span>
+<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-18:0/22:5 [head group] PE P-18:0/22:6 [FA]</span></span>
+<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          8.318733            54.30841</span></span>
+<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                   11.604186            16.30357</span></span>
+<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-18:0/22:6 [head group] PE P-20:0/20:4 [FA]</span></span>
+<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                          55.38982            19.37559</span></span>
+<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    21.28511            15.40970</span></span>
+<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-20:0/20:4 [head group] PE P-34:1 [-141] PE P-34:2 [-141]</span></span>
+<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                         16.381011         23.61729         29.77083</span></span>
+<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV                    9.858559         15.18802         33.68418</span></span>
+<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-36:2 [-141] PE P-36:3 [-141] PE P-36:4 [-141] PE P-38:4 [-141]</span></span>
+<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV               36.57035         17.11093         18.91981         15.71466</span></span>
+<span id="cb7-234"><a href="#cb7-234" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV         34.37390         15.75904         22.36306         12.32213</span></span>
+<span id="cb7-235"><a href="#cb7-235" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PE P-38:5 [-141] PE P-38:6 [-141] PE P-40:5 [-141] PE P-40:6 [-141]</span></span>
+<span id="cb7-236"><a href="#cb7-236" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV               23.07799         79.11856         9.685007         56.06552</span></span>
+<span id="cb7-237"><a href="#cb7-237" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV         21.90810         18.27177        10.084276         39.33879</span></span>
+<span id="cb7-238"><a href="#cb7-238" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PG 33:1 d7 (ISTD)  PG 34:1  PG 36:1  PG 36:2  PI 32:0  PI 32:1</span></span>
+<span id="cb7-239"><a href="#cb7-239" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV               10.215842 56.34128 50.69755 46.64141 36.88980 27.32121</span></span>
+<span id="cb7-240"><a href="#cb7-240" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV          7.843026 35.98604 50.84137 30.95909 37.37281 18.58900</span></span>
+<span id="cb7-241"><a href="#cb7-241" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PI 33:1 d7 (ISTD)  PI 34:0  PI 34:1   PI 34:2  PI 35:1  PI 35:2</span></span>
+<span id="cb7-242"><a href="#cb7-242" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                11.25850 13.88151 13.00172 11.583086 26.06102 20.35620</span></span>
+<span id="cb7-243"><a href="#cb7-243" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV          13.28469 16.74826 10.26708  7.882173 24.41765 25.79081</span></span>
+<span id="cb7-244"><a href="#cb7-244" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PI 36:1   PI 36:2 PI 36:3|PI 36:4 [M+2]  PI 36:4   PI 36:5  PI 37:4</span></span>
+<span id="cb7-245"><a href="#cb7-245" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       33.67103 10.715448              6.731507 13.15053 22.984516 10.38213</span></span>
+<span id="cb7-246"><a href="#cb7-246" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 26.69585  7.172043              5.572319 14.25303  8.627847 11.27485</span></span>
+<span id="cb7-247"><a href="#cb7-247" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PI 38:3   PI 38:4  PI 38:5  PI 38:6  PI 40:4 PI 40:5|PI 40:6 M+2</span></span>
+<span id="cb7-248"><a href="#cb7-248" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       12.37326 11.752935 9.652637 11.34363 44.76779            21.75916</span></span>
+<span id="cb7-249"><a href="#cb7-249" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 11.45996  9.093694 9.782380 10.74472 21.74422            20.43048</span></span>
+<span id="cb7-250"><a href="#cb7-250" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           PI 40:6 polysiloxane 7 polysiloxane 8 PS 33:1 d7 (ISTD)  SM 30:1</span></span>
+<span id="cb7-251"><a href="#cb7-251" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       15.23133       69.68286       50.48584          10.48364 8.089983</span></span>
+<span id="cb7-252"><a href="#cb7-252" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 17.92832       34.45694       52.66077          13.44759 8.318501</span></span>
+<span id="cb7-253"><a href="#cb7-253" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           SM 31:1  SM 32:0  SM 32:1  SM 32:2  SM 33:1  SM 34:0  SM 34:1</span></span>
+<span id="cb7-254"><a href="#cb7-254" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       27.98922 36.63414 18.15536 24.15466 27.80398 51.74864 12.06706</span></span>
+<span id="cb7-255"><a href="#cb7-255" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 12.96484 16.18925 19.67903 13.58880 20.18607 18.12141 11.82877</span></span>
+<span id="cb7-256"><a href="#cb7-256" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           SM 34:2  SM 34:3  SM 35:1  SM 35:2  SM 36:1  SM 36:2</span></span>
+<span id="cb7-257"><a href="#cb7-257" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       16.86843 23.82007 12.51019 8.615562 13.35823 10.12903</span></span>
+<span id="cb7-258"><a href="#cb7-258" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 15.18896 15.21134 12.47441 7.547067 16.39190 11.54575</span></span>
+<span id="cb7-259"><a href="#cb7-259" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          SM 36:2 d9 (ISTD)  SM 36:3  SM 38:1  SM 38:2  SM 38:3   SM 39:1</span></span>
+<span id="cb7-260"><a href="#cb7-260" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV                17.57696 18.92718 26.26439 17.64658 15.28943 19.683449</span></span>
+<span id="cb7-261"><a href="#cb7-261" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV          17.24714 15.61486 12.19519 15.49735 20.09633  9.746825</span></span>
+<span id="cb7-262"><a href="#cb7-262" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           SM 40:1  SM 40:2 SM 40:3|PC 36:4 M+1   SM 41:1   SM 42:1  SM 42:2</span></span>
+<span id="cb7-263"><a href="#cb7-263" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       14.55709 7.940956            15.04974 11.799194 11.424425 8.919295</span></span>
+<span id="cb7-264"><a href="#cb7-264" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 12.53727 6.305689            17.58110  9.699436  8.414689 5.694160</span></span>
+<span id="cb7-265"><a href="#cb7-265" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           SM 42:3   SM 43:1  SM 44:1  SM 44:2  TG 48:0 TG 48:0 [-16:0]  TG 48:1</span></span>
+<span id="cb7-266"><a href="#cb7-266" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       30.56283 23.214877 18.23498 7.732091 51.24952        49.84520 54.72397</span></span>
+<span id="cb7-267"><a href="#cb7-267" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 37.51238  6.254715 15.22005 8.284322 28.24404        29.02005 19.45119</span></span>
+<span id="cb7-268"><a href="#cb7-268" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 48:1 [-18:1] TG 48:1 d7 (ISTD) TG 48:1 d7 [-15:0] (ISTD)  TG 48:2</span></span>
+<span id="cb7-269"><a href="#cb7-269" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              58.48001          15.47909                  17.31942 58.12619</span></span>
+<span id="cb7-270"><a href="#cb7-270" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        20.60232          12.05526                  13.90809 25.06046</span></span>
+<span id="cb7-271"><a href="#cb7-271" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 48:2 [-14:1] TG 48:2 [-16:0] TG 48:2 [-16:1] TG 48:2 [-18:1]</span></span>
+<span id="cb7-272"><a href="#cb7-272" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV             57.508606        55.87553        51.97034        60.64871</span></span>
+<span id="cb7-273"><a href="#cb7-273" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        7.683013        14.70846        16.21861        13.20602</span></span>
+<span id="cb7-274"><a href="#cb7-274" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           TG 48:3 TG 48:3 [-16:1] TG 48:3 [-18:2]  TG 49:1 TG 49:1 [-15:0]</span></span>
+<span id="cb7-275"><a href="#cb7-275" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       56.38243        52.14465        57.60761 27.22475        45.76660</span></span>
+<span id="cb7-276"><a href="#cb7-276" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 12.80637        17.79874        18.23173 12.65187        12.07718</span></span>
+<span id="cb7-277"><a href="#cb7-277" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 49:1 [-16:0] TG 49:1 [-18:1]  TG 50:0 TG 50:0 [-18:0]  TG 50:1</span></span>
+<span id="cb7-278"><a href="#cb7-278" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              48.16306        51.43487 61.15048        62.13444 54.11601</span></span>
+<span id="cb7-279"><a href="#cb7-279" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        19.13138        17.51135 47.45636        33.76629 15.58114</span></span>
+<span id="cb7-280"><a href="#cb7-280" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 50:1 [-14:0] TG 50:1 [-18:1]   TG 50:2 TG 50:2 [-18:0]</span></span>
+<span id="cb7-281"><a href="#cb7-281" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              52.72993        54.88839 48.607455        44.52567</span></span>
+<span id="cb7-282"><a href="#cb7-282" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        21.64755        11.58072  9.273915        17.86124</span></span>
+<span id="cb7-283"><a href="#cb7-283" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 50:2 [-18:1] TG 50:2 [-18:2]  TG 50:3 TG 50:3 [-14:1]</span></span>
+<span id="cb7-284"><a href="#cb7-284" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              50.32463        50.57107 54.29705        54.55827</span></span>
+<span id="cb7-285"><a href="#cb7-285" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        11.53090        14.90605 17.49220        14.64106</span></span>
+<span id="cb7-286"><a href="#cb7-286" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 50:3 [-16:1] TG 50:3 [-18:1]  TG 50:4 TG 50:4 [-14:0]</span></span>
+<span id="cb7-287"><a href="#cb7-287" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              51.22481        56.49086 55.45625        54.68215</span></span>
+<span id="cb7-288"><a href="#cb7-288" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        17.75181        19.28337 11.67948        15.32793</span></span>
+<span id="cb7-289"><a href="#cb7-289" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 51:0 [-16:0] TG 51:0 [-17:0]  TG 51:1 TG 51:1 [-18:1]  TG 51:2</span></span>
+<span id="cb7-290"><a href="#cb7-290" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              56.56607        59.99007 54.72579        57.27498 49.21795</span></span>
+<span id="cb7-291"><a href="#cb7-291" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        44.17526        44.26577 11.28402        14.76770 10.99689</span></span>
+<span id="cb7-292"><a href="#cb7-292" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 51:2 [-15:0] TG 51:2 [-16:0] TG 51:2 [-18:1]  TG 52:1</span></span>
+<span id="cb7-293"><a href="#cb7-293" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              45.62991        51.95672        51.15393 60.16281</span></span>
+<span id="cb7-294"><a href="#cb7-294" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        10.69356        12.81098        14.85934 13.71204</span></span>
+<span id="cb7-295"><a href="#cb7-295" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 52:1 [-18:0]  TG 52:2 TG 52:2 [-16:0]  TG 52:3 TG 52:3 [-16:1]</span></span>
+<span id="cb7-296"><a href="#cb7-296" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              59.29058 48.15001        43.86001 40.54513        44.44044</span></span>
+<span id="cb7-297"><a href="#cb7-297" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        24.67837 16.23319        17.19055 15.32357        15.60324</span></span>
+<span id="cb7-298"><a href="#cb7-298" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 52:3 [-18:2]  TG 52:4 TG 52:4 [-16:0] TG 52:4 [-18:1]  TG 53:2</span></span>
+<span id="cb7-299"><a href="#cb7-299" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              39.38765 50.92710        46.57178        52.29451 54.55843</span></span>
+<span id="cb7-300"><a href="#cb7-300" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        12.37977 12.79338        13.33380         6.94786 10.38195</span></span>
+<span id="cb7-301"><a href="#cb7-301" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 53:2 [-17:0]  TG 54:1 TG 54:1 [-18:1]  TG 54:2 TG 54:2 [-18:0]</span></span>
+<span id="cb7-302"><a href="#cb7-302" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              53.77771 59.84683        62.34617 55.31413        53.89926</span></span>
+<span id="cb7-303"><a href="#cb7-303" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        19.21829 14.05318        24.79251 12.50565        12.97789</span></span>
+<span id="cb7-304"><a href="#cb7-304" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           TG 54:3 TG 54:3 [-18:1]  TG 54:4 TG 54:4 [-18:0] TG 54:4 [-18:2]</span></span>
+<span id="cb7-305"><a href="#cb7-305" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       46.68116        49.73786 43.16634        36.15784        40.92642</span></span>
+<span id="cb7-306"><a href="#cb7-306" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 15.61592        14.71881 12.09857        10.93432        20.54518</span></span>
+<span id="cb7-307"><a href="#cb7-307" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           TG 54:5 TG 54:5 [-18:1]  TG 54:6 TG 54:6 [-18:2]  TG 56:6</span></span>
+<span id="cb7-308"><a href="#cb7-308" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV       49.97012        51.41532 54.31058        55.98263 40.69794</span></span>
+<span id="cb7-309"><a href="#cb7-309" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV 16.37827        13.12215 11.24028        15.54904 13.04125</span></span>
+<span id="cb7-310"><a href="#cb7-310" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          TG 56:6 [-20:4]  TG 56:8 TG 56:8 [-20:4]  TG 58:8 TG 58:8 [-22:6]</span></span>
+<span id="cb7-311"><a href="#cb7-311" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CV              30.78908 53.31619        46.29561 47.53044        55.08712</span></span>
+<span id="cb7-312"><a href="#cb7-312" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RobustCV        11.56068 17.59504        15.75192 13.23378        13.80987</span></span>
+<span id="cb7-313"><a href="#cb7-313" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(<span class="fu">t</span>(d_res3))</span>
+<span id="cb7-314"><a href="#cb7-314" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                  CV  RobustCV</span></span>
+<span id="cb7-315"><a href="#cb7-315" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 14:0                                   18.845558 12.889809</span></span>
+<span id="cb7-316"><a href="#cb7-316" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 15:0                                   24.747067 21.757413</span></span>
+<span id="cb7-317"><a href="#cb7-317" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 16:0                                   35.452591 38.366985</span></span>
+<span id="cb7-318"><a href="#cb7-318" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 16:1                                   16.956125 13.413218</span></span>
+<span id="cb7-319"><a href="#cb7-319" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 16:2                                   28.029837 28.470091</span></span>
+<span id="cb7-320"><a href="#cb7-320" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 17:0                                   29.653257 34.329629</span></span>
+<span id="cb7-321"><a href="#cb7-321" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 17:1                                   22.012507 20.109734</span></span>
+<span id="cb7-322"><a href="#cb7-322" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 18:0                                   19.714718 20.604681</span></span>
+<span id="cb7-323"><a href="#cb7-323" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 18:1                                   10.241062 10.767755</span></span>
+<span id="cb7-324"><a href="#cb7-324" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 18:1 d7 (ISTD)                         11.747305 13.903692</span></span>
+<span id="cb7-325"><a href="#cb7-325" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 18:2                                   16.231646 12.951794</span></span>
+<span id="cb7-326"><a href="#cb7-326" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 18:3                                   21.401303 13.163216</span></span>
+<span id="cb7-327"><a href="#cb7-327" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 20:1                                   12.224234  8.725951</span></span>
+<span id="cb7-328"><a href="#cb7-328" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 20:2                                   15.932544 14.135832</span></span>
+<span id="cb7-329"><a href="#cb7-329" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 20:3                                   14.800802 14.305843</span></span>
+<span id="cb7-330"><a href="#cb7-330" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 20:4                                   16.349901 17.513342</span></span>
+<span id="cb7-331"><a href="#cb7-331" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 20:5                                   38.635961 20.716799</span></span>
+<span id="cb7-332"><a href="#cb7-332" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 22:0                                   49.178479 64.339245</span></span>
+<span id="cb7-333"><a href="#cb7-333" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 22:1                                   49.612415 53.044133</span></span>
+<span id="cb7-334"><a href="#cb7-334" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 22:4                                   17.583960 21.786256</span></span>
+<span id="cb7-335"><a href="#cb7-335" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 22:5                                   14.969398 11.585751</span></span>
+<span id="cb7-336"><a href="#cb7-336" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 22:6                                   12.984984  8.480649</span></span>
+<span id="cb7-337"><a href="#cb7-337" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CE 24:4                                   31.888777 29.061621</span></span>
+<span id="cb7-338"><a href="#cb7-338" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:0/16:0                            27.752131 17.172973</span></span>
+<span id="cb7-339"><a href="#cb7-339" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:0/18:0                            34.780150 18.697087</span></span>
+<span id="cb7-340"><a href="#cb7-340" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:0/20:0                            19.347403 17.666436</span></span>
+<span id="cb7-341"><a href="#cb7-341" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:0/22:0                            12.332876 13.219487</span></span>
+<span id="cb7-342"><a href="#cb7-342" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:0/22:0 [284]                      20.261513 13.898141</span></span>
+<span id="cb7-343"><a href="#cb7-343" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:0/24:1                            16.600245 11.535367</span></span>
+<span id="cb7-344"><a href="#cb7-344" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:0/24:1 [284]                      20.671314 17.477942</span></span>
+<span id="cb7-345"><a href="#cb7-345" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/16:0                            13.860760 18.985804</span></span>
+<span id="cb7-346"><a href="#cb7-346" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/16:0 d31 (ISTD)                 30.817156 27.956383</span></span>
+<span id="cb7-347"><a href="#cb7-347" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/17:0                            43.398161 32.568590</span></span>
+<span id="cb7-348"><a href="#cb7-348" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/18:0                            18.928956 22.553489</span></span>
+<span id="cb7-349"><a href="#cb7-349" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/20:0                            22.238552 22.383137</span></span>
+<span id="cb7-350"><a href="#cb7-350" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/22:0                            14.870702 12.420183</span></span>
+<span id="cb7-351"><a href="#cb7-351" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/24:0                            19.081253  9.979294</span></span>
+<span id="cb7-352"><a href="#cb7-352" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/24:1                            22.001997 12.517041</span></span>
+<span id="cb7-353"><a href="#cb7-353" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/25:0                             9.355901  6.074033</span></span>
+<span id="cb7-354"><a href="#cb7-354" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:1/26:0                            16.493050 11.550025</span></span>
+<span id="cb7-355"><a href="#cb7-355" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:2/22:0                            15.251080 14.630391</span></span>
+<span id="cb7-356"><a href="#cb7-356" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:2/24:0                                   NA        NA</span></span>
+<span id="cb7-357"><a href="#cb7-357" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cer d18:2/24:1                            18.568409 15.309935</span></span>
+<span id="cb7-358"><a href="#cb7-358" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; COH [161)                                 10.341370  6.889555</span></span>
+<span id="cb7-359"><a href="#cb7-359" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; COH [95)                                  10.043430  8.084858</span></span>
+<span id="cb7-360"><a href="#cb7-360" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 14:0_18:1 [-14:0]                      53.513073 35.562168</span></span>
+<span id="cb7-361"><a href="#cb7-361" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 14:0_18:1 [-18:1]                      49.420564 51.719982</span></span>
+<span id="cb7-362"><a href="#cb7-362" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 14:0_18:2 [-14:0]                      45.543380 61.159397</span></span>
+<span id="cb7-363"><a href="#cb7-363" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 14:0_18:2 [-18:2]                      42.053532 37.748691</span></span>
+<span id="cb7-364"><a href="#cb7-364" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 15:0_18:1 d7 (ISTD) [-15:0]            11.267651  6.860265</span></span>
+<span id="cb7-365"><a href="#cb7-365" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 15:0_18:1 d7 (ISTD) [-18:1]            14.179816 16.009407</span></span>
+<span id="cb7-366"><a href="#cb7-366" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_16:0 [-16:0]                      20.614178 22.629478</span></span>
+<span id="cb7-367"><a href="#cb7-367" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_16:1 [-16:0]                      29.111179 25.601343</span></span>
+<span id="cb7-368"><a href="#cb7-368" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_16:1 [-16:1]                      28.126162 26.734485</span></span>
+<span id="cb7-369"><a href="#cb7-369" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_18:1 [-16:0]                      37.855825 42.349894</span></span>
+<span id="cb7-370"><a href="#cb7-370" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_18:1 [-18:1]                      39.022553 35.931873</span></span>
+<span id="cb7-371"><a href="#cb7-371" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_18:2 [-16:0]                      28.693109 28.344018</span></span>
+<span id="cb7-372"><a href="#cb7-372" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_18:2 [-18:2]                      25.889911 17.089063</span></span>
+<span id="cb7-373"><a href="#cb7-373" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_20:3 [-20:3]                      38.088978 37.861310</span></span>
+<span id="cb7-374"><a href="#cb7-374" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_20:4 [-20:4]                      33.872641 36.183886</span></span>
+<span id="cb7-375"><a href="#cb7-375" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_22:5 [-22:5]                      34.549997 32.290213</span></span>
+<span id="cb7-376"><a href="#cb7-376" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:0_22:6 [-22:6]                      45.514200 40.718498</span></span>
+<span id="cb7-377"><a href="#cb7-377" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:1_18:1 [-16:1]                      29.277597 31.392973</span></span>
+<span id="cb7-378"><a href="#cb7-378" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 16:1_18:1 [-18:1]                      30.609817 38.786035</span></span>
+<span id="cb7-379"><a href="#cb7-379" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:0_18:1 [-18:0]                      29.203316 25.528573</span></span>
+<span id="cb7-380"><a href="#cb7-380" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:0_18:1 [-18:1]                      34.445379 32.238921</span></span>
+<span id="cb7-381"><a href="#cb7-381" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:0_18:2 [-18:0]                      27.877834 17.759295</span></span>
+<span id="cb7-382"><a href="#cb7-382" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:0_18:2 [-18:2]                      23.743549 16.943914</span></span>
+<span id="cb7-383"><a href="#cb7-383" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:0_20:4 [-20:4]                      27.049071 22.116518</span></span>
+<span id="cb7-384"><a href="#cb7-384" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:1_18:1 [-18:1]                      41.650595 23.041810</span></span>
+<span id="cb7-385"><a href="#cb7-385" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:1_18:2 [-18:1]                      32.753413 18.523155</span></span>
+<span id="cb7-386"><a href="#cb7-386" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:1_18:2 [-18:2]                      34.001859 33.711937</span></span>
+<span id="cb7-387"><a href="#cb7-387" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:1_18:3 [-18:3]                      34.230698 25.112323</span></span>
+<span id="cb7-388"><a href="#cb7-388" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:1_20:3 [-20:3]                      33.170597 24.194693</span></span>
+<span id="cb7-389"><a href="#cb7-389" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:1_20:4 [-18:1]                      21.261324 17.387686</span></span>
+<span id="cb7-390"><a href="#cb7-390" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:1_20:4 [-20:4]                      18.780775 20.077546</span></span>
+<span id="cb7-391"><a href="#cb7-391" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:2_18:2 [-18:2]                      26.159863 24.568088</span></span>
+<span id="cb7-392"><a href="#cb7-392" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:2_20:3 [-20:3]                      22.403779 23.523549</span></span>
+<span id="cb7-393"><a href="#cb7-393" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DG 18:2_20:4 [-20:4]                      15.158106 20.074444</span></span>
+<span id="cb7-394"><a href="#cb7-394" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Diisooctyl Phthalate                       4.288320  4.054930</span></span>
+<span id="cb7-395"><a href="#cb7-395" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GM3 d18:1/16:0                            25.030125 12.822055</span></span>
+<span id="cb7-396"><a href="#cb7-396" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GM3 d18:1/18:0                            11.092379 10.041070</span></span>
+<span id="cb7-397"><a href="#cb7-397" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GM3 d18:1/20:0                            18.629798 21.732989</span></span>
+<span id="cb7-398"><a href="#cb7-398" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GM3 d18:1/22:0                            21.981109 25.772796</span></span>
+<span id="cb7-399"><a href="#cb7-399" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GM3 d18:1/24:0                            31.414822 34.563349</span></span>
+<span id="cb7-400"><a href="#cb7-400" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GM3 d18:1/24:1                            27.967838 21.742517</span></span>
+<span id="cb7-401"><a href="#cb7-401" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex2Cer d18:1/16:0                        26.562586 15.457030</span></span>
+<span id="cb7-402"><a href="#cb7-402" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex2Cer d18:1/16:0 d3 (ISTD)              14.212464 15.812122</span></span>
+<span id="cb7-403"><a href="#cb7-403" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex2Cer d18:1/18:0                        19.344667 16.382221</span></span>
+<span id="cb7-404"><a href="#cb7-404" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex2Cer d18:1/20:0                        25.131861 21.946110</span></span>
+<span id="cb7-405"><a href="#cb7-405" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex2Cer d18:1/22:0                        21.318847 23.898929</span></span>
+<span id="cb7-406"><a href="#cb7-406" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex2Cer d18:1/24:0                        26.223651 17.035380</span></span>
+<span id="cb7-407"><a href="#cb7-407" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex2Cer d18:1/24:1                        29.772167 23.962242</span></span>
+<span id="cb7-408"><a href="#cb7-408" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex3Cer d18:1/16:0                        10.939306  9.416301</span></span>
+<span id="cb7-409"><a href="#cb7-409" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex3Cer d18:1/18:0                        44.236644 36.149709</span></span>
+<span id="cb7-410"><a href="#cb7-410" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex3Cer d18:1/20:0                        37.891487 36.611740</span></span>
+<span id="cb7-411"><a href="#cb7-411" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex3Cer d18:1/22:0                        24.079772 26.367081</span></span>
+<span id="cb7-412"><a href="#cb7-412" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex3Cer d18:1/24:0                        23.996864 28.270043</span></span>
+<span id="cb7-413"><a href="#cb7-413" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hex3Cer d18:1/24:1                        20.330800 23.807531</span></span>
+<span id="cb7-414"><a href="#cb7-414" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; HexCer d18:1/16:0                         31.754982 22.530900</span></span>
+<span id="cb7-415"><a href="#cb7-415" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; HexCer d18:1/16:0 d3 (ISTD)               16.577948 17.433077</span></span>
+<span id="cb7-416"><a href="#cb7-416" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; HexCer d18:1/18:0                         20.237432 17.486167</span></span>
+<span id="cb7-417"><a href="#cb7-417" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; HexCer d18:1/20:0                         20.064386 26.189682</span></span>
+<span id="cb7-418"><a href="#cb7-418" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; HexCer d18:1/22:0                         11.912791 12.585400</span></span>
+<span id="cb7-419"><a href="#cb7-419" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; HexCer d18:1/24:0                          9.425181 11.965828</span></span>
+<span id="cb7-420"><a href="#cb7-420" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; HexCer d18:1/24:1                         10.206379  9.615355</span></span>
+<span id="cb7-421"><a href="#cb7-421" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 14:0                                  32.607869  4.205618</span></span>
+<span id="cb7-422"><a href="#cb7-422" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 15:0                                  18.626101 13.667124</span></span>
+<span id="cb7-423"><a href="#cb7-423" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 16:0                                         NA        NA</span></span>
+<span id="cb7-424"><a href="#cb7-424" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 16:1                                  22.171688  8.879139</span></span>
+<span id="cb7-425"><a href="#cb7-425" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 17:0                                  23.738569  9.215611</span></span>
+<span id="cb7-426"><a href="#cb7-426" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 17:1                                  27.688541  9.349596</span></span>
+<span id="cb7-427"><a href="#cb7-427" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 18:0                                  16.102907  7.898196</span></span>
+<span id="cb7-428"><a href="#cb7-428" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 18:1                                   7.942218  7.862337</span></span>
+<span id="cb7-429"><a href="#cb7-429" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 18:1 d7 (ISTD)                         3.848798  4.050861</span></span>
+<span id="cb7-430"><a href="#cb7-430" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 18:2                                  39.815842 14.076051</span></span>
+<span id="cb7-431"><a href="#cb7-431" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 18:3                                  10.932137  6.589890</span></span>
+<span id="cb7-432"><a href="#cb7-432" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 19:0                                  30.978975  6.520337</span></span>
+<span id="cb7-433"><a href="#cb7-433" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 19:1                                   6.693737  6.488933</span></span>
+<span id="cb7-434"><a href="#cb7-434" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 20:0                                  62.559807 11.131630</span></span>
+<span id="cb7-435"><a href="#cb7-435" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 20:1                                   8.495556  8.849198</span></span>
+<span id="cb7-436"><a href="#cb7-436" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 20:2                                  15.598488 11.608710</span></span>
+<span id="cb7-437"><a href="#cb7-437" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 20:3                                  16.447865 16.776918</span></span>
+<span id="cb7-438"><a href="#cb7-438" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 20:4                                  46.866925 26.193951</span></span>
+<span id="cb7-439"><a href="#cb7-439" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 20:5                                  16.764800 13.479052</span></span>
+<span id="cb7-440"><a href="#cb7-440" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 22:0                                  19.564567 15.291554</span></span>
+<span id="cb7-441"><a href="#cb7-441" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 22:1                                   9.672084 10.987358</span></span>
+<span id="cb7-442"><a href="#cb7-442" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 22:5                                  16.791691 17.034035</span></span>
+<span id="cb7-443"><a href="#cb7-443" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 22:6                                  29.169835 22.294591</span></span>
+<span id="cb7-444"><a href="#cb7-444" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 24:0                                  16.829225 13.743734</span></span>
+<span id="cb7-445"><a href="#cb7-445" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC 26:0                                  15.206434 15.339027</span></span>
+<span id="cb7-446"><a href="#cb7-446" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC O-16:0                                11.416596 11.073157</span></span>
+<span id="cb7-447"><a href="#cb7-447" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC O-18:0                                 9.761429 10.201032</span></span>
+<span id="cb7-448"><a href="#cb7-448" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC O-18:1                                12.098855  7.434764</span></span>
+<span id="cb7-449"><a href="#cb7-449" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC O-20:0                                19.432421 10.843068</span></span>
+<span id="cb7-450"><a href="#cb7-450" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC O-20:1                                11.152119  9.923341</span></span>
+<span id="cb7-451"><a href="#cb7-451" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC O-22:0                                20.799135 20.013058</span></span>
+<span id="cb7-452"><a href="#cb7-452" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC O-22:1                                10.069599  7.498699</span></span>
+<span id="cb7-453"><a href="#cb7-453" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC O-24:0                                38.366224 45.836107</span></span>
+<span id="cb7-454"><a href="#cb7-454" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC P-16:0                                 7.088695  8.258499</span></span>
+<span id="cb7-455"><a href="#cb7-455" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC P-18:0                                10.794176  9.624488</span></span>
+<span id="cb7-456"><a href="#cb7-456" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC P-18:1                                12.196105  9.240221</span></span>
+<span id="cb7-457"><a href="#cb7-457" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPC P-20:0                                 9.767569  9.066431</span></span>
+<span id="cb7-458"><a href="#cb7-458" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE 16:0                                  38.906343  7.654789</span></span>
+<span id="cb7-459"><a href="#cb7-459" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE 18:0                                  38.444946 12.462576</span></span>
+<span id="cb7-460"><a href="#cb7-460" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE 18:1                                  36.001432  7.966259</span></span>
+<span id="cb7-461"><a href="#cb7-461" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE 18:1 d7 (ISTD)                         4.671964  4.582686</span></span>
+<span id="cb7-462"><a href="#cb7-462" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE 18:2                                  35.627236 11.333937</span></span>
+<span id="cb7-463"><a href="#cb7-463" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE 20:4                                  20.937690 23.579160</span></span>
+<span id="cb7-464"><a href="#cb7-464" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE 22:6                                  21.130515 16.761968</span></span>
+<span id="cb7-465"><a href="#cb7-465" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE P-16:0                                35.148552 16.735572</span></span>
+<span id="cb7-466"><a href="#cb7-466" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE P-18:0                                 6.179243  4.580738</span></span>
+<span id="cb7-467"><a href="#cb7-467" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPE P-18:1                                22.830415 24.971263</span></span>
+<span id="cb7-468"><a href="#cb7-468" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPI 20:4                                  77.815252 25.840307</span></span>
+<span id="cb7-469"><a href="#cb7-469" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPS 16:0                                  13.107324 10.592705</span></span>
+<span id="cb7-470"><a href="#cb7-470" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPS 18:0                                  15.368668 18.789131</span></span>
+<span id="cb7-471"><a href="#cb7-471" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPS 18:1                                  13.765279 17.149069</span></span>
+<span id="cb7-472"><a href="#cb7-472" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LPS 18:2                                  44.093074 25.471554</span></span>
+<span id="cb7-473"><a href="#cb7-473" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 31:0                                   17.126599 11.015704</span></span>
+<span id="cb7-474"><a href="#cb7-474" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 31:1                                   34.707956 24.667692</span></span>
+<span id="cb7-475"><a href="#cb7-475" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 32:0                                   10.803822 11.784985</span></span>
+<span id="cb7-476"><a href="#cb7-476" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 32:1                                   19.552114 23.595072</span></span>
+<span id="cb7-477"><a href="#cb7-477" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 32:2                                   33.047793 11.980985</span></span>
+<span id="cb7-478"><a href="#cb7-478" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 32:3                                   45.311582 17.689253</span></span>
+<span id="cb7-479"><a href="#cb7-479" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 33:1                                   11.791330 10.123276</span></span>
+<span id="cb7-480"><a href="#cb7-480" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 33:1 d7 (ISTD)                         13.383083 14.376985</span></span>
+<span id="cb7-481"><a href="#cb7-481" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 33:2                                   14.803312 12.080028</span></span>
+<span id="cb7-482"><a href="#cb7-482" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 34:0                                   19.895763 13.939891</span></span>
+<span id="cb7-483"><a href="#cb7-483" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 34:1                                   11.234404  5.779942</span></span>
+<span id="cb7-484"><a href="#cb7-484" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 34:2                                    6.565694  5.478580</span></span>
+<span id="cb7-485"><a href="#cb7-485" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 34:2 + 2O                              13.606771  9.105301</span></span>
+<span id="cb7-486"><a href="#cb7-486" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 34:2 + O\\PC O-34:3 +2O\\PC P-34:2 +2O 25.659982 11.388756</span></span>
+<span id="cb7-487"><a href="#cb7-487" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 34:3                                   24.577989 19.019318</span></span>
+<span id="cb7-488"><a href="#cb7-488" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 34:4                                   34.008499 12.829426</span></span>
+<span id="cb7-489"><a href="#cb7-489" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 34:5                                   33.781158 16.256345</span></span>
+<span id="cb7-490"><a href="#cb7-490" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 35:1                                   22.450822 10.230859</span></span>
+<span id="cb7-491"><a href="#cb7-491" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 35:2                                   20.068175 10.316457</span></span>
+<span id="cb7-492"><a href="#cb7-492" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 35:3                                   24.333107 13.850772</span></span>
+<span id="cb7-493"><a href="#cb7-493" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 35:4                                   25.808906 14.095616</span></span>
+<span id="cb7-494"><a href="#cb7-494" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 35:5                                   49.692634 22.165842</span></span>
+<span id="cb7-495"><a href="#cb7-495" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 36:1                                   17.796157 14.472551</span></span>
+<span id="cb7-496"><a href="#cb7-496" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 36:2                                    6.820233  3.921130</span></span>
+<span id="cb7-497"><a href="#cb7-497" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 36:3                                   13.156642 11.080135</span></span>
+<span id="cb7-498"><a href="#cb7-498" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 36:4 a                                 22.371498 23.972258</span></span>
+<span id="cb7-499"><a href="#cb7-499" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 36:4 b                                 11.377497 13.544127</span></span>
+<span id="cb7-500"><a href="#cb7-500" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 36:5                                   41.080304 17.832943</span></span>
+<span id="cb7-501"><a href="#cb7-501" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 36:6                                   49.357049 12.603352</span></span>
+<span id="cb7-502"><a href="#cb7-502" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 36:7                                   46.383204 16.490203</span></span>
+<span id="cb7-503"><a href="#cb7-503" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 37:4                                   17.461442 15.669625</span></span>
+<span id="cb7-504"><a href="#cb7-504" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 37:5                                   34.088271 10.175356</span></span>
+<span id="cb7-505"><a href="#cb7-505" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 37:6                                   33.969907  7.523333</span></span>
+<span id="cb7-506"><a href="#cb7-506" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 38:3                                   27.271433 19.261797</span></span>
+<span id="cb7-507"><a href="#cb7-507" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 38:4                                    7.600213  8.847579</span></span>
+<span id="cb7-508"><a href="#cb7-508" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 38:5|PC 38:6 [M+2]                     26.299243 11.441508</span></span>
+<span id="cb7-509"><a href="#cb7-509" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 38:6                                   25.434055 14.197511</span></span>
+<span id="cb7-510"><a href="#cb7-510" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 38:7                                   39.029840  9.319981</span></span>
+<span id="cb7-511"><a href="#cb7-511" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 38:8                                   63.887277 13.382848</span></span>
+<span id="cb7-512"><a href="#cb7-512" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 39:5                                   13.246488 11.315614</span></span>
+<span id="cb7-513"><a href="#cb7-513" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 39:6                                   34.592231 13.738347</span></span>
+<span id="cb7-514"><a href="#cb7-514" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 39:7                                   39.804073 13.037769</span></span>
+<span id="cb7-515"><a href="#cb7-515" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 40:4|PC 40:5 [M+2]|PC 40:6 [M+4]       17.310560 10.792457</span></span>
+<span id="cb7-516"><a href="#cb7-516" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 40:5|PC 40:6 [M+2]                     27.443386  9.678151</span></span>
+<span id="cb7-517"><a href="#cb7-517" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 40:6                                   28.085869 16.939641</span></span>
+<span id="cb7-518"><a href="#cb7-518" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 40:7                                   25.839228 12.087282</span></span>
+<span id="cb7-519"><a href="#cb7-519" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC 40:8                                   21.280752 14.921285</span></span>
+<span id="cb7-520"><a href="#cb7-520" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-32:0                                  8.262337  6.168879</span></span>
+<span id="cb7-521"><a href="#cb7-521" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-32:1                                 13.400018 13.914545</span></span>
+<span id="cb7-522"><a href="#cb7-522" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-32:2                                 10.961719 10.774040</span></span>
+<span id="cb7-523"><a href="#cb7-523" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-34:1                                  7.233822  6.694328</span></span>
+<span id="cb7-524"><a href="#cb7-524" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-34:2                                 14.552795 14.214159</span></span>
+<span id="cb7-525"><a href="#cb7-525" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-34:4                                  8.809532  7.045549</span></span>
+<span id="cb7-526"><a href="#cb7-526" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-36:1                                 11.481795  9.142275</span></span>
+<span id="cb7-527"><a href="#cb7-527" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-36:2                                  7.499541  8.055080</span></span>
+<span id="cb7-528"><a href="#cb7-528" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-36:4                                  9.875485 11.681651</span></span>
+<span id="cb7-529"><a href="#cb7-529" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-36:5                                 25.130433 12.386608</span></span>
+<span id="cb7-530"><a href="#cb7-530" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-38:4                                 12.424068 10.014965</span></span>
+<span id="cb7-531"><a href="#cb7-531" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-38:5                                 12.015245  9.295322</span></span>
+<span id="cb7-532"><a href="#cb7-532" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-38:6                                 27.226600 22.508157</span></span>
+<span id="cb7-533"><a href="#cb7-533" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-40:5                                 13.364696 15.788002</span></span>
+<span id="cb7-534"><a href="#cb7-534" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-40:6                                 21.555767 18.553021</span></span>
+<span id="cb7-535"><a href="#cb7-535" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC O-40:7                                 29.032971  8.610196</span></span>
+<span id="cb7-536"><a href="#cb7-536" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-32:0                                  8.529705  6.636770</span></span>
+<span id="cb7-537"><a href="#cb7-537" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-32:1                                 13.372000 10.462152</span></span>
+<span id="cb7-538"><a href="#cb7-538" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-34:1                                 32.599404 14.036361</span></span>
+<span id="cb7-539"><a href="#cb7-539" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-34:2                                 10.207299  9.589348</span></span>
+<span id="cb7-540"><a href="#cb7-540" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-34:3                                  8.809532  7.045549</span></span>
+<span id="cb7-541"><a href="#cb7-541" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-36:2                                  9.435911  8.266795</span></span>
+<span id="cb7-542"><a href="#cb7-542" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-36:4                                 15.010036 15.672006</span></span>
+<span id="cb7-543"><a href="#cb7-543" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-36:5                                 34.142050 25.166662</span></span>
+<span id="cb7-544"><a href="#cb7-544" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-38:4                                  9.860074  8.331922</span></span>
+<span id="cb7-545"><a href="#cb7-545" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-38:5                                 11.406587  9.365612</span></span>
+<span id="cb7-546"><a href="#cb7-546" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-40:5                                 22.093083 17.604811</span></span>
+<span id="cb7-547"><a href="#cb7-547" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC P-40:6                                 25.651891 21.348881</span></span>
+<span id="cb7-548"><a href="#cb7-548" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 32:1                                   43.519895 26.806945</span></span>
+<span id="cb7-549"><a href="#cb7-549" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 33:1 d7 (ISTD)                         13.448474 12.294455</span></span>
+<span id="cb7-550"><a href="#cb7-550" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 34:0                                   54.796724 42.397598</span></span>
+<span id="cb7-551"><a href="#cb7-551" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 34:1                                   43.426338 22.837267</span></span>
+<span id="cb7-552"><a href="#cb7-552" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 34:2                                   44.943124 14.112473</span></span>
+<span id="cb7-553"><a href="#cb7-553" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 34:3                                   46.782533 22.399788</span></span>
+<span id="cb7-554"><a href="#cb7-554" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 35:1                                   52.852728 25.427495</span></span>
+<span id="cb7-555"><a href="#cb7-555" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 35:2                                   51.586301 26.338609</span></span>
+<span id="cb7-556"><a href="#cb7-556" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 36:1                                   51.189318 16.614321</span></span>
+<span id="cb7-557"><a href="#cb7-557" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 36:2                                   46.837254 11.716366</span></span>
+<span id="cb7-558"><a href="#cb7-558" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 36:3|PE 36:4 [M+2]                     48.470046 15.241325</span></span>
+<span id="cb7-559"><a href="#cb7-559" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 36:4 a                                 51.417788 21.696827</span></span>
+<span id="cb7-560"><a href="#cb7-560" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 36:4 b                                 41.323649 24.589971</span></span>
+<span id="cb7-561"><a href="#cb7-561" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 36:5                                   53.956440 15.867349</span></span>
+<span id="cb7-562"><a href="#cb7-562" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 37:5                                   54.229187 43.288904</span></span>
+<span id="cb7-563"><a href="#cb7-563" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 38:3                                   54.281919 31.910835</span></span>
+<span id="cb7-564"><a href="#cb7-564" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 38:4                                   36.290988 21.151946</span></span>
+<span id="cb7-565"><a href="#cb7-565" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 38:5                                   48.593328 14.597330</span></span>
+<span id="cb7-566"><a href="#cb7-566" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 38:6                                   47.678883 18.237807</span></span>
+<span id="cb7-567"><a href="#cb7-567" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 40:4                                   45.083338 16.742702</span></span>
+<span id="cb7-568"><a href="#cb7-568" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 40:5|PE 40:6 [M+2]                     48.153179 15.499968</span></span>
+<span id="cb7-569"><a href="#cb7-569" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 40:6                                   51.334144 21.734826</span></span>
+<span id="cb7-570"><a href="#cb7-570" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE 40:7                                   50.119483 16.248863</span></span>
+<span id="cb7-571"><a href="#cb7-571" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-34:1                                 11.433101 14.787498</span></span>
+<span id="cb7-572"><a href="#cb7-572" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-34:2                                 19.526416 15.695033</span></span>
+<span id="cb7-573"><a href="#cb7-573" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-36:2                                 14.197994 16.354824</span></span>
+<span id="cb7-574"><a href="#cb7-574" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-36:3                                 13.168328 12.735562</span></span>
+<span id="cb7-575"><a href="#cb7-575" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-36:5                                 23.453111 26.619785</span></span>
+<span id="cb7-576"><a href="#cb7-576" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-38:4                                 18.277814 15.138467</span></span>
+<span id="cb7-577"><a href="#cb7-577" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-38:5                                  8.512177 10.616985</span></span>
+<span id="cb7-578"><a href="#cb7-578" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-40:5                                 17.991823 21.726617</span></span>
+<span id="cb7-579"><a href="#cb7-579" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-40:6                                 26.660140 19.670354</span></span>
+<span id="cb7-580"><a href="#cb7-580" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE O-40:7                                 12.231847 11.154004</span></span>
+<span id="cb7-581"><a href="#cb7-581" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/18:1 [FA]                       34.081987 19.873668</span></span>
+<span id="cb7-582"><a href="#cb7-582" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/18:1 [head group]               32.974560 22.997071</span></span>
+<span id="cb7-583"><a href="#cb7-583" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/18:2 [FA]                       17.057161 22.528705</span></span>
+<span id="cb7-584"><a href="#cb7-584" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/18:2 [head group]               16.740420 19.429251</span></span>
+<span id="cb7-585"><a href="#cb7-585" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/20:4 [FA]                       15.775068 14.619163</span></span>
+<span id="cb7-586"><a href="#cb7-586" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/20:4 [head group]               17.713631 18.621711</span></span>
+<span id="cb7-587"><a href="#cb7-587" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/22:5 [FA]                       26.077539 15.404650</span></span>
+<span id="cb7-588"><a href="#cb7-588" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/22:5 [head group]               25.188711 26.486156</span></span>
+<span id="cb7-589"><a href="#cb7-589" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/22:6 [FA]                       74.907788 24.236301</span></span>
+<span id="cb7-590"><a href="#cb7-590" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-16:0/22:6 [head group]               83.327999 22.423738</span></span>
+<span id="cb7-591"><a href="#cb7-591" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/18:1 [FA]                       49.028050 22.897610</span></span>
+<span id="cb7-592"><a href="#cb7-592" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/18:1 [head group]               50.132196 17.686750</span></span>
+<span id="cb7-593"><a href="#cb7-593" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/18:2 [FA]                       40.248895 11.156375</span></span>
+<span id="cb7-594"><a href="#cb7-594" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/18:2 [head group]               39.479858 26.652020</span></span>
+<span id="cb7-595"><a href="#cb7-595" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/20:4 [FA]                       11.047314 10.711387</span></span>
+<span id="cb7-596"><a href="#cb7-596" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/20:4 [head group]               15.362880 19.607708</span></span>
+<span id="cb7-597"><a href="#cb7-597" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/22:5 [FA]                       10.401666 12.658884</span></span>
+<span id="cb7-598"><a href="#cb7-598" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/22:5 [head group]                8.318733 11.604186</span></span>
+<span id="cb7-599"><a href="#cb7-599" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/22:6 [FA]                       54.308415 16.303568</span></span>
+<span id="cb7-600"><a href="#cb7-600" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-18:0/22:6 [head group]               55.389824 21.285107</span></span>
+<span id="cb7-601"><a href="#cb7-601" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-20:0/20:4 [FA]                       19.375587 15.409701</span></span>
+<span id="cb7-602"><a href="#cb7-602" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-20:0/20:4 [head group]               16.381011  9.858559</span></span>
+<span id="cb7-603"><a href="#cb7-603" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-34:1 [-141]                          23.617288 15.188024</span></span>
+<span id="cb7-604"><a href="#cb7-604" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-34:2 [-141]                          29.770833 33.684176</span></span>
+<span id="cb7-605"><a href="#cb7-605" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-36:2 [-141]                          36.570351 34.373899</span></span>
+<span id="cb7-606"><a href="#cb7-606" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-36:3 [-141]                          17.110929 15.759039</span></span>
+<span id="cb7-607"><a href="#cb7-607" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-36:4 [-141]                          18.919808 22.363057</span></span>
+<span id="cb7-608"><a href="#cb7-608" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-38:4 [-141]                          15.714665 12.322130</span></span>
+<span id="cb7-609"><a href="#cb7-609" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-38:5 [-141]                          23.077994 21.908101</span></span>
+<span id="cb7-610"><a href="#cb7-610" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-38:6 [-141]                          79.118556 18.271768</span></span>
+<span id="cb7-611"><a href="#cb7-611" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-40:5 [-141]                           9.685007 10.084276</span></span>
+<span id="cb7-612"><a href="#cb7-612" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PE P-40:6 [-141]                          56.065517 39.338788</span></span>
+<span id="cb7-613"><a href="#cb7-613" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PG 33:1 d7 (ISTD)                         10.215842  7.843026</span></span>
+<span id="cb7-614"><a href="#cb7-614" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PG 34:1                                   56.341280 35.986040</span></span>
+<span id="cb7-615"><a href="#cb7-615" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PG 36:1                                   50.697549 50.841372</span></span>
+<span id="cb7-616"><a href="#cb7-616" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PG 36:2                                   46.641414 30.959090</span></span>
+<span id="cb7-617"><a href="#cb7-617" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 32:0                                   36.889797 37.372811</span></span>
+<span id="cb7-618"><a href="#cb7-618" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 32:1                                   27.321209 18.589002</span></span>
+<span id="cb7-619"><a href="#cb7-619" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 33:1 d7 (ISTD)                         11.258501 13.284691</span></span>
+<span id="cb7-620"><a href="#cb7-620" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 34:0                                   13.881513 16.748262</span></span>
+<span id="cb7-621"><a href="#cb7-621" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 34:1                                   13.001723 10.267084</span></span>
+<span id="cb7-622"><a href="#cb7-622" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 34:2                                   11.583086  7.882173</span></span>
+<span id="cb7-623"><a href="#cb7-623" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 35:1                                   26.061018 24.417648</span></span>
+<span id="cb7-624"><a href="#cb7-624" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 35:2                                   20.356204 25.790810</span></span>
+<span id="cb7-625"><a href="#cb7-625" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 36:1                                   33.671028 26.695846</span></span>
+<span id="cb7-626"><a href="#cb7-626" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 36:2                                   10.715448  7.172043</span></span>
+<span id="cb7-627"><a href="#cb7-627" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 36:3|PI 36:4 [M+2]                      6.731507  5.572319</span></span>
+<span id="cb7-628"><a href="#cb7-628" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 36:4                                   13.150532 14.253029</span></span>
+<span id="cb7-629"><a href="#cb7-629" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 36:5                                   22.984516  8.627847</span></span>
+<span id="cb7-630"><a href="#cb7-630" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 37:4                                   10.382127 11.274853</span></span>
+<span id="cb7-631"><a href="#cb7-631" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 38:3                                   12.373259 11.459961</span></span>
+<span id="cb7-632"><a href="#cb7-632" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 38:4                                   11.752935  9.093694</span></span>
+<span id="cb7-633"><a href="#cb7-633" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 38:5                                    9.652637  9.782380</span></span>
+<span id="cb7-634"><a href="#cb7-634" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 38:6                                   11.343631 10.744723</span></span>
+<span id="cb7-635"><a href="#cb7-635" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 40:4                                   44.767788 21.744224</span></span>
+<span id="cb7-636"><a href="#cb7-636" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 40:5|PI 40:6 M+2                       21.759161 20.430477</span></span>
+<span id="cb7-637"><a href="#cb7-637" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PI 40:6                                   15.231325 17.928325</span></span>
+<span id="cb7-638"><a href="#cb7-638" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polysiloxane 7                            69.682858 34.456939</span></span>
+<span id="cb7-639"><a href="#cb7-639" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polysiloxane 8                            50.485837 52.660771</span></span>
+<span id="cb7-640"><a href="#cb7-640" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PS 33:1 d7 (ISTD)                         10.483636 13.447593</span></span>
+<span id="cb7-641"><a href="#cb7-641" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 30:1                                    8.089983  8.318501</span></span>
+<span id="cb7-642"><a href="#cb7-642" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 31:1                                   27.989217 12.964841</span></span>
+<span id="cb7-643"><a href="#cb7-643" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 32:0                                   36.634138 16.189250</span></span>
+<span id="cb7-644"><a href="#cb7-644" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 32:1                                   18.155363 19.679032</span></span>
+<span id="cb7-645"><a href="#cb7-645" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 32:2                                   24.154657 13.588795</span></span>
+<span id="cb7-646"><a href="#cb7-646" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 33:1                                   27.803975 20.186066</span></span>
+<span id="cb7-647"><a href="#cb7-647" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 34:0                                   51.748639 18.121408</span></span>
+<span id="cb7-648"><a href="#cb7-648" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 34:1                                   12.067062 11.828768</span></span>
+<span id="cb7-649"><a href="#cb7-649" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 34:2                                   16.868433 15.188964</span></span>
+<span id="cb7-650"><a href="#cb7-650" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 34:3                                   23.820072 15.211339</span></span>
+<span id="cb7-651"><a href="#cb7-651" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 35:1                                   12.510188 12.474410</span></span>
+<span id="cb7-652"><a href="#cb7-652" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 35:2                                    8.615562  7.547067</span></span>
+<span id="cb7-653"><a href="#cb7-653" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 36:1                                   13.358229 16.391899</span></span>
+<span id="cb7-654"><a href="#cb7-654" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 36:2                                   10.129032 11.545752</span></span>
+<span id="cb7-655"><a href="#cb7-655" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 36:2 d9 (ISTD)                         17.576956 17.247140</span></span>
+<span id="cb7-656"><a href="#cb7-656" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 36:3                                   18.927181 15.614857</span></span>
+<span id="cb7-657"><a href="#cb7-657" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 38:1                                   26.264390 12.195195</span></span>
+<span id="cb7-658"><a href="#cb7-658" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 38:2                                   17.646582 15.497346</span></span>
+<span id="cb7-659"><a href="#cb7-659" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 38:3                                   15.289430 20.096332</span></span>
+<span id="cb7-660"><a href="#cb7-660" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 39:1                                   19.683449  9.746825</span></span>
+<span id="cb7-661"><a href="#cb7-661" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 40:1                                   14.557090 12.537265</span></span>
+<span id="cb7-662"><a href="#cb7-662" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 40:2                                    7.940956  6.305689</span></span>
+<span id="cb7-663"><a href="#cb7-663" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 40:3|PC 36:4 M+1                       15.049742 17.581103</span></span>
+<span id="cb7-664"><a href="#cb7-664" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 41:1                                   11.799194  9.699436</span></span>
+<span id="cb7-665"><a href="#cb7-665" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 42:1                                   11.424425  8.414689</span></span>
+<span id="cb7-666"><a href="#cb7-666" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 42:2                                    8.919295  5.694160</span></span>
+<span id="cb7-667"><a href="#cb7-667" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 42:3                                   30.562831 37.512379</span></span>
+<span id="cb7-668"><a href="#cb7-668" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 43:1                                   23.214877  6.254715</span></span>
+<span id="cb7-669"><a href="#cb7-669" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 44:1                                   18.234980 15.220052</span></span>
+<span id="cb7-670"><a href="#cb7-670" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SM 44:2                                    7.732091  8.284322</span></span>
+<span id="cb7-671"><a href="#cb7-671" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:0                                   51.249518 28.244044</span></span>
+<span id="cb7-672"><a href="#cb7-672" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:0 [-16:0]                           49.845196 29.020053</span></span>
+<span id="cb7-673"><a href="#cb7-673" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:1                                   54.723971 19.451192</span></span>
+<span id="cb7-674"><a href="#cb7-674" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:1 [-18:1]                           58.480006 20.602319</span></span>
+<span id="cb7-675"><a href="#cb7-675" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:1 d7 (ISTD)                         15.479090 12.055260</span></span>
+<span id="cb7-676"><a href="#cb7-676" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:1 d7 [-15:0] (ISTD)                 17.319423 13.908095</span></span>
+<span id="cb7-677"><a href="#cb7-677" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:2                                   58.126189 25.060459</span></span>
+<span id="cb7-678"><a href="#cb7-678" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:2 [-14:1]                           57.508606  7.683013</span></span>
+<span id="cb7-679"><a href="#cb7-679" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:2 [-16:0]                           55.875529 14.708460</span></span>
+<span id="cb7-680"><a href="#cb7-680" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:2 [-16:1]                           51.970338 16.218606</span></span>
+<span id="cb7-681"><a href="#cb7-681" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:2 [-18:1]                           60.648706 13.206024</span></span>
+<span id="cb7-682"><a href="#cb7-682" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:3                                   56.382426 12.806367</span></span>
+<span id="cb7-683"><a href="#cb7-683" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:3 [-16:1]                           52.144648 17.798739</span></span>
+<span id="cb7-684"><a href="#cb7-684" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 48:3 [-18:2]                           57.607606 18.231735</span></span>
+<span id="cb7-685"><a href="#cb7-685" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 49:1                                   27.224749 12.651875</span></span>
+<span id="cb7-686"><a href="#cb7-686" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 49:1 [-15:0]                           45.766599 12.077175</span></span>
+<span id="cb7-687"><a href="#cb7-687" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 49:1 [-16:0]                           48.163059 19.131385</span></span>
+<span id="cb7-688"><a href="#cb7-688" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 49:1 [-18:1]                           51.434870 17.511351</span></span>
+<span id="cb7-689"><a href="#cb7-689" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:0                                   61.150477 47.456364</span></span>
+<span id="cb7-690"><a href="#cb7-690" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:0 [-18:0]                           62.134440 33.766291</span></span>
+<span id="cb7-691"><a href="#cb7-691" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:1                                   54.116006 15.581145</span></span>
+<span id="cb7-692"><a href="#cb7-692" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:1 [-14:0]                           52.729926 21.647553</span></span>
+<span id="cb7-693"><a href="#cb7-693" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:1 [-18:1]                           54.888394 11.580716</span></span>
+<span id="cb7-694"><a href="#cb7-694" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:2                                   48.607455  9.273915</span></span>
+<span id="cb7-695"><a href="#cb7-695" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:2 [-18:0]                           44.525668 17.861238</span></span>
+<span id="cb7-696"><a href="#cb7-696" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:2 [-18:1]                           50.324627 11.530897</span></span>
+<span id="cb7-697"><a href="#cb7-697" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:2 [-18:2]                           50.571073 14.906051</span></span>
+<span id="cb7-698"><a href="#cb7-698" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:3                                   54.297055 17.492198</span></span>
+<span id="cb7-699"><a href="#cb7-699" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:3 [-14:1]                           54.558271 14.641065</span></span>
+<span id="cb7-700"><a href="#cb7-700" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:3 [-16:1]                           51.224807 17.751812</span></span>
+<span id="cb7-701"><a href="#cb7-701" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:3 [-18:1]                           56.490864 19.283371</span></span>
+<span id="cb7-702"><a href="#cb7-702" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:4                                   55.456247 11.679477</span></span>
+<span id="cb7-703"><a href="#cb7-703" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 50:4 [-14:0]                           54.682146 15.327926</span></span>
+<span id="cb7-704"><a href="#cb7-704" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 51:0 [-16:0]                           56.566068 44.175255</span></span>
+<span id="cb7-705"><a href="#cb7-705" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 51:0 [-17:0]                           59.990067 44.265770</span></span>
+<span id="cb7-706"><a href="#cb7-706" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 51:1                                   54.725789 11.284025</span></span>
+<span id="cb7-707"><a href="#cb7-707" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 51:1 [-18:1]                           57.274977 14.767705</span></span>
+<span id="cb7-708"><a href="#cb7-708" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 51:2                                   49.217954 10.996889</span></span>
+<span id="cb7-709"><a href="#cb7-709" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 51:2 [-15:0]                           45.629914 10.693565</span></span>
+<span id="cb7-710"><a href="#cb7-710" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 51:2 [-16:0]                           51.956721 12.810981</span></span>
+<span id="cb7-711"><a href="#cb7-711" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 51:2 [-18:1]                           51.153932 14.859341</span></span>
+<span id="cb7-712"><a href="#cb7-712" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:1                                   60.162815 13.712038</span></span>
+<span id="cb7-713"><a href="#cb7-713" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:1 [-18:0]                           59.290581 24.678365</span></span>
+<span id="cb7-714"><a href="#cb7-714" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:2                                   48.150015 16.233193</span></span>
+<span id="cb7-715"><a href="#cb7-715" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:2 [-16:0]                           43.860011 17.190552</span></span>
+<span id="cb7-716"><a href="#cb7-716" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:3                                   40.545129 15.323567</span></span>
+<span id="cb7-717"><a href="#cb7-717" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:3 [-16:1]                           44.440438 15.603244</span></span>
+<span id="cb7-718"><a href="#cb7-718" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:3 [-18:2]                           39.387645 12.379767</span></span>
+<span id="cb7-719"><a href="#cb7-719" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:4                                   50.927096 12.793379</span></span>
+<span id="cb7-720"><a href="#cb7-720" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:4 [-16:0]                           46.571778 13.333796</span></span>
+<span id="cb7-721"><a href="#cb7-721" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 52:4 [-18:1]                           52.294507  6.947860</span></span>
+<span id="cb7-722"><a href="#cb7-722" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 53:2                                   54.558433 10.381952</span></span>
+<span id="cb7-723"><a href="#cb7-723" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 53:2 [-17:0]                           53.777709 19.218289</span></span>
+<span id="cb7-724"><a href="#cb7-724" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:1                                   59.846827 14.053184</span></span>
+<span id="cb7-725"><a href="#cb7-725" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:1 [-18:1]                           62.346167 24.792509</span></span>
+<span id="cb7-726"><a href="#cb7-726" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:2                                   55.314126 12.505651</span></span>
+<span id="cb7-727"><a href="#cb7-727" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:2 [-18:0]                           53.899262 12.977891</span></span>
+<span id="cb7-728"><a href="#cb7-728" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:3                                   46.681160 15.615919</span></span>
+<span id="cb7-729"><a href="#cb7-729" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:3 [-18:1]                           49.737864 14.718809</span></span>
+<span id="cb7-730"><a href="#cb7-730" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:4                                   43.166337 12.098570</span></span>
+<span id="cb7-731"><a href="#cb7-731" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:4 [-18:0]                           36.157842 10.934319</span></span>
+<span id="cb7-732"><a href="#cb7-732" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:4 [-18:2]                           40.926419 20.545178</span></span>
+<span id="cb7-733"><a href="#cb7-733" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:5                                   49.970121 16.378265</span></span>
+<span id="cb7-734"><a href="#cb7-734" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:5 [-18:1]                           51.415322 13.122150</span></span>
+<span id="cb7-735"><a href="#cb7-735" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:6                                   54.310580 11.240277</span></span>
+<span id="cb7-736"><a href="#cb7-736" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 54:6 [-18:2]                           55.982629 15.549043</span></span>
+<span id="cb7-737"><a href="#cb7-737" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 56:6                                   40.697939 13.041254</span></span>
+<span id="cb7-738"><a href="#cb7-738" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 56:6 [-20:4]                           30.789078 11.560683</span></span>
+<span id="cb7-739"><a href="#cb7-739" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 56:8                                   53.316186 17.595043</span></span>
+<span id="cb7-740"><a href="#cb7-740" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 56:8 [-20:4]                           46.295611 15.751916</span></span>
+<span id="cb7-741"><a href="#cb7-741" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 58:8                                   47.530442 13.233777</span></span>
+<span id="cb7-742"><a href="#cb7-742" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TG 58:8 [-22:6]                           55.087122 13.809868</span></span>
+<span id="cb7-743"><a href="#cb7-743" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-744"><a href="#cb7-744" aria-hidden="true" tabindex="-1"></a>d_BQC_long <span class="ot">&lt;-</span> d_BQC <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>seq_no<span class="sc">:-</span>AcqTimeStamp,</span>
+<span id="cb7-745"><a href="#cb7-745" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">names_to =</span> <span class="st">"Compound"</span>,</span>
+<span id="cb7-746"><a href="#cb7-746" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">values_to =</span> <span class="st">"Area"</span>)</span>
+<span id="cb7-747"><a href="#cb7-747" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-748"><a href="#cb7-748" aria-hidden="true" tabindex="-1"></a>d_BQC_stats <span class="ot">&lt;-</span> d_BQC_long <span class="sc">|&gt;</span> </span>
+<span id="cb7-749"><a href="#cb7-749" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Compound) <span class="sc">|&gt;</span> </span>
+<span id="cb7-750"><a href="#cb7-750" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-751"><a href="#cb7-751" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-752"><a href="#cb7-752" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(Area),</span>
+<span id="cb7-753"><a href="#cb7-753" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min =</span> <span class="fu">min</span>(Area),</span>
+<span id="cb7-754"><a href="#cb7-754" aria-hidden="true" tabindex="-1"></a>    <span class="at">CV =</span> <span class="fu">sd</span>(Area)<span class="sc">/</span><span class="fu">mean</span>(Area) <span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb7-755"><a href="#cb7-755" aria-hidden="true" tabindex="-1"></a>    <span class="at">logCV =</span> <span class="fu">sqrt</span>(<span class="fu">exp</span>(<span class="dv">1</span>)<span class="sc">^</span>(<span class="fu">sd</span>(<span class="fu">log</span>(Area))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb7-756"><a href="#cb7-756" aria-hidden="true" tabindex="-1"></a>    <span class="at">logCV_roche =</span> <span class="fu">sqrt</span>(<span class="dv">10</span><span class="sc">^</span>(<span class="fu">log</span>(<span class="dv">10</span>)<span class="sc">*</span><span class="fu">sd</span>(<span class="fu">log</span>(Area, <span class="dv">10</span>))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb7-757"><a href="#cb7-757" aria-hidden="true" tabindex="-1"></a>    <span class="at">rCVq =</span> <span class="fl">0.75</span> <span class="sc">*</span> <span class="fu">IQR</span>(Area, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">/</span><span class="fu">median</span>(Area) <span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb7-758"><a href="#cb7-758" aria-hidden="true" tabindex="-1"></a>    <span class="at">rCVm =</span> <span class="fu">mad</span>(Area, <span class="at">constant =</span> <span class="fl">1.4826</span>)<span class="sc">/</span><span class="fu">median</span>(Area) <span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb7-759"><a href="#cb7-759" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-760"><a href="#cb7-760" aria-hidden="true" tabindex="-1"></a>d_BQC_stats</span>
+<span id="cb7-761"><a href="#cb7-761" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 428 × 9</span></span>
+<span id="cb7-762"><a href="#cb7-762" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Compound count    Mean   Min    CV logCV logCV_roche  rCVq  rCVm</span></span>
+<span id="cb7-763"><a href="#cb7-763" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb7-764"><a href="#cb7-764" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 CE 14:0     24   1362.   646  18.8  21.3        21.3  13.4  12.9</span></span>
+<span id="cb7-765"><a href="#cb7-765" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 CE 15:0     24    909.   418  24.7  26.2        26.2  21.2  21.8</span></span>
+<span id="cb7-766"><a href="#cb7-766" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 CE 16:0     24 136417. 67788  35.5  36.8        36.8  38.0  38.4</span></span>
+<span id="cb7-767"><a href="#cb7-767" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 CE 16:1     24  58019. 46129  17.0  16.1        16.1  17.0  13.4</span></span>
+<span id="cb7-768"><a href="#cb7-768" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 CE 16:2     24   2279.   969  28.0  30.1        30.1  28.7  28.5</span></span>
+<span id="cb7-769"><a href="#cb7-769" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 CE 17:0     24   8038.  4632  29.7  30.4        30.4  31.2  34.3</span></span>
+<span id="cb7-770"><a href="#cb7-770" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 422 more rows</span></span>
+<span id="cb7-771"><a href="#cb7-771" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-772"><a href="#cb7-772" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d_BQC_stats<span class="sc">$</span>CV)</span>
+<span id="cb7-773"><a href="#cb7-773" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d_BQC_stats<span class="sc">$</span>rCVm)</span>
+<span id="cb7-774"><a href="#cb7-774" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-775"><a href="#cb7-775" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_BQC_stats) <span class="sc">+</span></span>
+<span id="cb7-776"><a href="#cb7-776" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>CV))</span>
+<span id="cb7-777"><a href="#cb7-777" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
+<span id="cb7-778"><a href="#cb7-778" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Removed 2 rows containing non-finite values (stat_bin).</span></span>
+<span id="cb7-779"><a href="#cb7-779" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-780"><a href="#cb7-780" aria-hidden="true" tabindex="-1"></a>d_BQC_stats_long <span class="ot">&lt;-</span> d_BQC_stats <span class="sc">|&gt;</span></span>
+<span id="cb7-781"><a href="#cb7-781" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">:::</span><span class="fu">select</span>(Compound, CV,rCVm,,rCVq, logCV) <span class="sc">|&gt;</span> </span>
+<span id="cb7-782"><a href="#cb7-782" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Compound, <span class="at">names_to=</span> <span class="st">"CV_type"</span> ,<span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb7-783"><a href="#cb7-783" aria-hidden="true" tabindex="-1"></a>d_BQC_stats_long</span>
+<span id="cb7-784"><a href="#cb7-784" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1,712 × 3</span></span>
+<span id="cb7-785"><a href="#cb7-785" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Compound CV_type Value</span></span>
+<span id="cb7-786"><a href="#cb7-786" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;</span></span>
+<span id="cb7-787"><a href="#cb7-787" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 CE 14:0  CV       18.8</span></span>
+<span id="cb7-788"><a href="#cb7-788" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 CE 14:0  rCVm     12.9</span></span>
+<span id="cb7-789"><a href="#cb7-789" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 CE 14:0  rCVq     13.4</span></span>
+<span id="cb7-790"><a href="#cb7-790" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 CE 14:0  logCV    21.3</span></span>
+<span id="cb7-791"><a href="#cb7-791" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 CE 15:0  CV       24.7</span></span>
+<span id="cb7-792"><a href="#cb7-792" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 CE 15:0  rCVm     21.8</span></span>
+<span id="cb7-793"><a href="#cb7-793" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1,706 more rows</span></span>
+<span id="cb7-794"><a href="#cb7-794" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-795"><a href="#cb7-795" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_BQC_stats_long) <span class="sc">+</span></span>
+<span id="cb7-796"><a href="#cb7-796" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Value, <span class="at">fill =</span> CV_type)) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">150</span>)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>CV_type)</span>
+<span id="cb7-797"><a href="#cb7-797" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
+<span id="cb7-798"><a href="#cb7-798" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Removed 22 rows containing non-finite values (stat_bin).</span></span>
+<span id="cb7-799"><a href="#cb7-799" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Removed 8 rows containing missing values (geom_bar).</span></span>
+<span id="cb7-800"><a href="#cb7-800" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-801"><a href="#cb7-801" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-802"><a href="#cb7-802" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d_BQC_stats<span class="sc">$</span>CV, d_BQC_stats<span class="sc">$</span>logCV)</span>
+<span id="cb7-803"><a href="#cb7-803" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d_BQC_stats<span class="sc">$</span>CV, d_BQC_stats<span class="sc">$</span>logCV, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))</span>
+<span id="cb7-804"><a href="#cb7-804" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d_BQC_stats<span class="sc">$</span>CV, d_BQC_stats<span class="sc">$</span>rCVm)</span>
+<span id="cb7-805"><a href="#cb7-805" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d_BQC_stats<span class="sc">$</span>logCV, d_BQC_stats<span class="sc">$</span>rCVm, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200</span>))</span>
+<span id="cb7-806"><a href="#cb7-806" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d_BQC_stats<span class="sc">$</span>CV, d_BQC_stats<span class="sc">$</span>rCVq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-1.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-2.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-3.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-4.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-5.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-6.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-7.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-8.png" class="img-fluid" width="576"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="datawrangling_files/figure-html/calulcate-column-stats-9.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+    } else {
+      disableStylesheet(alternateStylesheets);
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./import_data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Import data into R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./recipes.html" class="pagination-link">
+        <span class="nav-page-text">Recipes</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">R with was written by Singapore Lipidomics Incubator (SLING).</div>   
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>
