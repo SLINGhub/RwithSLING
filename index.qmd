@@ -1,10 +1,10 @@
 # Welcome {.unnumbered}
 
-In this online book you will find notes and recipes prepared for and during the RwithSLING workshop sessions in 2022 together with team members of the [Singapore Lipidomics Incubator (SLING)](www.sling.sg) located within the [Life Sciences Center at National University of Singapore](https://nus.edu.sg/lsi/)
+In this online book you will find notes and recipes prepared during the RwithSLING workshop sessions in 2022 at the [Singapore Lipidomics Incubator (SLING)](www.sling.sg) @ NUS
 
-These RwithSLING workshop sessions are aimed as an applied quick-start into the usage of R in the processing, management and analysis of dataset handled in the lab. The focus is on mass spectrometry (MS)-based lipidomics datasets and study metadata.
+These RwithSLING workshop sessions are aimed as an applied quick-start into the usage of R in the processing, management and analysis of dataset handled in the lab. Focus is on mass spectrometry (MS)-based lipidomics datasets and study metadata.
 
-These notes were prepared before, during and after workshop sessions, covering topics discussed among the workshop participants. We tried to include frequent questions, challenges, pitfalls and possible solutions. The books is structured into two parts, (i) general topics and (ii) specific recipes to specific data processing scenarios in the lab.
+These notes were prepared before and after workshop sessions, covering topics discussed among the workshop participants. We try to include frequent questions, challenges, pitfalls and possible solutions. The books is structured into two parts, (i) general topics and (ii) specific recipes to specific data processing scenarios in the lab.
 
 Feedback and contributions are very welcome!
 
