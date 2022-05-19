@@ -7,6 +7,8 @@ book:
   author: 
   - name: "Bo Burla"
     affiliation: "Singapore Lipidomics Incubator @ NUS"
+  - name: "SLING"
+    affiliation: "Singapore Lipidomics Incubator @ NUS"
   date: "5/13/2022"
   chapters:
     - index.qmd
@@ -25,6 +27,11 @@ book:
       R with was written by Singapore Lipidomics Incubator (SLING).
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
+  
+  site-url: https://slinghub.github.io/RwithSLING/
+  repo-url: https://github.com/SLINGhub/RwithSLING/
+  repo-branch: master
+  repo-actions: [edit, issue]
 
 bibliography: references.bib
 
