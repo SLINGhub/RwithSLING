@@ -8,7 +8,7 @@
 *_files
 _main.rds
 _book
-*.md
+!LICENSE.md
 !CODE_OF_CONDUCT.md
 *.html
 !plausible.html
