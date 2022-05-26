@@ -7,13 +7,12 @@ book:
   author: 
   - name: "Bo Burla"
     affiliation: "Singapore Lipidomics Incubator @ NUS"
-  - name: "SLING"
-    affiliation: "Singapore Lipidomics Incubator @ NUS"
+
   date: "5/13/2022"
   chapters:
     - index.qmd
     - intro.qmd
-    - part: tutorials.qmd
+    - part: sessionnotes.qmd
       chapters: 
       - import_data.qmd
       - datawrangling.qmd
@@ -24,7 +23,7 @@ book:
 
   page-footer:
     left: |
-      R with was written by Singapore Lipidomics Incubator (SLING).
+      RwithSLING with was written by Singapore Lipidomics Incubator (SLING).
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   

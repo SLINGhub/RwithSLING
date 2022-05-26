@@ -3,6 +3,7 @@
 ```{r}
 #| results: "asis"
 #| echo: false
+#| message: false
 source("_common.R")
 ```
 
@@ -31,7 +32,7 @@ Perfect refers here a tidy, consistent table without missing values. A few consi
 ```{r}
 #| label: read-flat-CSV
 
-data_file_path <- here("data/Testdata_Lipidomics_flat_wide.csv")
+data_file_path <- here("data/Testdata_Lipidomics_flat_wide_V2.csv")
 d_wide <- readr::read_csv(data_file_path, trim_ws = TRUE)
 ```
 
@@ -66,7 +67,7 @@ However, it might be that your data file contains specific text for missing valu
 
 ```{r}
 #| label: read-flat-CSV-ND
-data_file_path <- here("data/Testdata_Lipidomics_flat_wide_with_differentNA.csv")
+data_file_path <- here("data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv")
 d_wide <- readr::read_csv(data_file_path, trim_ws = TRUE)
 
 ```
@@ -77,7 +78,7 @@ We will not be able to perform any calculations for columns that are text or log
 
 ```{r}
 #| label: read-flat-CSV-na
-data_file_path <- here("data/Testdata_Lipidomics_flat_wide_with_differentNA.csv")
+data_file_path <- here("data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv")
 d_wide <- readr::read_csv(data_file_path, 
                           trim_ws = TRUE, 
                           na = c("ND", "LOD"))
@@ -95,7 +96,7 @@ Importing Excel is easy too via the help of external packages such as `readxl`. 
 
 ```{r}
 #| label: read-flat-XLS
-data_file_path <- here("data/Testdata_Lipidomics_flat_wide.xlsx")
+data_file_path <- here("data/Testdata_Lipidomics_flat_wide_V2.xlsx")
 d_wide <- readxl::read_xlsx(data_file_path,
                             sheet = "Sheet1",
                             trim_ws = TRUE, 

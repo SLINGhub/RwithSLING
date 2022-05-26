@@ -19,60 +19,60 @@ library(tidyverse)
 
 ```{r select-rename-columns}
 #| results: markup
-d_subset <- d_orig |> dplyr::select(`AnalysisID` = "DataFileName", 
-                             AcqTimeStamp, Compound = Feature, 
-                             Area = Intensity)
-print(d_subset)
-```
-
-## Filter table for specific text
-
-```{r filter-tables}
-
-d_subset |> filter(AnalysisID == "149_BQC_PQC17.d ")
-
-d_subset |> filter(AnalysisID == "149-bQC_PQC17.d",Compound == "TG 48:1 [-18:1]")
-
-"CE 18:1" == "CE 18:1"
-"CE 18:1" == "CE 18:1 "
-"CE 18:1" == "CE  18:1"
-"Ce 18:1" == "CE 18:1"
-
-stringr::str_trim("CE 18:1 ")
-stringr::str_trim("   CE    18:1 ")
-stringr::str_squish("   CE    18:1 ")
-
-stringr::str_detect("LPC 18:1 (IS)", pattern = "IS")
-stringr::str_detect("LPC 18:1 (ISTD)", pattern = "IS")
-stringr::str_detect("LPC 18:1 (IS)", pattern = "ISTD")
-stringr::str_detect("LPC 18:1 (IS)", pattern = "LPC")
-
-stringr::str_replace("Acylcarnitine 18:1", pattern = "Acylcarnitine",replacement = "CAR")
-stringr::str_replace("TG 48:2 [SIM] Results", pattern = " Results",replacement = "")
-stringr::str_replace("112_BQC_A9334.d", pattern = ".d",replacement = "")
-
-stringr::str_to_lower("CE 18:1")
-
-Sample_ID <- 1
-try(Sample-ID <- 1)
-
-d_subset |> filter(AnalysisID == "149_BQC_PQC17.d", str_detect(Compound, "IS|LPI") )
-
-d_subset |> filter(str_detect(AnalysisID, "BQC|TQC") , str_detect(Compound, "IS")) -> temp
+# d_subset <- d_orig |> dplyr::select(`AnalysisID` = "DataFileName", 
+#                              AcqTimeStamp, Compound = Feature, 
+#                              Area = Intensity)
+# print(d_subset)
+# ```
+# 
+# ## Filter table for specific text
+# 
+# ```{r filter-tables}
+# 
+# d_subset |> filter(AnalysisID == "149_BQC_PQC17.d ")
+# 
+# d_subset |> filter(AnalysisID == "149-bQC_PQC17.d",Compound == "TG 48:1 [-18:1]")
+# 
+# "CE 18:1" == "CE 18:1"
+# "CE 18:1" == "CE 18:1 "
+# "CE 18:1" == "CE  18:1"
+# "Ce 18:1" == "CE 18:1"
+# 
+# stringr::str_trim("CE 18:1 ")
+# stringr::str_trim("   CE    18:1 ")
+# stringr::str_squish("   CE    18:1 ")
+# 
+# stringr::str_detect("LPC 18:1 (IS)", pattern = "IS")
+# stringr::str_detect("LPC 18:1 (ISTD)", pattern = "IS")
+# stringr::str_detect("LPC 18:1 (IS)", pattern = "ISTD")
+# stringr::str_detect("LPC 18:1 (IS)", pattern = "LPC")
+# 
+# stringr::str_replace("Acylcarnitine 18:1", pattern = "Acylcarnitine",replacement = "CAR")
+# stringr::str_replace("TG 48:2 [SIM] Results", pattern = " Results",replacement = "")
+# stringr::str_replace("112_BQC_A9334.d", pattern = ".d",replacement = "")
+# 
+# stringr::str_to_lower("CE 18:1")
+# 
+# Sample_ID <- 1
+# try(Sample-ID <- 1)
+# 
+# d_subset |> filter(AnalysisID == "149_BQC_PQC17.d", str_detect(Compound, "IS|LPI") )
+# 
+# d_subset |> filter(str_detect(AnalysisID, "BQC|TQC") , str_detect(Compound, "IS")) -> temp
 
 ```
 
 ## Convert long table to wide table format
 
 ```{r convert-long-to-wide-table}
-d_subset_wide<- d_subset |> 
-  pivot_wider(names_from = "Compound" ,values_from = "Area")
-
-d_subset2 <- d_subset 
-d_subset2$Compound <- factor(d_subset2$Compound)
-d_subset2$AnalysisID <- factor(d_subset2$AnalysisID)
-d_subset2$AcqTimeStamp <- NULL
-d_subset2$Area2 <- d_subset2$Area
+# d_subset_wide<- d_subset |> 
+#   pivot_wider(names_from = "Compound" ,values_from = "Area")
+# 
+# d_subset2 <- d_subset 
+# d_subset2$Compound <- factor(d_subset2$Compound)
+# d_subset2$AnalysisID <- factor(d_subset2$AnalysisID)
+# d_subset2$AcqTimeStamp <- NULL
+# d_subset2$Area2 <- d_subset2$Area
 
 
 ```
@@ -81,76 +81,76 @@ d_subset2$Area2 <- d_subset2$Area
 
 ```{r split-column}
 
-d_area <- d_area_temp |> 
-  separate(
-    col = AnalysisID,
-    into = c("seq_no", "QCtype", "sample_name"), 
-    sep = "_",
-    extra = "merge", 
-    remove = FALSE) |> 
-  dplyr::select(seq_no, QCtype, sample_name, AnalysisID, everything())
-    
-d_area
+# d_area <- d_area_temp |> 
+#   separate(
+#     col = AnalysisID,
+#     into = c("seq_no", "QCtype", "sample_name"), 
+#     sep = "_",
+#     extra = "merge", 
+#     remove = FALSE) |> 
+#   dplyr::select(seq_no, QCtype, sample_name, AnalysisID, everything())
+#     
+# d_area
 ```
 
 ```{r calulcate-column-stats}
-d_BQC <- d_area |> filter(QCtype == "BQC")
-
-
-d_res1 <- d_BQC |>
-  summarise(
-    across(.cols = -seq_no:-AcqTimeStamp,
-           .fns = ~ sd(.)/mean(.)*100)
-  )
-d_res1
-
-d_BQC_areas <- d_BQC |> dplyr::select(-seq_no:-AcqTimeStamp)
-
-d_res2 <- purrr::map_df(d_BQC_areas, .f = ~ sd(.)/mean(.)*100)
-d_res2
-
-d_res3 <- sapply(X = d_BQC_areas, 
-                 FUN = function(x) c(CV = sd(x)/mean(x) * 100,
-                                     RobustCV = mad(x)/median(x) * 100))
-as.data.frame(d_res3)
-as.data.frame(t(d_res3))
-
-d_BQC_long <- d_BQC |> pivot_longer(cols = -seq_no:-AcqTimeStamp,
-                                    names_to = "Compound",
-                                    values_to = "Area")
-
-d_BQC_stats <- d_BQC_long |> 
-  group_by(Compound) |> 
-  summarise(
-    count = n(),
-    Mean = mean(Area),
-    Min = min(Area),
-    CV = sd(Area)/mean(Area) *100,
-    logCV = sqrt(exp(1)^(sd(log(Area))^2)-1) *100,
-    logCV_roche = sqrt(10^(log(10)*sd(log(Area, 10))^2)-1) *100,
-    rCVq = 0.75 * IQR(Area, na.rm = TRUE)/median(Area) *100,
-    rCVm = mad(Area, constant = 1.4826)/median(Area) *100
-  )
-d_BQC_stats
-
-hist(d_BQC_stats$CV)
-hist(d_BQC_stats$rCVm)
-
-ggplot(d_BQC_stats) +
-  geom_histogram(aes(x=CV))
-
-d_BQC_stats_long <- d_BQC_stats |>
-  dplyr:::select(Compound, CV,rCVm,,rCVq, logCV) |> 
-  pivot_longer(cols = -Compound, names_to= "CV_type" ,values_to = "Value")
-d_BQC_stats_long
-
-ggplot(d_BQC_stats_long) +
-  geom_histogram(aes(x=Value, fill = CV_type)) + scale_x_continuous(limits = c(0,150)) + facet_wrap(~CV_type)
-
-
-plot(d_BQC_stats$CV, d_BQC_stats$logCV)
-plot(d_BQC_stats$CV, d_BQC_stats$logCV, xlim = c(0,100), ylim = c(0,100))
-plot(d_BQC_stats$CV, d_BQC_stats$rCVm)
-plot(d_BQC_stats$logCV, d_BQC_stats$rCVm, xlim = c(0,200))
-plot(d_BQC_stats$CV, d_BQC_stats$rCVq)
+# d_BQC <- d_area |> filter(QCtype == "BQC")
+# 
+# 
+# d_res1 <- d_BQC |>
+#   summarise(
+#     across(.cols = -seq_no:-AcqTimeStamp,
+#            .fns = ~ sd(.)/mean(.)*100)
+#   )
+# d_res1
+# 
+# d_BQC_areas <- d_BQC |> dplyr::select(-seq_no:-AcqTimeStamp)
+# 
+# d_res2 <- purrr::map_df(d_BQC_areas, .f = ~ sd(.)/mean(.)*100)
+# d_res2
+# 
+# d_res3 <- sapply(X = d_BQC_areas, 
+#                  FUN = function(x) c(CV = sd(x)/mean(x) * 100,
+#                                      RobustCV = mad(x)/median(x) * 100))
+# as.data.frame(d_res3)
+# as.data.frame(t(d_res3))
+# 
+# d_BQC_long <- d_BQC |> pivot_longer(cols = -seq_no:-AcqTimeStamp,
+#                                     names_to = "Compound",
+#                                     values_to = "Area")
+# 
+# d_BQC_stats <- d_BQC_long |> 
+#   group_by(Compound) |> 
+#   summarise(
+#     count = n(),
+#     Mean = mean(Area),
+#     Min = min(Area),
+#     CV = sd(Area)/mean(Area) *100,
+#     logCV = sqrt(exp(1)^(sd(log(Area))^2)-1) *100,
+#     logCV_roche = sqrt(10^(log(10)*sd(log(Area, 10))^2)-1) *100,
+#     rCVq = 0.75 * IQR(Area, na.rm = TRUE)/median(Area) *100,
+#     rCVm = mad(Area, constant = 1.4826)/median(Area) *100
+#   )
+# d_BQC_stats
+# 
+# hist(d_BQC_stats$CV)
+# hist(d_BQC_stats$rCVm)
+# 
+# ggplot(d_BQC_stats) +
+#   geom_histogram(aes(x=CV))
+# 
+# d_BQC_stats_long <- d_BQC_stats |>
+#   dplyr:::select(Compound, CV,rCVm,,rCVq, logCV) |> 
+#   pivot_longer(cols = -Compound, names_to= "CV_type" ,values_to = "Value")
+# d_BQC_stats_long
+# 
+# ggplot(d_BQC_stats_long) +
+#   geom_histogram(aes(x=Value, fill = CV_type)) + scale_x_continuous(limits = c(0,150)) + facet_wrap(~CV_type)
+# 
+# 
+# plot(d_BQC_stats$CV, d_BQC_stats$logCV)
+# plot(d_BQC_stats$CV, d_BQC_stats$logCV, xlim = c(0,100), ylim = c(0,100))
+# plot(d_BQC_stats$CV, d_BQC_stats$rCVm)
+# plot(d_BQC_stats$logCV, d_BQC_stats$rCVm, xlim = c(0,200))
+# plot(d_BQC_stats$CV, d_BQC_stats$rCVq)
 ```

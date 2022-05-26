@@ -88,7 +88,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <link href="./datawrangling.html" rel="next">
-<link href="./tutorials.html" rel="prev">
+<link href="./sessionnotes.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./tutorials.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Notes</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Subsetting tables</span></a>
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></a>
   </div>
 </li>
     </ul>
@@ -263,17 +263,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>In omics datasets, often rows correspond to samples, and columns to compounds (features).</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 215 Columns: 430</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Delimiter: ","</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; chr    (3): DataFileme, SampleType, VialPosition</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dbl  (426): CE 14:0, CE 15:0, CE 16:0, CE 16:1, CE 16:2, CE 17:0, CE 17:1, C...</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dttm   (1): AcqTimeStamp</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_V2.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Rows: 215 Columns: 430
+#&gt; ── Column specification ────────────────────────────────────────────────────────
+#&gt; Delimiter: ","
+#&gt; chr    (3): DataFileme, SPLType, VialPosition
+#&gt; dbl  (426): CE 14:0, CE 15:0, CE 16:0, CE 16:1, CE 16:2, CE 17:0, CE 17:1, C...
+#&gt; dttm   (1): AcqTimeStamp
+#&gt; 
+#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.
+#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
 </div>
 <p>By default <code>read_csv()</code> outputs a summary of the import. Note that <code>read_csv</code> will by default <em>guess</em> the type of data each column. The output provides then a summery of the assigned data types (see below). In the example above, we see that all columns describing the samples are text (<code>&lt;char&gt;)</code>, and all columns with lipid names are numeric (<code>&lt;dbl&gt;</code>).</p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -339,19 +341,21 @@ Basic data types in R that can occur in tables
 </div>
 <p>You can print tables in the console or in R notebook (.Rmd), which will also show the column types:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d_wide</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 215 × 430</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   DataFileme     AcqTimeStamp        SampleType VialPosition `CE 14:0` `CE 15:0`</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 001_EQC_TQC p… 2018-04-12 18:28:00 Sample     Vial 2            1532       515</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 002_EQC_TQC p… 2018-04-12 18:39:00 Sample     Vial 2            1029       911</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 003_EQC_TQC p… 2018-04-12 18:51:00 Sample     Vial 2             685       649</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 004_EQC_TQC p… 2018-04-12 19:02:00 Sample     Vial 2            1283       576</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 005_EQC_TQC p… 2018-04-12 19:13:00 Sample     Vial 2             946       732</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 006_EBLK_Extr… 2018-04-12 19:25:00 Sample     P1-A1              132        75</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 209 more rows, and 424 more variables: `CE 16:0` &lt;dbl&gt;,</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;dbl&gt;, `CE 17:1` &lt;dbl&gt;,</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; # A tibble: 215 × 430
+#&gt;   DataFileme        AcqTimeStamp        SPLType VialPosition `CE 14:0` `CE 15:0`
+#&gt;   &lt;chr&gt;             &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 001_EQC_TQC prer… 2018-04-12 18:28:00 EQC     Vial 2            1532       515
+#&gt; 2 002_EQC_TQC prer… 2018-04-12 18:39:00 EQC     Vial 2            1029       911
+#&gt; 3 003_EQC_TQC prer… 2018-04-12 18:51:00 EQC     Vial 2             685       649
+#&gt; 4 004_EQC_TQC prer… 2018-04-12 19:02:00 EQC     Vial 2            1283       576
+#&gt; 5 005_EQC_TQC prer… 2018-04-12 19:13:00 EQC     Vial 2             946       732
+#&gt; 6 006_EBLK_Extract… 2018-04-12 19:25:00 PBLK    P1-A1              132        75
+#&gt; # … with 209 more rows, and 424 more variables: `CE 16:0` &lt;dbl&gt;,
+#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;dbl&gt;, `CE 17:1` &lt;dbl&gt;,
+#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</code></pre>
+</div>
 </div>
 </section>
 <section id="read-csvs-with-missing-values" class="level3" data-number="2.1.2">
@@ -359,50 +363,58 @@ Basic data types in R that can occur in tables
 <p>Data files often contain missing values, i.e.&nbsp;as empty cells. <code>read_csv()</code> assigns empty/missing values during the import to the specific value <code>NA</code> (<em>Not Available</em>). Missing values will in general not affect to data type guessed by <code>read_csv()</code>, except all values or missing in a column (see later).</p>
 <p>However, it might be that your data file contains specific text for missing values, for instance “<em>ND”</em>,”<em>LOD”</em> or lowercase <em>“na”</em>. Results from e.g.&nbsp;clinical chemistry labs frequently indicate not available data with a short text such as <em>“clotted”</em>, <em>“hemolytic”</em>, <em>“no received”</em> to explain why a value was not reported. What happens when we import such a file using default <code>read_csv</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_with_differentNA.csv"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 215 Columns: 432</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Delimiter: ","</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; chr  (109): DataFileNDme, SampleType, VialPosition, CE 15:0, CE 16:0, CE 17:...</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dbl  (320): CE 14:0, CE 16:1, CE 17:1, CE 18:0, CE 18:1, CE 18:1 d7 (ISTD), ...</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lgl    (2): CE 16:2, LPC 16:0</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dttm   (1): AcqTimeStamp</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Rows: 215 Columns: 432
+#&gt; ── Column specification ────────────────────────────────────────────────────────
+#&gt; Delimiter: ","
+#&gt; chr  (109): DataFileNDme, SampleType, VialPosition, CE 15:0, CE 16:0, CE 17:...
+#&gt; dbl  (320): CE 14:0, CE 16:1, CE 17:1, CE 18:0, CE 18:1, CE 18:1 d7 (ISTD), ...
+#&gt; lgl    (2): CE 16:2, LPC 16:0
+#&gt; dttm   (1): AcqTimeStamp
+#&gt; 
+#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.
+#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
 </div>
 <p><code>read_csv()</code> was mislead by the presence of unknown text values and guessed the data types wrongly as <code>&lt;char&gt;</code> for some columns. We also have two columns of the type <code>&lt;lgl&gt;</code>, which stand for logical (<code>TRUE</code>/<code>FALSE</code>), what happend here? All peak areas of e.g.&nbsp;CE 16:2 were missing and <code>read_csv</code> has no way to guess what is the intended data type, in which case it chooses <code>&lt;lgl&gt;</code>as default.</p>
 <p>We will not be able to perform any calculations for columns that are text or logical. We therefore need to explicitly tell R what values to interpret as missing values (<code>NA</code>). We can do this by providing a list of texts that should be interpreted as <code>NA</code> via the <code>na</code> parameter:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_with_differentNA.csv"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"ND"</span>, <span class="st">"LOD"</span>))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: One or more parsing issues, see `problems()` for details</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 215 Columns: 432</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Delimiter: ","</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; chr    (3): DataFileNDme, SampleType, VialPosition</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dbl  (425): CE 14:0, CE 15:0, CE 16:0, CE 16:1, CE 17:0, CE 17:1, CE 18:0, C...</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lgl    (3): CE 16:2, Cer d18:2/24:0, LPC 16:0</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dttm   (1): AcqTimeStamp</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_wide)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 215 × 432</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   DataFileNDme   AcqTimeStamp        SampleType VialPosition `CE 14:0` `CE 15:0`</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 001_EQC_TQC p… 2018-04-12 18:28:00 Sample     Vial 2            1532       515</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 002_EQC_TQC p… 2018-04-12 18:39:00 Sample     Vial 2            1029        NA</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 003_EQC_TQC p… 2018-04-12 18:51:00 Sample     Vial 2             685       649</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 004_EQC_TQC p… 2018-04-12 19:02:00 Sample     Vial 2            1283       576</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 005_EQC_TQC p… 2018-04-12 19:13:00 Sample     Vial 2             946       732</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 006_EBLK_Extr… 2018-04-12 19:25:00 Sample     P1-A1              132        NA</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 209 more rows, and 426 more variables: `CE 16:0` &lt;dbl&gt;,</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;lgl&gt;, `CE 17:0` &lt;dbl&gt;, `CE 17:1` &lt;dbl&gt;,</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"ND"</span>, <span class="st">"LOD"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Warning: One or more parsing issues, see `problems()` for details</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Rows: 215 Columns: 432
+#&gt; ── Column specification ────────────────────────────────────────────────────────
+#&gt; Delimiter: ","
+#&gt; chr    (3): DataFileNDme, SampleType, VialPosition
+#&gt; dbl  (425): CE 14:0, CE 15:0, CE 16:0, CE 16:1, CE 17:0, CE 17:1, CE 18:0, C...
+#&gt; lgl    (3): CE 16:2, Cer d18:2/24:0, LPC 16:0
+#&gt; dttm   (1): AcqTimeStamp
+#&gt; 
+#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.
+#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; # A tibble: 215 × 432
+#&gt;   DataFileNDme   AcqTimeStamp        SampleType VialPosition `CE 14:0` `CE 15:0`
+#&gt;   &lt;chr&gt;          &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 001_EQC_TQC p… 2018-04-12 18:28:00 EQC        Vial 2            1532       515
+#&gt; 2 002_EQC_TQC p… 2018-04-12 18:39:00 EQC        Vial 2            1029        NA
+#&gt; 3 003_EQC_TQC p… 2018-04-12 18:51:00 EQC        Vial 2             685       649
+#&gt; 4 004_EQC_TQC p… 2018-04-12 19:02:00 EQC        Vial 2            1283       576
+#&gt; 5 005_EQC_TQC p… 2018-04-12 19:13:00 EQC        Vial 2             946       732
+#&gt; 6 006_EBLK_Extr… 2018-04-12 19:25:00 PBLK       P1-A1              132        NA
+#&gt; # … with 209 more rows, and 426 more variables: `CE 16:0` &lt;dbl&gt;,
+#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;lgl&gt;, `CE 17:0` &lt;dbl&gt;, `CE 17:1` &lt;dbl&gt;,
+#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</code></pre>
+</div>
 </div>
 <div class="callout-note callout callout-style-simple no-icon">
 <div class="callout-body d-flex">
@@ -420,24 +432,26 @@ Basic data types in R that can occur in tables
 <h2 data-number="2.2" class="anchored" data-anchor-id="importing-an-excel-table"><span class="header-section-number">2.2</span> Importing an Excel table</h2>
 <p>Importing Excel is easy too via the help of external packages such as <code>readxl</code>. Note that you will need to define which sheet to import (e.g.&nbsp;below <code>Sheet1</code>). The same considerations about missing values and white spaces as detailed before apply here too.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide.xlsx"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(data_file_path,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sheet =</span> <span class="st">"Sheet1"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"ND"</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_wide)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 215 × 432</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   DataFileName          AcqTimeStamp SampleType VialPosition `CE 14:0` `CE 15:0`</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 001_EQC_TQC prerun 0… 2018-04-12T… Sample     Vial 2            1532       515</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 002_EQC_TQC prerun 0… 2018-04-12T… Sample     Vial 2            1029       911</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 003_EQC_TQC prerun 0… 2018-04-12T… Sample     Vial 2             685       649</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 004_EQC_TQC prerun 0… 2018-04-12T… Sample     Vial 2            1283       576</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 005_EQC_TQC prerun 0… 2018-04-12T… Sample     Vial 2             946       732</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 006_EBLK_Extracted B… 2018-04-12T… Sample     P1-A1              132        NA</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 209 more rows, and 426 more variables: `CE 16:0` &lt;dbl&gt;,</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;chr&gt;, `CE 17:1` &lt;dbl&gt;,</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_V2.xlsx"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(data_file_path,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sheet =</span> <span class="st">"Sheet1"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"ND"</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; # A tibble: 215 × 432
+#&gt;   DataFileName          AcqTimeStamp SampleType VialPosition `CE 14:0` `CE 15:0`
+#&gt;   &lt;chr&gt;                 &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 001_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1532       515
+#&gt; 2 002_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1029       911
+#&gt; 3 003_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2             685       649
+#&gt; 4 004_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1283       576
+#&gt; 5 005_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2             946       732
+#&gt; 6 006_EBLK_Extracted B… 2018-04-12T… PBLK       P1-A1              132        NA
+#&gt; # … with 209 more rows, and 426 more variables: `CE 16:0` &lt;dbl&gt;,
+#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;chr&gt;, `CE 17:1` &lt;dbl&gt;,
+#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</code></pre>
+</div>
 </div>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -635,20 +649,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./tutorials.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorials</span>
+      <a href="./sessionnotes.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./datawrangling.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Subsetting tables</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">R with was written by Singapore Lipidomics Incubator (SLING).</div>   
+    <div class="nav-footer-left">RwithSLING with was written by Singapore Lipidomics Incubator (SLING).</div>   
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

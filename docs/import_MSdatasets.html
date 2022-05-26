@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./tutorials.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Notes</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Subsetting tables</span></a>
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></a>
   </div>
 </li>
     </ul>
@@ -248,10 +248,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/paste-B702CE09.png" class="img-fluid"></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SLINGtools)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_MHQuant_Detailed.csv"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> SLINGtools<span class="sc">::</span><span class="fu">read_peakareas_MassHunterCSV</span>(data_file_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_MHQuant_Detailed_V2.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> SLINGtools<span class="sc">::</span><span class="fu">read_MassHunterCSV_wide</span>(data_file_path, <span class="at">field =</span> <span class="st">"Area"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Reading 'Testdata_Lipidomics_MHQuant_Detailed.csv' ... 
+<pre><code>Reading 'Testdata_Lipidomics_MHQuant_Detailed_V2.csv' ... 
+
+indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [=====-] 2.15GB/s, eta:  0s
+indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [======] 2.15GB/s, eta:  0s
+                                                                                
 Imported  215 samples with 428 transitions </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -259,16 +263,16 @@ Imported  215 samples with 428 transitions </code></pre>
 <pre><code># A tibble: 215 × 432
    DataFileName  AcqTimeStamp        SampleType VialPosition `CE 14:0` `CE 15:0`
    &lt;chr&gt;         &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;
- 1 001_EQC_TQC … 2018-04-12 18:28:00 Sample     Vial 2            1532       515
- 2 002_EQC_TQC … 2018-04-12 18:39:00 Sample     Vial 2            1029       911
- 3 003_EQC_TQC … 2018-04-12 18:51:00 Sample     Vial 2             685       649
- 4 004_EQC_TQC … 2018-04-12 19:02:00 Sample     Vial 2            1283       576
- 5 005_EQC_TQC … 2018-04-12 19:13:00 Sample     Vial 2             946       732
- 6 006_EBLK_Ext… 2018-04-12 19:25:00 Sample     P1-A1              132        75
- 7 007_SOLV_Bla… 2018-04-12 19:36:00 Sample     Vial 1             241        56
- 8 008_LTR_LTR0… 2018-04-12 19:48:00 Sample     P1-A2             1118       905
- 9 009_NIST_NIS… 2018-04-12 19:59:00 Sample     P1-A3             1499       482
-10 010_TQCd-0_T… 2018-04-12 20:11:00 Sample     Vial 4              77        96
+ 1 001_EQC_TQC … 2018-04-12 18:28:00 EQC        Vial 2            1532       515
+ 2 002_EQC_TQC … 2018-04-12 18:39:00 EQC        Vial 2            1029       911
+ 3 003_EQC_TQC … 2018-04-12 18:51:00 EQC        Vial 2             685       649
+ 4 004_EQC_TQC … 2018-04-12 19:02:00 EQC        Vial 2            1283       576
+ 5 005_EQC_TQC … 2018-04-12 19:13:00 EQC        Vial 2             946       732
+ 6 006_EBLK_Ext… 2018-04-12 19:25:00 PBLK       P1-A1              132        75
+ 7 007_SOLV_Bla… 2018-04-12 19:36:00 SBLK       Vial 1             241        56
+ 8 008_LTR_LTR0… 2018-04-12 19:48:00 LTR        P1-A2             1118       905
+ 9 009_NIST_NIS… 2018-04-12 19:59:00 NIST       P1-A3             1499       482
+10 010_TQCd-0_T… 2018-04-12 20:11:00 RQC        Vial 4              77        96
 # … with 205 more rows, and 426 more variables: `CE 16:0` &lt;dbl&gt;,
 #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;dbl&gt;, `CE 17:1` &lt;dbl&gt;,
 #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;,
@@ -284,10 +288,14 @@ Imported  215 samples with 428 transitions </code></pre>
 <p>Detail <a href="https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software/data-analysis/quantitative-analysis">MassHunter Quant</a>.</p>
 <p><img src="images/paste-A1421EC0.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_MHQuant_Detailed.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_MHQuant_Detailed_V2.csv"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d_all_long <span class="ot">&lt;-</span> SLINGtools<span class="sc">::</span><span class="fu">read_MassHunterCSV</span>(data_file_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Reading 'Testdata_Lipidomics_MHQuant_Detailed.csv' ... 
+<pre><code>Reading 'Testdata_Lipidomics_MHQuant_Detailed_V2.csv' ... 
+
+indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [=====-] 2.15GB/s, eta:  0s
+indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [======] 2.15GB/s, eta:  0s
+                                                                                
 Imported  215 samples with 428 transitions </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_all_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -295,19 +303,19 @@ Imported  215 samples with 428 transitions </code></pre>
 <pre><code># A tibble: 92,020 × 14
    DataFileName     DataName SampleType AcqTimeStamp        VialPosition Feature
    &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;  
- 1 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 14:0
- 2 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 15:0
- 3 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 16:0
- 4 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 16:1
- 5 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 16:2
- 6 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 17:0
- 7 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 17:1
- 8 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 18:0
- 9 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 18:1
-10 001_EQC_TQC pre… 001_EQC… Sample     2018-04-12 18:28:00 Vial 2       CE 18:…
+ 1 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 14:0
+ 2 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 15:0
+ 3 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 16:0
+ 4 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 16:1
+ 5 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 16:2
+ 6 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 17:0
+ 7 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 17:1
+ 8 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 18:0
+ 9 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 18:1
+10 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 18:…
 # … with 92,010 more rows, and 8 more variables: IonPolarity &lt;fct&gt;,
 #   PrecursorMZ &lt;dbl&gt;, ProductMZ &lt;dbl&gt;, CollisionEnergy &lt;dbl&gt;, RT &lt;dbl&gt;,
-#   Intensity &lt;dbl&gt;, FWHM &lt;dbl&gt;, MI &lt;lgl&gt;</code></pre>
+#   Area &lt;dbl&gt;, FWHM &lt;dbl&gt;, MI &lt;lgl&gt;</code></pre>
 </div>
 </div>
 
@@ -506,7 +514,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">R with was written by Singapore Lipidomics Incubator (SLING).</div>   
+    <div class="nav-footer-left">RwithSLING with was written by Singapore Lipidomics Incubator (SLING).</div>   
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

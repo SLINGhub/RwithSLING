@@ -87,7 +87,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
-<link href="./tutorials.html" rel="next">
+<link href="./sessionnotes.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./tutorials.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Notes</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Subsetting tables</span></a>
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></a>
   </div>
 </li>
     </ul>
@@ -246,12 +246,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Following software need to be installed on your computer to work with the examples shown in this online book:</p>
 <ul>
 <li><p><code>R</code> Version 4.1 (or higher) <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>. Check your R version by running following command in your console: ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">R.Version</span>()<span class="sc">$</span>version.string</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "R version 4.2.0 (2022-04-22 ucrt)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">R.Version</span>()<span class="sc">$</span>version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "R version 4.2.0 (2022-04-22 ucrt)"</code></pre>
+</div>
 <p>:::</p></li>
 <li><p><code>RStudio</code> Version 2022.02 or higher <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>. Check your <code>RStudio</code> version by either looking clicking <em>About RStudio</em> under the menu <em>Help</em>, or by running following command in your console</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rstudioapi<span class="sc">::</span><span class="fu">versionInfo</span>()<span class="sc">$</span>version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rstudioapi<span class="sc">::</span><span class="fu">versionInfo</span>()<span class="sc">$</span>version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
 <p>Following software are only needed for specific chapters/examples:</p>
@@ -272,8 +274,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Run this in your R command line to install these packages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pkg_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"here"</span>, <span class="st">"tidyverse"</span>, <span class="st">"readxl"</span>, <span class="st">"remotes"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(pkg_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pkg_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"here"</span>, <span class="st">"tidyverse"</span>, <span class="st">"readxl"</span>, <span class="st">"remotes"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(pkg_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -463,15 +465,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./tutorials.html" class="pagination-link">
-        <span class="nav-page-text">Tutorials</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sessionnotes.html" class="pagination-link">
+        <span class="nav-page-text">Notes</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">R with was written by Singapore Lipidomics Incubator (SLING).</div>   
+    <div class="nav-footer-left">RwithSLING with was written by Singapore Lipidomics Incubator (SLING).</div>   
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

@@ -4,7 +4,7 @@ set.seed(76543)
 
 knitr::opts_chunk$set(
   comment = "#>",
-  collapse = TRUE,
+  collapse = FALSE,
   # cache = TRUE,
   fig.retina = 2,
   fig.width = 6,
