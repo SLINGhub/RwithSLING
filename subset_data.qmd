@@ -5,14 +5,18 @@
 #| echo: false
 source("_common.R")
 ```
+## Introduction
 
-```{r setup}
+In this chapter we will look at how to subset data
+
+### Prerequisites
+
+```{r}
+#| label: setup
 #| message: false
-#| results: hide
 library(here)
-library(SLINGtools)
 library(tidyverse)
-
+library(SLINGtools)
 ```
 
 ## Select and rename columns

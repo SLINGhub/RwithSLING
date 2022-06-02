@@ -87,7 +87,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
-<link href="./datawrangling.html" rel="next">
+<link href="./tables.html" rel="next">
 <link href="./sessionnotes.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Notes</a>
+        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Learning R</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -181,14 +181,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tables in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
   </div>
 </li>
     </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./recipes.html" class="sidebar-item-text sidebar-link">Recipes</a>
+        <a href="./recipes.html" class="sidebar-item-text sidebar-link">Workflows</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -196,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -215,12 +220,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#read-csv-files" id="toc-read-csv-files" class="nav-link active" data-scroll-target="#read-csv-files"> <span class="header-section-number">2.1</span> Read CSV files</a>
-  <ul class="collapse">
-  <li><a href="#read-a-perfect-csv-file" id="toc-read-a-perfect-csv-file" class="nav-link" data-scroll-target="#read-a-perfect-csv-file"> <span class="header-section-number">2.1.1</span> Read a <em>perfect</em> CSV file</a></li>
-  <li><a href="#read-csvs-with-missing-values" id="toc-read-csvs-with-missing-values" class="nav-link" data-scroll-target="#read-csvs-with-missing-values"> <span class="header-section-number">2.1.2</span> Read CSVs with missing values</a></li>
-  </ul></li>
-  <li><a href="#importing-an-excel-table" id="toc-importing-an-excel-table" class="nav-link" data-scroll-target="#importing-an-excel-table"> <span class="header-section-number">2.2</span> Importing an Excel table</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">2.1</span> Introduction</a></li>
+  <li><a href="#read-csv-files" id="toc-read-csv-files" class="nav-link" data-scroll-target="#read-csv-files"> <span class="header-section-number">2.2</span> Read CSV files</a></li>
+  <li><a href="#read-excel-tables" id="toc-read-excel-tables" class="nav-link" data-scroll-target="#read-excel-tables"> <span class="header-section-number">2.3</span> Read Excel tables</a></li>
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types"> <span class="header-section-number">2.4</span> Data Types</a></li>
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"> <span class="header-section-number">2.5</span> Missing Values</a></li>
+  <li><a href="#other-considerations" id="toc-other-considerations" class="nav-link" data-scroll-target="#other-considerations"> <span class="header-section-number">2.6</span> Other Considerations</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/import_data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -245,26 +250,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Throughout this workshop we will use datasets that we often us encounter during our work. These include pre-processed MS datasets and study metadata of different types and formats.</p>
+<section id="introduction" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2.1</span> Introduction</h2>
+<div class="callout-note callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Verify the integrity of your data files and imported data - do not just assume all is fine</p>
+</div>
+</div>
+</div>
+<p>Data analysis projects often start by importing data from files. It is easier to start with clearly structured, clean and consistent data files:</p>
+<ul>
+<li>Tidy data: <em>observations</em> (e.g.&nbsp;samples) as <em>rows</em>, <em>variables</em> (e.g.&nbsp;compounds) as <em>columns</em></li>
+<li>First row contains column names</li>
+<li>No nested columns and rows</li>
+<li>No text before and after the table</li>
+</ul>
+<p>We will be using <code>readr</code> (from tidyverse) and <code>readxl</code> packages in this chapter:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SLINGtools)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="read-csv-files" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="read-csv-files"><span class="header-section-number">2.1</span> Read CSV files</h2>
-<section id="read-a-perfect-csv-file" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="read-a-perfect-csv-file"><span class="header-section-number">2.1.1</span> Read a <em>perfect</em> CSV file</h3>
-<p>Perfect refers here a tidy, consistent table without missing values. A few considerations when importing data files:</p>
-<ul>
-<li>The first row should contains the column names, all subsequent rows data/values</li>
-<li>White spaces before or after text fields can (and often will) cause issues downstream, therefore I suggest to trim whitespaces, e.g.&nbsp;by setting <code>trim_ws = TRUE</code></li>
-<li>In omics datasets, often rows correspond to samples, and columns to compounds (features).</li>
-</ul>
+</section>
+<section id="read-csv-files" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="read-csv-files"><span class="header-section-number">2.2</span> Read CSV files</h2>
+<p><strong>Hint</strong>: Inspect the summery provided by <code>read_csv()</code> to verify correct data types were assigned</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_V2.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_V2.csv"</span>), </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_names =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Rows: 215 Columns: 430
 #&gt; ── Column specification ────────────────────────────────────────────────────────
@@ -277,93 +295,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>By default <code>read_csv()</code> outputs a summary of the import. Note that <code>read_csv</code> will by default <em>guess</em> the type of data each column. The output provides then a summery of the assigned data types (see below). In the example above, we see that all columns describing the samples are text (<code>&lt;char&gt;)</code>, and all columns with lipid names are numeric (<code>&lt;dbl&gt;</code>).</p>
+<p>To remove white-spaces before and after text, set <code>trim_ws = TRUE</code>.</p>
+</section>
+<section id="read-excel-tables" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="read-excel-tables"><span class="header-section-number">2.3</span> Read Excel tables</h2>
+<p>Importing Excel tables can be done via the package s <code>readxl</code>. Note: you will need to define which sheet to import (e.g.&nbsp;below <code>Sheet1</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_V2.xlsx"</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sheet =</span> <span class="st">"Sheet1"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"ND"</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; # A tibble: 215 × 432
+#&gt;   DataFileName          AcqTimeStamp SampleType VialPosition `CE 14:0` `CE 15:0`
+#&gt;   &lt;chr&gt;                 &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 001_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1532       515
+#&gt; 2 002_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1029       911
+#&gt; 3 003_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2             685       649
+#&gt; 4 004_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1283       576
+#&gt; 5 005_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2             946       732
+#&gt; 6 006_EBLK_Extracted B… 2018-04-12T… PBLK       P1-A1              132        NA
+#&gt; # … with 209 more rows, and 426 more variables: `CE 16:0` &lt;dbl&gt;,
+#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;chr&gt;, `CE 17:1` &lt;dbl&gt;,
+#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Basic data types in R that can occur in tables
+Verify integrity of imported data
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<table class="table">
-<colgroup>
-<col style="width: 24%">
-<col style="width: 13%">
-<col style="width: 33%">
-<col style="width: 29%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>Short</th>
-<th>Description</th>
-<th>Example(s)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Numeric (double)</td>
-<td><code>&lt;dbl&gt;</code></td>
-<td>Floating point number</td>
-<td><code>3.14159</code></td>
-</tr>
-<tr class="even">
-<td>Character</td>
-<td><code>&lt;char&gt;</code></td>
-<td>Character (text) string</td>
-<td><code>"S1P d18:1", "BQC"</code></td>
-</tr>
-<tr class="odd">
-<td>Logical</td>
-<td><code>&lt;lgl&gt;</code></td>
-<td>True or False, 1 or 0</td>
-<td><code>TRUE; FALSE</code></td>
-</tr>
-<tr class="even">
-<td>Integer</td>
-<td><code>&lt;int&gt;</code></td>
-<td>Number without digits</td>
-<td><code>3L; 7011L; -13L</code></td>
-</tr>
-<tr class="odd">
-<td>Factor</td>
-<td><code>&lt;fct&gt;</code></td>
-<td>Categorical data</td>
-<td><code>BQC; TQC; SPL</code></td>
-</tr>
-</tbody>
-</table>
-<p>Moreover there are data and time types, i.e.&nbsp;date <code>&lt;dt&gt;</code>, time <code>&lt;tm&gt;</code> and datetime <code>&lt;dttm&gt;</code></p>
-</div>
-</div>
-<p>You can print tables in the console or in R notebook (.Rmd), which will also show the column types:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 215 × 430
-#&gt;   DataFileme        AcqTimeStamp        SPLType VialPosition `CE 14:0` `CE 15:0`
-#&gt;   &lt;chr&gt;             &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 001_EQC_TQC prer… 2018-04-12 18:28:00 EQC     Vial 2            1532       515
-#&gt; 2 002_EQC_TQC prer… 2018-04-12 18:39:00 EQC     Vial 2            1029       911
-#&gt; 3 003_EQC_TQC prer… 2018-04-12 18:51:00 EQC     Vial 2             685       649
-#&gt; 4 004_EQC_TQC prer… 2018-04-12 19:02:00 EQC     Vial 2            1283       576
-#&gt; 5 005_EQC_TQC prer… 2018-04-12 19:13:00 EQC     Vial 2             946       732
-#&gt; 6 006_EBLK_Extract… 2018-04-12 19:25:00 PBLK    P1-A1              132        75
-#&gt; # … with 209 more rows, and 424 more variables: `CE 16:0` &lt;dbl&gt;,
-#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;dbl&gt;, `CE 17:1` &lt;dbl&gt;,
-#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</code></pre>
+<ul>
+<li>Do not assume imported data fine without having reason to do so</li>
+<li>Ensure data types were correctly assigned</li>
+<li>Ensure missing values are correctly handled</li>
+</ul>
 </div>
 </div>
 </section>
-<section id="read-csvs-with-missing-values" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="read-csvs-with-missing-values"><span class="header-section-number">2.1.2</span> Read CSVs with missing values</h3>
-<p>Data files often contain missing values, i.e.&nbsp;as empty cells. <code>read_csv()</code> assigns empty/missing values during the import to the specific value <code>NA</code> (<em>Not Available</em>). Missing values will in general not affect to data type guessed by <code>read_csv()</code>, except all values or missing in a column (see later).</p>
-<p>However, it might be that your data file contains specific text for missing values, for instance “<em>ND”</em>,”<em>LOD”</em> or lowercase <em>“na”</em>. Results from e.g.&nbsp;clinical chemistry labs frequently indicate not available data with a short text such as <em>“clotted”</em>, <em>“hemolytic”</em>, <em>“no received”</em> to explain why a value was not reported. What happens when we import such a file using default <code>read_csv</code>?</p>
+<section id="data-types" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="data-types"><span class="header-section-number">2.4</span> Data Types</h2>
+<ul>
+<li><strong>Note:</strong> <code>read_csv()</code> or <code>read_xlsx()</code> will by default <strong><em>guess</em></strong> the data type of each column.</li>
+<li>Typical data types are numbers (<code>dbl</code>), text (<code>chr</code>), logical (<code>lgl</code>) and factor (<code>fct</code>)</li>
+<li>You can define the column types already at import (see <code>?read_csv</code>).</li>
+</ul>
+</section>
+<section id="missing-values" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="missing-values"><span class="header-section-number">2.5</span> Missing Values</h2>
+<ul>
+<li>Data files often contain missing values, i.e.&nbsp;as empty cells.</li>
+<li><code>read_csv()</code> or <code>read_xlsx()</code> assign empty/missing values as <code>NA</code> (<em>Not Available</em>).</li>
+<li>Missing values will in general not affect to data type guessed by <code>read_csv()</code></li>
+<li>Exception: Column contains only massing values, in this case it will be of type <code>logical</code></li>
+<li>However, if data files contain specific text values for missing values (e.g.,“<em>ND”</em>,”<em>LOD”</em>, <em>“na”)</em>, then <code>read_csv()</code> or <code>read_xlsx()</code> assign the column by default as character (text)</li>
+</ul>
+<p>Results from e.g.&nbsp;clinical chemistry, frequently indicate not available data with a short text such as <em>“clotted”</em>, <em>“hemolytic”</em>, <em>“no received”</em> to explain why a value was not reported. What happens when we import such a file using <code>read_csv</code> with default parameters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Rows: 215 Columns: 432
@@ -378,10 +374,15 @@ Basic data types in R that can occur in tables
 #&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p><code>read_csv()</code> was mislead by the presence of unknown text values and guessed the data types wrongly as <code>&lt;char&gt;</code> for some columns. We also have two columns of the type <code>&lt;lgl&gt;</code>, which stand for logical (<code>TRUE</code>/<code>FALSE</code>), what happend here? All peak areas of e.g.&nbsp;CE 16:2 were missing and <code>read_csv</code> has no way to guess what is the intended data type, in which case it chooses <code>&lt;lgl&gt;</code>as default.</p>
-<p>We will not be able to perform any calculations for columns that are text or logical. We therefore need to explicitly tell R what values to interpret as missing values (<code>NA</code>). We can do this by providing a list of texts that should be interpreted as <code>NA</code> via the <code>na</code> parameter:</p>
+<ul>
+<li><code>read_csv()</code> was mislead by the presence of unknown text values and guessed the data types wrongly as <code>&lt;char&gt;</code> for some columns.</li>
+<li>We also have two columns of the type <code>&lt;lgl&gt;</code>, which stand for logical (<code>TRUE</code>/<code>FALSE</code>). In this case all peak areas of CE 16:2 were missing, and <code>read_csv</code> has no way to guess the intended data type. In which case it chooses <code>&lt;lgl&gt;</code> will be chosen as default.</li>
+<li>We will not be able to perform any calculations for columns that are text or logical.</li>
+<li>We need to explicitly tell R which values to interpret as missing values (<code>NA</code>).</li>
+<li>We can do by providing the <code>na</code> parameter a list of texts that should be interpreted as <code>NA</code> :</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data_file_path, </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"ND"</span>, <span class="st">"LOD"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -416,56 +417,12 @@ Basic data types in R that can occur in tables
 #&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Missing values can be a source of difficult to trace erros. Defined and careful dealing with missing values is therefore important. Also note, that there is no way to have different types of missing values in the standard R data table formats.</p>
-</div>
-</div>
-</div>
 </section>
-</section>
-<section id="importing-an-excel-table" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="importing-an-excel-table"><span class="header-section-number">2.2</span> Importing an Excel table</h2>
-<p>Importing Excel is easy too via the help of external packages such as <code>readxl</code>. Note that you will need to define which sheet to import (e.g.&nbsp;below <code>Sheet1</code>). The same considerations about missing values and white spaces as detailed before apply here too.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_flat_wide_V2.xlsx"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(data_file_path,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sheet =</span> <span class="st">"Sheet1"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"ND"</span>))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 215 × 432
-#&gt;   DataFileName          AcqTimeStamp SampleType VialPosition `CE 14:0` `CE 15:0`
-#&gt;   &lt;chr&gt;                 &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 001_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1532       515
-#&gt; 2 002_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1029       911
-#&gt; 3 003_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2             685       649
-#&gt; 4 004_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2            1283       576
-#&gt; 5 005_EQC_TQC prerun 0… 2018-04-12T… EQC        Vial 2             946       732
-#&gt; 6 006_EBLK_Extracted B… 2018-04-12T… PBLK       P1-A1              132        NA
-#&gt; # … with 209 more rows, and 426 more variables: `CE 16:0` &lt;dbl&gt;,
-#&gt; #   `CE 16:1` &lt;dbl&gt;, `CE 16:2` &lt;dbl&gt;, `CE 17:0` &lt;chr&gt;, `CE 17:1` &lt;dbl&gt;,
-#&gt; #   `CE 18:0` &lt;dbl&gt;, `CE 18:1` &lt;dbl&gt;, `CE 18:1 d7 (ISTD)` &lt;dbl&gt;, …</code></pre>
-</div>
-</div>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Check your imported data
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Check integrity of your imported data, that data types were correctly assigned and that missing values were corrently handled. Do not assume the imported data is fine without having reason to do so.</p>
-</div>
-</div>
+<section id="other-considerations" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="other-considerations"><span class="header-section-number">2.6</span> Other Considerations</h2>
+<ul>
+<li>White spaces or double spaces, White spaces before or after text fields can (and often will) cause issues downstream, therefore I suggest to trim whitespaces, e.g.&nbsp;by setting <code>trim_ws = TRUE</code></li>
+</ul>
 
 
 </section>
@@ -650,12 +607,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./sessionnotes.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Learning R</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./datawrangling.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./tables.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tables in R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

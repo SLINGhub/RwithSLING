@@ -15,6 +15,7 @@ book:
     - part: sessionnotes.qmd
       chapters: 
       - import_data.qmd
+      - tables.qmd
       - datawrangling.qmd
     - part: recipes.qmd
       chapters: 

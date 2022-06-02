@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>RwithSLING - 4&nbsp; Read MS datasets into R</title>
+<title>RwithSLING - 5&nbsp; Read MS datasets into R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Notes</a>
+        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Learning R</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -181,14 +181,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tables in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
   </div>
 </li>
     </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./recipes.html" class="sidebar-item-text sidebar-link">Recipes</a>
+        <a href="./recipes.html" class="sidebar-item-text sidebar-link">Workflows</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -196,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -215,8 +220,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#import-peak-areas-from-agilent-masshunter-csv-file" id="toc-import-peak-areas-from-agilent-masshunter-csv-file" class="nav-link active" data-scroll-target="#import-peak-areas-from-agilent-masshunter-csv-file"> <span class="header-section-number">4.1</span> Import peak areas from Agilent MassHunter CSV file</a></li>
-  <li><a href="#import-all-data-from-an-agilent-masshunter-csv-file" id="toc-import-all-data-from-an-agilent-masshunter-csv-file" class="nav-link" data-scroll-target="#import-all-data-from-an-agilent-masshunter-csv-file"> <span class="header-section-number">4.2</span> Import all data from an Agilent MassHunter CSV file</a></li>
+  <li><a href="#import-peak-areas-from-agilent-masshunter-csv-file" id="toc-import-peak-areas-from-agilent-masshunter-csv-file" class="nav-link active" data-scroll-target="#import-peak-areas-from-agilent-masshunter-csv-file"> <span class="header-section-number">5.1</span> Import peak areas from Agilent MassHunter CSV file</a></li>
+  <li><a href="#import-all-data-from-an-agilent-masshunter-csv-file" id="toc-import-all-data-from-an-agilent-masshunter-csv-file" class="nav-link" data-scroll-target="#import-all-data-from-an-agilent-masshunter-csv-file"> <span class="header-section-number">5.2</span> Import all data from an Agilent MassHunter CSV file</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/import_MSdatasets.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -225,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></h1>
 </div>
 
 
@@ -243,8 +248,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>Pre-processed MS datasets refers to data exported from MS rawdata processing software, such as Agilent MassHunter, Sciex Multiquant, and open-source tools as MRMkit and Skyline. These datasets usually contain peak/signal intensities and associated data such as retention time, FWHM, as well as information about the sample.</p>
 <p>The R package <a href="https://github.com/SLINGhub/SLINGtools">SLINGtools</a> provided helper functions to import data files obtained from different tools.</p>
-<section id="import-peak-areas-from-agilent-masshunter-csv-file" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="import-peak-areas-from-agilent-masshunter-csv-file"><span class="header-section-number">4.1</span> Import peak areas from Agilent MassHunter CSV file</h2>
+<section id="import-peak-areas-from-agilent-masshunter-csv-file" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="import-peak-areas-from-agilent-masshunter-csv-file"><span class="header-section-number">5.1</span> Import peak areas from Agilent MassHunter CSV file</h2>
 <p><img src="images/paste-B702CE09.png" class="img-fluid"></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SLINGtools)</span>
@@ -253,7 +258,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading 'Testdata_Lipidomics_MHQuant_Detailed_V2.csv' ... 
 
-indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [=====-] 2.15GB/s, eta:  0s
 indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [======] 2.15GB/s, eta:  0s
                                                                                 
 Imported  215 samples with 428 transitions </code></pre>
@@ -283,8 +287,8 @@ Imported  215 samples with 428 transitions </code></pre>
 </div>
 </div>
 </section>
-<section id="import-all-data-from-an-agilent-masshunter-csv-file" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="import-all-data-from-an-agilent-masshunter-csv-file"><span class="header-section-number">4.2</span> Import all data from an Agilent MassHunter CSV file</h2>
+<section id="import-all-data-from-an-agilent-masshunter-csv-file" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="import-all-data-from-an-agilent-masshunter-csv-file"><span class="header-section-number">5.2</span> Import all data from an Agilent MassHunter CSV file</h2>
 <p>Detail <a href="https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software/data-analysis/quantitative-analysis">MassHunter Quant</a>.</p>
 <p><img src="images/paste-A1421EC0.png" class="img-fluid"></p>
 <div class="cell">
@@ -293,7 +297,6 @@ Imported  215 samples with 428 transitions </code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading 'Testdata_Lipidomics_MHQuant_Detailed_V2.csv' ... 
 
-indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [=====-] 2.15GB/s, eta:  0s
 indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [======] 2.15GB/s, eta:  0s
                                                                                 
 Imported  215 samples with 428 transitions </code></pre>
@@ -502,7 +505,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./recipes.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Recipes</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Workflows</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

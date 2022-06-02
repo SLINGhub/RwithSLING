@@ -1,34 +1,33 @@
-# Select data and plot
+# Select and plot
 
 ```{r}
-#| results: "asis"
+#| results: "hide"
 #| echo: false
 source("_common.R")
 ```
 
-```{r setup}
-#| echo: false
+## Introduction
+
+In this chapter we will look at how read data from files into R \### Prerequisites
+
+```{r}
+#| label: setup
 library(here)
 library(tidyverse)
-
-# Update SLINGtools if you have not done so (remove # and run next line)
-# remotes::install_github("SLINGhub/SLINGtools")
-
 library(SLINGtools)
-
-
 ```
 
-## Import an Agilent MassHunter CSV file using `SLINGtools`
+## Import an Agilent MassHunter CSV file
 
-```{r read MassHunter CSV file}
-
+```{r}
+#| label: readMH-CSV-file
 
 data_file_path <- here("data/Testdata_Lipidomics_MHQuant_Detailed_V2.csv")
 
 d_orig <- read_MassHunterCSV(data_file_path)
 print(d_orig)
 ```
+
 
 ## Select, remove, re-order, and rename columns
 
@@ -46,12 +45,14 @@ d <- d_orig |>
 print(d)
 ```
 
-## Filter rows 
+## Filter rows
 
-Use the function `filter()`
+Use the function `filter()`.
 
 ```{r filter-tables}
-# 
+#| message: false
+#| results: "hide"
+
 d |> filter(AnalysisID == "149_BQC_PQC17.d ")
 d |> filter(AnalysisID == "149-bQC_PQC17.d", Compound == "TG 48:1 [-18:1]")
 d |> filter(QCtype == "BQC")
@@ -60,7 +61,9 @@ d |> filter(QCtype == "BQC" & QCtype == "TQC" )
 d |> filter(QCtype %in% c("BQC", "TQC"))
 
 ```
+
 ## Let's finally plot
+
 ```{r}
 
 # For this we take one single sample, let's say a  BQC
@@ -78,7 +81,7 @@ ggplot(d_plot, aes(x = PrecursorMZ, y = RT)) +
 
 ```
 
-## Split column to get lipid clas
+## Split column to get lipid class
 
 ```{r split-column}
 
@@ -92,7 +95,9 @@ d_plot_wclass <- d_plot |>
     
 d_plot_wclass
 ```
+
 ## Now let's plot again
+
 ```{r}
 # ggplot
 ggplot(d_plot_wclass, aes(x = PrecursorMZ, y = RT, color = lipidclass)) +
@@ -101,6 +106,7 @@ ggplot(d_plot_wclass, aes(x = PrecursorMZ, y = RT, color = lipidclass)) +
 ```
 
 ## ... another time
+
 ```{r}
 # ggplot
 ggplot(d_plot_wclass, aes(x = PrecursorMZ, y = RT, color = lipidclass, size = Intensity/10)) +
@@ -108,12 +114,13 @@ ggplot(d_plot_wclass, aes(x = PrecursorMZ, y = RT, color = lipidclass, size = In
 
 ```
 
-::: {.callout-note appearance="simple"}
 ## Comparisons in R
 
 Run following lines and try understand the result
 
 ```{r}
+#| message: false
+#| results: "hide"
 
 "CE 18:1" == "CE 18:1"
 "CE 18:1" == "CE 18:1 "
@@ -153,10 +160,6 @@ try(Sample-ID <- 1)
 #                    str_detect(Compound, "IS")) -> temp
 
 ```
-:::
-
-```{}
-```
 
 ## Convert long table to wide table format
 
@@ -165,8 +168,6 @@ try(Sample-ID <- 1)
 #   pivot_wider(names_from = "Compound" ,values_from = "Area")
 
 ```
-
-
 
 ```{r calulcate-column-stats}
 # d_BQC <- d_area |> filter(QCtype == "BQC")

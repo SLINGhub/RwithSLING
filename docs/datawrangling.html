@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>RwithSLING - 3&nbsp; Select data and plot</title>
+<title>RwithSLING - 4&nbsp; Select and plot</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,7 +88,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <link href="./recipes.html" rel="next">
-<link href="./import_data.html" rel="prev">
+<link href="./tables.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Select and plot</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Notes</a>
+        <a href="./sessionnotes.html" class="sidebar-item-text sidebar-link">Learning R</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -181,14 +181,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tables in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
   </div>
 </li>
     </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./recipes.html" class="sidebar-item-text sidebar-link">Recipes</a>
+        <a href="./recipes.html" class="sidebar-item-text sidebar-link">Workflows</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -196,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -215,14 +220,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#import-an-agilent-masshunter-csv-file-using-slingtools" id="toc-import-an-agilent-masshunter-csv-file-using-slingtools" class="nav-link active" data-scroll-target="#import-an-agilent-masshunter-csv-file-using-slingtools"> <span class="header-section-number">3.1</span> Import an Agilent MassHunter CSV file using <code>SLINGtools</code></a></li>
-  <li><a href="#select-remove-re-order-and-rename-columns" id="toc-select-remove-re-order-and-rename-columns" class="nav-link" data-scroll-target="#select-remove-re-order-and-rename-columns"> <span class="header-section-number">3.2</span> Select, remove, re-order, and rename columns</a></li>
-  <li><a href="#filter-rows" id="toc-filter-rows" class="nav-link" data-scroll-target="#filter-rows"> <span class="header-section-number">3.3</span> Filter rows</a></li>
-  <li><a href="#lets-finally-plot" id="toc-lets-finally-plot" class="nav-link" data-scroll-target="#lets-finally-plot"> <span class="header-section-number">3.4</span> Let’s finally plot</a></li>
-  <li><a href="#split-column-to-get-lipid-clas" id="toc-split-column-to-get-lipid-clas" class="nav-link" data-scroll-target="#split-column-to-get-lipid-clas"> <span class="header-section-number">3.5</span> Split column to get lipid clas</a></li>
-  <li><a href="#now-lets-plot-again" id="toc-now-lets-plot-again" class="nav-link" data-scroll-target="#now-lets-plot-again"> <span class="header-section-number">3.6</span> Now let’s plot again</a></li>
-  <li><a href="#another-time" id="toc-another-time" class="nav-link" data-scroll-target="#another-time"> <span class="header-section-number">3.7</span> … another time</a></li>
-  <li><a href="#convert-long-table-to-wide-table-format" id="toc-convert-long-table-to-wide-table-format" class="nav-link" data-scroll-target="#convert-long-table-to-wide-table-format"> <span class="header-section-number">3.8</span> Convert long table to wide table format</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">4.1</span> Introduction</a></li>
+  <li><a href="#import-an-agilent-masshunter-csv-file" id="toc-import-an-agilent-masshunter-csv-file" class="nav-link" data-scroll-target="#import-an-agilent-masshunter-csv-file"> <span class="header-section-number">4.2</span> Import an Agilent MassHunter CSV file</a></li>
+  <li><a href="#select-remove-re-order-and-rename-columns" id="toc-select-remove-re-order-and-rename-columns" class="nav-link" data-scroll-target="#select-remove-re-order-and-rename-columns"> <span class="header-section-number">4.3</span> Select, remove, re-order, and rename columns</a></li>
+  <li><a href="#filter-rows" id="toc-filter-rows" class="nav-link" data-scroll-target="#filter-rows"> <span class="header-section-number">4.4</span> Filter rows</a></li>
+  <li><a href="#lets-finally-plot" id="toc-lets-finally-plot" class="nav-link" data-scroll-target="#lets-finally-plot"> <span class="header-section-number">4.5</span> Let’s finally plot</a></li>
+  <li><a href="#split-column-to-get-lipid-class" id="toc-split-column-to-get-lipid-class" class="nav-link" data-scroll-target="#split-column-to-get-lipid-class"> <span class="header-section-number">4.6</span> Split column to get lipid class</a></li>
+  <li><a href="#now-lets-plot-again" id="toc-now-lets-plot-again" class="nav-link" data-scroll-target="#now-lets-plot-again"> <span class="header-section-number">4.7</span> Now let’s plot again</a></li>
+  <li><a href="#another-time" id="toc-another-time" class="nav-link" data-scroll-target="#another-time"> <span class="header-section-number">4.8</span> … another time</a></li>
+  <li><a href="#comparisons-in-r" id="toc-comparisons-in-r" class="nav-link" data-scroll-target="#comparisons-in-r"> <span class="header-section-number">4.9</span> Comparisons in R</a></li>
+  <li><a href="#convert-long-table-to-wide-table-format" id="toc-convert-long-table-to-wide-table-format" class="nav-link" data-scroll-target="#convert-long-table-to-wide-table-format"> <span class="header-section-number">4.10</span> Convert long table to wide table format</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/datawrangling.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -231,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Select data and plot</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Select and plot</span></h1>
 </div>
 
 
@@ -248,9 +255,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <div class="cell">
+
+</div>
+<section id="introduction" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">4.1</span> Introduction</h2>
+<p>In this chapter we will look at how read data from files into R ### Prerequisites</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; here() starts at E:/OneDrive - National University of Singapore/Data/Projects/RwithSLING</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 </div>
@@ -265,21 +280,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; ✖ dplyr::filter() masks stats::filter()
 #&gt; ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SLINGtools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="import-an-agilent-masshunter-csv-file-using-slingtools" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="import-an-agilent-masshunter-csv-file-using-slingtools"><span class="header-section-number">3.1</span> Import an Agilent MassHunter CSV file using <code>SLINGtools</code></h2>
+</section>
+<section id="import-an-agilent-masshunter-csv-file" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="import-an-agilent-masshunter-csv-file"><span class="header-section-number">4.2</span> Import an Agilent MassHunter CSV file</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_MHQuant_Detailed_V2.csv"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>d_orig <span class="ot">&lt;-</span> <span class="fu">read_MassHunterCSV</span>(data_file_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_file_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data/Testdata_Lipidomics_MHQuant_Detailed_V2.csv"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>d_orig <span class="ot">&lt;-</span> <span class="fu">read_MassHunterCSV</span>(data_file_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Reading 'Testdata_Lipidomics_MHQuant_Detailed_V2.csv' ... 
 #&gt; 
+indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [=====-] 2.15GB/s, eta:  0s
 indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [======] 2.15GB/s, eta:  0s
                                                                                 
 Imported  215 samples with 428 transitions</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_orig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d_orig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 92,020 × 14
 #&gt;   DataFileName      DataName SampleType AcqTimeStamp        VialPosition Feature
@@ -296,18 +314,18 @@ Imported  215 samples with 428 transitions</code></pre>
 </div>
 </div>
 </section>
-<section id="select-remove-re-order-and-rename-columns" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="select-remove-re-order-and-rename-columns"><span class="header-section-number">3.2</span> Select, remove, re-order, and rename columns</h2>
+<section id="select-remove-re-order-and-rename-columns" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="select-remove-re-order-and-rename-columns"><span class="header-section-number">4.3</span> Select, remove, re-order, and rename columns</h2>
 <p>Use the function <code>select()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d_orig <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">AnalysisID =</span> <span class="st">"DataFileName"</span>, </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">QCtype =</span> SampleType,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">Compound =</span> Feature, </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">Intensity =</span> Area,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                RT,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                PrecursorMZ)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d_orig <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">AnalysisID =</span> <span class="st">"DataFileName"</span>, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">QCtype =</span> SampleType,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">Compound =</span> Feature, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">Intensity =</span> Area,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                RT,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                PrecursorMZ)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 92,020 × 6
 #&gt;   AnalysisID              QCtype Compound Intensity    RT PrecursorMZ
@@ -322,106 +340,54 @@ Imported  215 samples with 428 transitions</code></pre>
 </div>
 </div>
 </section>
-<section id="filter-rows" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="filter-rows"><span class="header-section-number">3.3</span> Filter rows</h2>
-<p>Use the function <code>filter()</code></p>
+<section id="filter-rows" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="filter-rows"><span class="header-section-number">4.4</span> Filter rows</h2>
+<p>Use the function <code>filter()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"149_BQC_PQC17.d "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 0 × 6
-#&gt; # … with 6 variables: AnalysisID &lt;chr&gt;, QCtype &lt;chr&gt;, Compound &lt;chr&gt;,
-#&gt; #   Intensity &lt;dbl&gt;, RT &lt;dbl&gt;, PrecursorMZ &lt;dbl&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"149-bQC_PQC17.d"</span>, Compound <span class="sc">==</span> <span class="st">"TG 48:1 [-18:1]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 0 × 6
-#&gt; # … with 6 variables: AnalysisID &lt;chr&gt;, QCtype &lt;chr&gt;, Compound &lt;chr&gt;,
-#&gt; #   Intensity &lt;dbl&gt;, RT &lt;dbl&gt;, PrecursorMZ &lt;dbl&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">==</span> <span class="st">"BQC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 10,272 × 6
-#&gt;   AnalysisID      QCtype Compound Intensity    RT PrecursorMZ
-#&gt;   &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
-#&gt; 1 018_BQC_PQC01.d BQC    CE 14:0       1473  6.98        615.
-#&gt; 2 018_BQC_PQC01.d BQC    CE 15:0        744  7.07        629.
-#&gt; 3 018_BQC_PQC01.d BQC    CE 16:0     111189  7.16        643.
-#&gt; 4 018_BQC_PQC01.d BQC    CE 16:1      52297  6.98        641.
-#&gt; 5 018_BQC_PQC01.d BQC    CE 16:2       2502  6.83        639.
-#&gt; 6 018_BQC_PQC01.d BQC    CE 17:0       9178  7.22        657.
-#&gt; # … with 10,266 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">==</span> <span class="st">"BQC"</span> <span class="sc">|</span> QCtype <span class="sc">==</span> <span class="st">"TQC"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 17,120 × 6
-#&gt;   AnalysisID      QCtype Compound Intensity    RT PrecursorMZ
-#&gt;   &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
-#&gt; 1 016_TQC_TQC01.d TQC    CE 14:0       1248  6.98        615.
-#&gt; 2 016_TQC_TQC01.d TQC    CE 15:0       1008  7.07        629.
-#&gt; 3 016_TQC_TQC01.d TQC    CE 16:0     167626  7.16        643.
-#&gt; 4 016_TQC_TQC01.d TQC    CE 16:1      42972  7.01        641.
-#&gt; 5 016_TQC_TQC01.d TQC    CE 16:2       1966  6.83        639.
-#&gt; 6 016_TQC_TQC01.d TQC    CE 17:0       8618  7.20        657.
-#&gt; # … with 17,114 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">==</span> <span class="st">"BQC"</span> <span class="sc">&amp;</span> QCtype <span class="sc">==</span> <span class="st">"TQC"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 0 × 6
-#&gt; # … with 6 variables: AnalysisID &lt;chr&gt;, QCtype &lt;chr&gt;, Compound &lt;chr&gt;,
-#&gt; #   Intensity &lt;dbl&gt;, RT &lt;dbl&gt;, PrecursorMZ &lt;dbl&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BQC"</span>, <span class="st">"TQC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 17,120 × 6
-#&gt;   AnalysisID      QCtype Compound Intensity    RT PrecursorMZ
-#&gt;   &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
-#&gt; 1 016_TQC_TQC01.d TQC    CE 14:0       1248  6.98        615.
-#&gt; 2 016_TQC_TQC01.d TQC    CE 15:0       1008  7.07        629.
-#&gt; 3 016_TQC_TQC01.d TQC    CE 16:0     167626  7.16        643.
-#&gt; 4 016_TQC_TQC01.d TQC    CE 16:1      42972  7.01        641.
-#&gt; 5 016_TQC_TQC01.d TQC    CE 16:2       1966  6.83        639.
-#&gt; 6 016_TQC_TQC01.d TQC    CE 17:0       8618  7.20        657.
-#&gt; # … with 17,114 more rows</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"149_BQC_PQC17.d "</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"149-bQC_PQC17.d"</span>, Compound <span class="sc">==</span> <span class="st">"TG 48:1 [-18:1]"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">==</span> <span class="st">"BQC"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">==</span> <span class="st">"BQC"</span> <span class="sc">|</span> QCtype <span class="sc">==</span> <span class="st">"TQC"</span> )</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">==</span> <span class="st">"BQC"</span> <span class="sc">&amp;</span> QCtype <span class="sc">==</span> <span class="st">"TQC"</span> )</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">filter</span>(QCtype <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BQC"</span>, <span class="st">"TQC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="lets-finally-plot" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="lets-finally-plot"><span class="header-section-number">3.4</span> Let’s finally plot</h2>
+<section id="lets-finally-plot" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="lets-finally-plot"><span class="header-section-number">4.5</span> Let’s finally plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For this we take one single sample, let's say a  BQC</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>d_plot <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"066_BQC_PQC07.d"</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Base R</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> d_plot<span class="sc">$</span>PrecursorMZ, <span class="at">y =</span> d_plot<span class="sc">$</span>RT)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_plot, <span class="fu">aes</span>(<span class="at">x =</span> PrecursorMZ, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For this we take one single sample, let's say a  BQC</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>d_plot <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AnalysisID <span class="sc">==</span> <span class="st">"066_BQC_PQC07.d"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Base R</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> d_plot<span class="sc">$</span>PrecursorMZ, <span class="at">y =</span> d_plot<span class="sc">$</span>RT)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_plot, <span class="fu">aes</span>(<span class="at">x =</span> PrecursorMZ, <span class="at">y =</span> RT)) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="datawrangling_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="576"></p>
+<p><img src="datawrangling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="576"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="datawrangling_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="576"></p>
+<p><img src="datawrangling_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="576"></p>
 </div>
 </div>
 </section>
-<section id="split-column-to-get-lipid-clas" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="split-column-to-get-lipid-clas"><span class="header-section-number">3.5</span> Split column to get lipid clas</h2>
+<section id="split-column-to-get-lipid-class" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="split-column-to-get-lipid-class"><span class="header-section-number">4.6</span> Split column to get lipid class</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>d_plot_wclass <span class="ot">&lt;-</span> d_plot <span class="sc">|&gt;</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> Compound,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"lipidclass"</span>, <span class="st">"chain"</span>), </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">" "</span>,</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">extra =</span> <span class="st">"merge"</span>, </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">remove =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>d_plot_wclass</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>d_plot_wclass <span class="ot">&lt;-</span> d_plot <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> Compound,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"lipidclass"</span>, <span class="st">"chain"</span>), </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">" "</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">extra =</span> <span class="st">"merge"</span>, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">remove =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>d_plot_wclass</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 428 × 8
 #&gt;   AnalysisID      QCtype Compound lipidclass chain Intensity    RT PrecursorMZ
@@ -436,192 +402,142 @@ Imported  215 samples with 428 transitions</code></pre>
 </div>
 </div>
 </section>
-<section id="now-lets-plot-again" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="now-lets-plot-again"><span class="header-section-number">3.6</span> Now let’s plot again</h2>
+<section id="now-lets-plot-again" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="now-lets-plot-again"><span class="header-section-number">4.7</span> Now let’s plot again</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_plot_wclass, <span class="fu">aes</span>(<span class="at">x =</span> PrecursorMZ, <span class="at">y =</span> RT, <span class="at">color =</span> lipidclass)) <span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_plot_wclass, <span class="fu">aes</span>(<span class="at">x =</span> PrecursorMZ, <span class="at">y =</span> RT, <span class="at">color =</span> lipidclass)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="datawrangling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="576"></p>
+<p><img src="datawrangling_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
 </section>
-<section id="another-time" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="another-time"><span class="header-section-number">3.7</span> … another time</h2>
+<section id="another-time" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="another-time"><span class="header-section-number">4.8</span> … another time</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_plot_wclass, <span class="fu">aes</span>(<span class="at">x =</span> PrecursorMZ, <span class="at">y =</span> RT, <span class="at">color =</span> lipidclass, <span class="at">size =</span> Intensity<span class="sc">/</span><span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_plot_wclass, <span class="fu">aes</span>(<span class="at">x =</span> PrecursorMZ, <span class="at">y =</span> RT, <span class="at">color =</span> lipidclass, <span class="at">size =</span> Intensity<span class="sc">/</span><span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="datawrangling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="576"></p>
+<p><img src="datawrangling_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-<div class="callout-note callout callout-style-simple callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Comparisons in R
-</div>
-</div>
-<div class="callout-body-container callout-body">
+</section>
+<section id="comparisons-in-r" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="comparisons-in-r"><span class="header-section-number">4.9</span> Comparisons in R</h2>
 <p>Run following lines and try understand the result</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] TRUE</code></pre>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1 "</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE  18:1"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="st">"Ce 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1"</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_trim</span>(<span class="st">"CE 18:1 "</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_trim</span>(<span class="st">"   CE    18:1 "</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_squish</span>(<span class="st">"   CE    18:1 "</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"IS"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (ISTD)"</span>, <span class="at">pattern =</span> <span class="st">"IS"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"ISTD"</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"LPC"</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"Acylcarnitine 18:1"</span>, </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pattern =</span> <span class="st">"Acylcarnitine"</span>,</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">replacement =</span> <span class="st">"CAR"</span>)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"TG 48:2 [SIM] Results"</span>, </span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pattern =</span> <span class="st">" Results"</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"112_BQC_A9334.d"</span>, </span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pattern =</span> <span class="st">".d"</span>,</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>                     <span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_to_lower</span>(<span class="st">"CE 18:1"</span>)</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>Sample_ID <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(Sample<span class="sc">-</span>ID <span class="ot">&lt;-</span> <span class="dv">1</span>)</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="co"># d |&gt; filter(AnalysisID == "149_BQC_PQC17.d", </span></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="co">#                    str_detect(Compound, "IS|LPI") )</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="co"># d |&gt; filter(str_detect(AnalysisID, "BQC|TQC") , </span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="co">#                    str_detect(Compound, "IS")) -&gt; temp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1 "</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] FALSE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="st">"CE 18:1"</span> <span class="sc">==</span> <span class="st">"CE  18:1"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] FALSE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Ce 18:1"</span> <span class="sc">==</span> <span class="st">"CE 18:1"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] FALSE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_trim</span>(<span class="st">"CE 18:1 "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "CE 18:1"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_trim</span>(<span class="st">"   CE    18:1 "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "CE    18:1"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_squish</span>(<span class="st">"   CE    18:1 "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "CE 18:1"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"IS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (ISTD)"</span>, <span class="at">pattern =</span> <span class="st">"IS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"ISTD"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] FALSE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="st">"LPC 18:1 (IS)"</span>, <span class="at">pattern =</span> <span class="st">"LPC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"Acylcarnitine 18:1"</span>, </span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pattern =</span> <span class="st">"Acylcarnitine"</span>,</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">replacement =</span> <span class="st">"CAR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "CAR 18:1"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"TG 48:2 [SIM] Results"</span>, </span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pattern =</span> <span class="st">" Results"</span>,</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">replacement =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "TG 48:2 [SIM]"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"112_BQC_A9334.d"</span>, </span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pattern =</span> <span class="st">".d"</span>,</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">replacement =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "112_BQC_A9334"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_to_lower</span>(<span class="st">"CE 18:1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "ce 18:1"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>Sample_ID <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(Sample<span class="sc">-</span>ID <span class="ot">&lt;-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; Error in Sample - ID &lt;- 1 : object 'Sample' not found</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d |&gt; filter(AnalysisID == "149_BQC_PQC17.d", </span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                    str_detect(Compound, "IS|LPI") )</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># d |&gt; filter(str_detect(AnalysisID, "BQC|TQC") , </span></span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                    str_detect(Compound, "IS")) -&gt; temp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-<pre><code></code></pre>
 </section>
-<section id="convert-long-table-to-wide-table-format" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="convert-long-table-to-wide-table-format"><span class="header-section-number">3.8</span> Convert long table to wide table format</h2>
+<section id="convert-long-table-to-wide-table-format" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="convert-long-table-to-wide-table-format"><span class="header-section-number">4.10</span> Convert long table to wide table format</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d_area_temp &lt;- d |&gt; </span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_wider(names_from = "Compound" ,values_from = "Area")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d_area_temp &lt;- d |&gt; </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_wider(names_from = "Compound" ,values_from = "Area")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC &lt;- d_area |&gt; filter(QCtype == "BQC")</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res1 &lt;- d_BQC |&gt;</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(</span></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     across(.cols = -seq_no:-AcqTimeStamp,</span></span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="co">#            .fns = ~ sd(.)/mean(.)*100)</span></span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
-<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res1</span></span>
-<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_areas &lt;- d_BQC |&gt; dplyr::select(-seq_no:-AcqTimeStamp)</span></span>
-<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res2 &lt;- purrr::map_df(d_BQC_areas, .f = ~ sd(.)/mean(.)*100)</span></span>
-<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res2</span></span>
-<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res3 &lt;- sapply(X = d_BQC_areas, </span></span>
-<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a><span class="co">#                  FUN = function(x) c(CV = sd(x)/mean(x) * 100,</span></span>
-<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      RobustCV = mad(x)/median(x) * 100))</span></span>
-<span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a><span class="co"># as.data.frame(d_res3)</span></span>
-<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="co"># as.data.frame(t(d_res3))</span></span>
-<span id="cb66-21"><a href="#cb66-21" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-22"><a href="#cb66-22" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_long &lt;- d_BQC |&gt; pivot_longer(cols = -seq_no:-AcqTimeStamp,</span></span>
-<span id="cb66-23"><a href="#cb66-23" aria-hidden="true" tabindex="-1"></a><span class="co">#                                     names_to = "Compound",</span></span>
-<span id="cb66-24"><a href="#cb66-24" aria-hidden="true" tabindex="-1"></a><span class="co">#                                     values_to = "Area")</span></span>
-<span id="cb66-25"><a href="#cb66-25" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-26"><a href="#cb66-26" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_stats &lt;- d_BQC_long |&gt; </span></span>
-<span id="cb66-27"><a href="#cb66-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(Compound) |&gt; </span></span>
-<span id="cb66-28"><a href="#cb66-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(</span></span>
-<span id="cb66-29"><a href="#cb66-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     count = n(),</span></span>
-<span id="cb66-30"><a href="#cb66-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     Mean = mean(Area),</span></span>
-<span id="cb66-31"><a href="#cb66-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     Min = min(Area),</span></span>
-<span id="cb66-32"><a href="#cb66-32" aria-hidden="true" tabindex="-1"></a><span class="co">#     CV = sd(Area)/mean(Area) *100,</span></span>
-<span id="cb66-33"><a href="#cb66-33" aria-hidden="true" tabindex="-1"></a><span class="co">#     logCV = sqrt(exp(1)^(sd(log(Area))^2)-1) *100,</span></span>
-<span id="cb66-34"><a href="#cb66-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     logCV_roche = sqrt(10^(log(10)*sd(log(Area, 10))^2)-1) *100,</span></span>
-<span id="cb66-35"><a href="#cb66-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     rCVq = 0.75 * IQR(Area, na.rm = TRUE)/median(Area) *100,</span></span>
-<span id="cb66-36"><a href="#cb66-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     rCVm = mad(Area, constant = 1.4826)/median(Area) *100</span></span>
-<span id="cb66-37"><a href="#cb66-37" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
-<span id="cb66-38"><a href="#cb66-38" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_stats</span></span>
-<span id="cb66-39"><a href="#cb66-39" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-40"><a href="#cb66-40" aria-hidden="true" tabindex="-1"></a><span class="co"># hist(d_BQC_stats$CV)</span></span>
-<span id="cb66-41"><a href="#cb66-41" aria-hidden="true" tabindex="-1"></a><span class="co"># hist(d_BQC_stats$rCVm)</span></span>
-<span id="cb66-42"><a href="#cb66-42" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-43"><a href="#cb66-43" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(d_BQC_stats) +</span></span>
-<span id="cb66-44"><a href="#cb66-44" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_histogram(aes(x=CV))</span></span>
-<span id="cb66-45"><a href="#cb66-45" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-46"><a href="#cb66-46" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_stats_long &lt;- d_BQC_stats |&gt;</span></span>
-<span id="cb66-47"><a href="#cb66-47" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr:::select(Compound, CV,rCVm,,rCVq, logCV) |&gt; </span></span>
-<span id="cb66-48"><a href="#cb66-48" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_longer(cols = -Compound, names_to= "CV_type" ,values_to = "Value")</span></span>
-<span id="cb66-49"><a href="#cb66-49" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_stats_long</span></span>
-<span id="cb66-50"><a href="#cb66-50" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-51"><a href="#cb66-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(d_BQC_stats_long) +</span></span>
-<span id="cb66-52"><a href="#cb66-52" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_histogram(aes(x=Value, fill = CV_type)) + scale_x_continuous(limits = c(0,150)) + facet_wrap(~CV_type)</span></span>
-<span id="cb66-53"><a href="#cb66-53" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-54"><a href="#cb66-54" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb66-55"><a href="#cb66-55" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$CV, d_BQC_stats$logCV)</span></span>
-<span id="cb66-56"><a href="#cb66-56" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$CV, d_BQC_stats$logCV, xlim = c(0,100), ylim = c(0,100))</span></span>
-<span id="cb66-57"><a href="#cb66-57" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$CV, d_BQC_stats$rCVm)</span></span>
-<span id="cb66-58"><a href="#cb66-58" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$logCV, d_BQC_stats$rCVm, xlim = c(0,200))</span></span>
-<span id="cb66-59"><a href="#cb66-59" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$CV, d_BQC_stats$rCVq)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC &lt;- d_area |&gt; filter(QCtype == "BQC")</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res1 &lt;- d_BQC |&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     across(.cols = -seq_no:-AcqTimeStamp,</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#            .fns = ~ sd(.)/mean(.)*100)</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res1</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_areas &lt;- d_BQC |&gt; dplyr::select(-seq_no:-AcqTimeStamp)</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res2 &lt;- purrr::map_df(d_BQC_areas, .f = ~ sd(.)/mean(.)*100)</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res2</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># d_res3 &lt;- sapply(X = d_BQC_areas, </span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co">#                  FUN = function(x) c(CV = sd(x)/mean(x) * 100,</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      RobustCV = mad(x)/median(x) * 100))</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># as.data.frame(d_res3)</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># as.data.frame(t(d_res3))</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_long &lt;- d_BQC |&gt; pivot_longer(cols = -seq_no:-AcqTimeStamp,</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co">#                                     names_to = "Compound",</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co">#                                     values_to = "Area")</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_stats &lt;- d_BQC_long |&gt; </span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(Compound) |&gt; </span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     count = n(),</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     Mean = mean(Area),</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     Min = min(Area),</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="co">#     CV = sd(Area)/mean(Area) *100,</span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="co">#     logCV = sqrt(exp(1)^(sd(log(Area))^2)-1) *100,</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     logCV_roche = sqrt(10^(log(10)*sd(log(Area, 10))^2)-1) *100,</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     rCVq = 0.75 * IQR(Area, na.rm = TRUE)/median(Area) *100,</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     rCVm = mad(Area, constant = 1.4826)/median(Area) *100</span></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_stats</span></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="co"># hist(d_BQC_stats$CV)</span></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="co"># hist(d_BQC_stats$rCVm)</span></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(d_BQC_stats) +</span></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_histogram(aes(x=CV))</span></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_stats_long &lt;- d_BQC_stats |&gt;</span></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr:::select(Compound, CV,rCVm,,rCVq, logCV) |&gt; </span></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_longer(cols = -Compound, names_to= "CV_type" ,values_to = "Value")</span></span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a><span class="co"># d_BQC_stats_long</span></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(d_BQC_stats_long) +</span></span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_histogram(aes(x=Value, fill = CV_type)) + scale_x_continuous(limits = c(0,150)) + facet_wrap(~CV_type)</span></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$CV, d_BQC_stats$logCV)</span></span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$CV, d_BQC_stats$logCV, xlim = c(0,100), ylim = c(0,100))</span></span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$CV, d_BQC_stats$rCVm)</span></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$logCV, d_BQC_stats$rCVm, xlim = c(0,200))</span></span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(d_BQC_stats$CV, d_BQC_stats$rCVq)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -806,13 +722,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./import_data.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Import data into R</span></span>
+      <a href="./tables.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tables in R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./recipes.html" class="pagination-link">
-        <span class="nav-page-text">Recipes</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Workflows</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
