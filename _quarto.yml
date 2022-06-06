@@ -12,12 +12,13 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: sessionnotes.qmd
+    - part: tutorials.qmd
       chapters: 
       - import_data.qmd
       - tables.qmd
       - datawrangling.qmd
-    - part: recipes.qmd
+      - multiple_models.qmd
+    - part: workflows.qmd
       chapters: 
       - import_MSdatasets.qmd
     - references.qmd

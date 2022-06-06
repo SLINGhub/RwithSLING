@@ -43,7 +43,6 @@ d_wide <- read_csv(file = here("data/Testdata_Lipidomics_flat_wide_V2.csv"),
 
 To remove white-spaces before and after text, set `trim_ws = TRUE`.
 
-
 ## Read Excel tables
 
 Importing Excel tables can be done via the package s `readxl`. Note: you will need to define which sheet to import (e.g. below `Sheet1`).

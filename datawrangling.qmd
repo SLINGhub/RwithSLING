@@ -28,7 +28,6 @@ d_orig <- read_MassHunterCSV(data_file_path)
 print(d_orig)
 ```
 
-
 ## Select, remove, re-order, and rename columns
 
 Use the function `select()`

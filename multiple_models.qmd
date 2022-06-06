@@ -1,0 +1,160 @@
+# Multivariate Regression
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+source("_common.R")
+library(knitr)
+
+```
+
+## Libraries
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+library(SLINGtools)
+library(broom)
+
+```
+
+## Import Datasets
+
+```{r}
+#| label: read-data
+#| echo: true
+#| message: false
+
+d_meta <- read_csv(here("data/ISLS10_Part2_metadata.csv"))
+d_wide <- read_csv(here("data/ISLS10_Part2_lipidomics_curated.csv"))
+
+```
+
+## Prepare Data
+
+```{r select-rename-columns}
+#| label: prepare-data
+#| echo: true
+#| message: false
+
+# Convert to long format
+d_long <- d_wide |>
+  pivot_longer(cols = -ID, names_to = "Compound" , values_to = "Conc")
+
+# Combine data and metadata
+d_full <- d_meta |> left_join(d_long, by = "ID")
+
+# log-transform and scale (z-score) data
+d_full <- d_full |>
+  group_by(Compound) |>
+  mutate(Conc_log = log2(Conc),
+         Conc_logz = as.numeric(scale(Conc_log)))
+```
+
+## Run regression for each lipid
+
+In this example a logistic regression is used. The output of `glm()` is converted to a tidy table using the `broom::tidy()` function. 
+
+```{r filter-tables}
+#| label: reg-analysis
+#| echo: true
+#| message: false
+#| tbl-cap: "Model results"
+#| tbl-colwidths: [60,40]
+
+model <- as.formula("DM ~ Age + Gender + BMI + HbA1c + 
+                    SBP + HDL + LDL + TG + Conc_logz")
+
+d_res <- d_full %>%
+  group_by(Compound) %>%
+  nest() %>%
+  mutate(
+    models = map(data, function(x) glm(model, data = x, family = "binomial")), 
+    tidy = map(models, function(x) broom::tidy(x))) |> 
+  unnest(tidy) |> 
+  dplyr::select(-data, -models)
+```
+
+The results contain the combined estimates, errors, and *P* values for each term for each lipid species.
+
+```{r}
+#| label: tbl_results
+#| echo: false
+kable(head(d_res, n = 10),digits = 6)
+```
+
+To get the effects and *P* values for the lipids we filter for the term `Conc_logz`. We futhermore get the adjusted *P* values (FDR).
+
+```{r filter-tables}
+d_res_lipids <- d_res |> 
+   filter(term == "Conc_logz") |> 
+   mutate(FDR = p.adjust(p.value, method = "fdr")) |> 
+   arrange(FDR)
+```
+
+```{r}
+#| label: tbl_results_filt
+#| echo: false
+kable(head(d_res_lipids),digits = 6)
+```
+
+## Forest Plot
+
+Prepare data
+
+```{r}
+#| label: prep-plotdata
+#| echo: true
+#| message: false
+
+# lipid annotation
+d_lipid_annot <- d_res_lipids |>
+  select(Compound) |>  
+  separate(Compound, 
+           into = c("lipid_class", "fa_chain"), 
+           remove = FALSE, 
+           extra = "drop",
+           fill = "right",  
+           sep = "/" )
+
+d_plot <- d_res_lipids |> 
+  full_join(d_lipid_annot, by = "Compound") |> 
+  mutate(
+    est_low = estimate - std.error,
+    est_high = estimate + std.error, 
+    signif = FDR < 0.05,
+    label = if_else(signif, fa_chain, "")) |> 
+  arrange(signif)
+```
+
+Plot
+
+```{r}
+#| label: forestplot
+#| echo: true
+#| message: false
+#| fig-cap: "Figure 1. Forest plot of logistic regression (DM ~ Age + Gender + BMI + HbA1c + SBP + HDL + LDL + TG + Lipid). Species with FDR > 0.05 are highlighted in red." 
+#| fig-align: "center"
+#| fig-width: 10
+
+ggplot(d_plot, aes(x = lipid_class, y = estimate,color = signif, label = label)) +
+  geom_hline(yintercept = 0) +
+  geom_pointrange(aes(ymin = est_low, ymax = est_high, alpha = signif),
+                  size = 0.5,
+                  position = position_jitter(width = .3, height = 0)) +
+  coord_flip() +
+  scale_color_manual(values = c("FALSE" = "grey70", "TRUE" = "red")) +
+  scale_alpha_manual(values = c("FALSE" = 0.3, "TRUE" = 1)) +
+  ggrepel::geom_text_repel(
+    aes(y = estimate),
+    size = 2,
+    max.overlaps = 5,
+    point.padding = .7
+  ) +
+  theme_bw() + 
+  theme(legend.position="none")
+```
