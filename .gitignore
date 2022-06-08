@@ -16,6 +16,5 @@ libs
 *.rds
 _main.*
 tmp-pdfcrop-*
-figures
 /.quarto/
 nul

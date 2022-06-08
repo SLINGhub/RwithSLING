@@ -57,7 +57,7 @@ d_full <- d_full |>
 
 ## Run regression for each lipid
 
-In this example a logistic regression is used. The output of `glm()` is converted to a tidy table using the `broom::tidy()` function. 
+In this example a logistic regression is used. The output of `glm()` is converted to a tidy table using the `broom::tidy()` function.
 
 ```{r filter-tables}
 #| label: reg-analysis
