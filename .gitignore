@@ -5,7 +5,6 @@
 .Rproj.user
 .Rhistory
 *_cache
-*_files
 _main.rds
 _book
 !LICENSE.md
