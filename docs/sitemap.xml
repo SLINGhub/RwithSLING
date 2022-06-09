@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://slinghub.github.io/RwithSLING/index.html</loc>
-    <lastmod>2022-06-08T13:40:29.664Z</lastmod>
+    <lastmod>2022-06-09T06:17:28.001Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/intro.html</loc>
-    <lastmod>2022-06-08T13:40:27.938Z</lastmod>
+    <lastmod>2022-06-09T06:17:26.173Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tutorials.html</loc>
-    <lastmod>2022-06-08T13:40:27.939Z</lastmod>
+    <lastmod>2022-06-09T06:17:26.177Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/import_data.html</loc>
-    <lastmod>2022-06-08T13:40:27.942Z</lastmod>
+    <lastmod>2022-06-09T06:17:26.179Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tables.html</loc>
-    <lastmod>2022-06-08T13:40:27.945Z</lastmod>
+    <lastmod>2022-06-09T06:17:26.181Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/datawrangling.html</loc>
-    <lastmod>2022-06-08T13:40:27.949Z</lastmod>
+    <lastmod>2022-06-09T06:17:26.184Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/dilution_series.html</loc>
+    <lastmod>2022-06-09T06:17:26.187Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/multiple_models.html</loc>
-    <lastmod>2022-06-08T13:40:27.959Z</lastmod>
+    <lastmod>2022-06-09T06:17:26.190Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/workflows.html</loc>
-    <lastmod>2022-06-08T13:40:27.961Z</lastmod>
+    <lastmod>2022-06-09T06:17:26.192Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/references.html</loc>
-    <lastmod>2022-06-08T13:40:27.963Z</lastmod>
+    <lastmod>2022-06-09T06:17:26.193Z</lastmod>
   </url>
 </urlset>

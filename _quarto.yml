@@ -17,6 +17,7 @@ book:
       - import_data.qmd
       - tables.qmd
       - datawrangling.qmd
+      - dilution_series.qmd
       - multiple_models.qmd
     - part: workflows.qmd
       chapters: 

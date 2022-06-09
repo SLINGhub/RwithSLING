@@ -88,7 +88,7 @@
     "href": "datawrangling.html#introduction",
     "title": "4  Select and plot",
     "section": "4.1 Introduction",
-    "text": "4.1 Introduction\nIn this chapter we will look at how read data from files into R ### Prerequisites\n\nlibrary(here)\n\n#> here() starts at E:/Code/RwithSLING\n\nlibrary(tidyverse)\n\n#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n#> ✔ ggplot2 3.3.6     ✔ purrr   0.3.4\n#> ✔ tibble  3.1.7     ✔ dplyr   1.0.9\n#> ✔ tidyr   1.2.0     ✔ stringr 1.4.0\n#> ✔ readr   2.1.2     ✔ forcats 0.5.1\n\n\n#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n#> ✖ dplyr::filter() masks stats::filter()\n#> ✖ dplyr::lag()    masks stats::lag()\n\nlibrary(SLINGtools)"
+    "text": "4.1 Introduction\nIn this chapter we will look at how read data from files into R ### Prerequisites\n\nlibrary(here)\nlibrary(tidyverse)\nlibrary(SLINGtools)"
   },
   {
     "objectID": "datawrangling.html#import-an-agilent-masshunter-csv-file",
@@ -154,38 +154,73 @@
     "text": "4.10 Convert long table to wide table format\n\n# d_area_temp <- d |> \n#   pivot_wider(names_from = \"Compound\" ,values_from = \"Area\")\n\n\n# d_BQC <- d_area |> filter(QCtype == \"BQC\")\n# \n# \n# d_res1 <- d_BQC |>\n#   summarise(\n#     across(.cols = -seq_no:-AcqTimeStamp,\n#            .fns = ~ sd(.)/mean(.)*100)\n#   )\n# d_res1\n# \n# d_BQC_areas <- d_BQC |> dplyr::select(-seq_no:-AcqTimeStamp)\n\n# d_res2 <- purrr::map_df(d_BQC_areas, .f = ~ sd(.)/mean(.)*100)\n# d_res2\n# \n# d_res3 <- sapply(X = d_BQC_areas, \n#                  FUN = function(x) c(CV = sd(x)/mean(x) * 100,\n#                                      RobustCV = mad(x)/median(x) * 100))\n# as.data.frame(d_res3)\n# as.data.frame(t(d_res3))\n# \n# d_BQC_long <- d_BQC |> pivot_longer(cols = -seq_no:-AcqTimeStamp,\n#                                     names_to = \"Compound\",\n#                                     values_to = \"Area\")\n# \n# d_BQC_stats <- d_BQC_long |> \n#   group_by(Compound) |> \n#   summarise(\n#     count = n(),\n#     Mean = mean(Area),\n#     Min = min(Area),\n#     CV = sd(Area)/mean(Area) *100,\n#     logCV = sqrt(exp(1)^(sd(log(Area))^2)-1) *100,\n#     logCV_roche = sqrt(10^(log(10)*sd(log(Area, 10))^2)-1) *100,\n#     rCVq = 0.75 * IQR(Area, na.rm = TRUE)/median(Area) *100,\n#     rCVm = mad(Area, constant = 1.4826)/median(Area) *100\n#   )\n# d_BQC_stats\n# \n# hist(d_BQC_stats$CV)\n# hist(d_BQC_stats$rCVm)\n# \n# ggplot(d_BQC_stats) +\n#   geom_histogram(aes(x=CV))\n# \n# d_BQC_stats_long <- d_BQC_stats |>\n#   dplyr:::select(Compound, CV,rCVm,,rCVq, logCV) |> \n#   pivot_longer(cols = -Compound, names_to= \"CV_type\" ,values_to = \"Value\")\n# d_BQC_stats_long\n# \n# ggplot(d_BQC_stats_long) +\n#   geom_histogram(aes(x=Value, fill = CV_type)) + scale_x_continuous(limits = c(0,150)) + facet_wrap(~CV_type)\n# \n# \n# plot(d_BQC_stats$CV, d_BQC_stats$logCV)\n# plot(d_BQC_stats$CV, d_BQC_stats$logCV, xlim = c(0,100), ylim = c(0,100))\n# plot(d_BQC_stats$CV, d_BQC_stats$rCVm)\n# plot(d_BQC_stats$logCV, d_BQC_stats$rCVm, xlim = c(0,200))\n# plot(d_BQC_stats$CV, d_BQC_stats$rCVq)"
   },
   {
-    "objectID": "multiple_models.html#libraries",
-    "href": "multiple_models.html#libraries",
+    "objectID": "dilution_series.html#libraries",
+    "href": "dilution_series.html#libraries",
     "title": "5  Multivariate Regression",
     "section": "5.1 Libraries",
-    "text": "5.1 Libraries\n\nlibrary(here)\nlibrary(tidyverse)\nlibrary(SLINGtools)\nlibrary(broom)"
+    "text": "5.1 Libraries\n\nlibrary(here)\nlibrary(tidyverse)\nlibrary(broom)"
+  },
+  {
+    "objectID": "dilution_series.html#overview-lm-and-broom-package",
+    "href": "dilution_series.html#overview-lm-and-broom-package",
+    "title": "5  Multivariate Regression",
+    "section": "5.2 Overview lm and ‘broom’ package",
+    "text": "5.2 Overview lm and ‘broom’ package\n\nd_test <- tibble(InjVol = c(0,0.2, 0.4, 0.6, 0.8,1),\n                  Response  = c(12, 23, 34,44, 89, 101)) \n                 \nd_test\n\n#> # A tibble: 6 × 2\n#>   InjVol Response\n#>    <dbl>    <dbl>\n#> 1    0         12\n#> 2    0.2       23\n#> 3    0.4       34\n#> 4    0.6       44\n#> 5    0.8       89\n#> 6    1        101\n\n# Linear model\nmodel <- lm(formula = Response ~ InjVol, data = d_test)\n\n# Get result summary\nsummary(model)\n\n#> \n#> Call:\n#> lm(formula = Response ~ InjVol, data = d_test)\n#> \n#> Residuals:\n#>        1        2        3        4        5        6 \n#>   8.1429   0.4857  -7.1714 -15.8286  10.5143   3.8571 \n#> \n#> Coefficients:\n#>             Estimate Std. Error t value Pr(>|t|)   \n#> (Intercept)    3.857      8.043   0.480  0.65656   \n#> InjVol        93.286     13.282   7.024  0.00216 **\n#> ---\n#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n#> \n#> Residual standard error: 11.11 on 4 degrees of freedom\n#> Multiple R-squared:  0.925,  Adjusted R-squared:  0.9062 \n#> F-statistic: 49.33 on 1 and 4 DF,  p-value: 0.002165\n\n# Get r^2 only\nsummary(model)$r.squared\n\n#> [1] 0.9249954\n\n# Using broom::glance \nbroom::glance(model) \n\n#> # A tibble: 1 × 12\n#>   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n#>       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <dbl>  <dbl> <dbl> <dbl>\n#> 1     0.925         0.906  11.1      49.3 0.00216     1  -21.7  49.5  48.9\n#> # … with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>\n\nbroom::tidy(model) \n\n#> # A tibble: 2 × 5\n#>   term        estimate std.error statistic p.value\n#>   <chr>          <dbl>     <dbl>     <dbl>   <dbl>\n#> 1 (Intercept)     3.86      8.04     0.480 0.657  \n#> 2 InjVol         93.3      13.3      7.02  0.00216"
+  },
+  {
+    "objectID": "dilution_series.html#import-datasets",
+    "href": "dilution_series.html#import-datasets",
+    "title": "5  Multivariate Regression",
+    "section": "5.3 Import Datasets",
+    "text": "5.3 Import Datasets\n\nd_orig <- read_csv(here(\"data/Testdata_Lipidomics_flat_wide_annotated_V1.csv\"))"
+  },
+  {
+    "objectID": "dilution_series.html#prepare-data",
+    "href": "dilution_series.html#prepare-data",
+    "title": "5  Multivariate Regression",
+    "section": "5.4 Prepare Data",
+    "text": "5.4 Prepare Data\n\n# Convert to long format\nd_wide  <- d_orig |> dplyr::select(-AcqTimeStamp, -VialPosition)\n\nd_long <- d_wide |> \n  pivot_longer(cols = -DataFileName:-InjVol, names_to = \"Compound\" , values_to = \"Area\")\n\nd_rqc <- d_long |> filter(QCtype == \"RQC\")"
+  },
+  {
+    "objectID": "dilution_series.html#run-regression-for-each-lipid",
+    "href": "dilution_series.html#run-regression-for-each-lipid",
+    "title": "5  Multivariate Regression",
+    "section": "5.5 Run regression for each lipid",
+    "text": "5.5 Run regression for each lipid\nIn this example a logistic regression is used. The output of glm() is converted to a tidy table using the broom::tidy() function.\n\nmodel <- as.formula(\"Area ~ InjVol\")\n\nd_res <- d_rqc %>%\n  group_by(Compound) %>%\n  nest() %>%\n  mutate(\n    models = map(data, function(x) lm(model, data = x)), \n    tidy = map(models, function(x) broom::glance(x))) |> \n  unnest(tidy) |> \n  dplyr::select(-data, -models)\n\nThe results contain the combined estimates, errors, and P values for each term for each lipid species.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompound\nr.squared\nadj.r.squared\nsigma\nstatistic\np.value\ndf\nlogLik\nAIC\nBIC\ndeviance\ndf.residual\nnobs\n\n\n\n\nCE 14:0\n0.637155\n0.614477\n391.7204\n28.09596\n0.000072\n1\n-131.9507\n269.9014\n272.5725\n2.455118e+06\n16\n18\n\n\nCE 15:0\n0.540688\n0.511981\n253.5177\n18.83469\n0.000507\n1\n-124.1187\n254.2373\n256.9084\n1.028340e+06\n16\n18\n\n\nCE 16:0\n0.626274\n0.602917\n44054.0359\n26.81215\n0.000092\n1\n-216.9579\n439.9159\n442.5870\n3.105213e+10\n16\n18\n\n\nCE 16:1\n0.834197\n0.823834\n8622.1216\n80.50006\n0.000000\n1\n-187.5984\n381.1968\n383.8679\n1.189456e+09\n16\n18\n\n\nCE 16:2\n0.609873\n0.585490\n585.7358\n25.01226\n0.000131\n1\n-139.1925\n284.3850\n287.0561\n5.489383e+06\n16\n18\n\n\nCE 17:0\n0.900585\n0.894371\n1178.0217\n144.94082\n0.000000\n1\n-151.7695\n309.5390\n312.2101\n2.220376e+07\n16\n18\n\n\nCE 17:1\n0.945373\n0.941959\n1914.1239\n276.89543\n0.000000\n1\n-160.5071\n327.0142\n329.6854\n5.862192e+07\n16\n18\n\n\nCE 18:0\n0.952998\n0.950061\n8748.1092\n324.41314\n0.000000\n1\n-187.8595\n381.7190\n384.3902\n1.224471e+09\n16\n18\n\n\nCE 18:1\n0.944273\n0.940791\n522750.3432\n271.11631\n0.000000\n1\n-261.4843\n528.9686\n531.6397\n4.372287e+12\n16\n18\n\n\nCE 18:1 d7 (ISTD)\n0.922337\n0.917483\n60313.2929\n190.01887\n0.000000\n1\n-222.6124\n451.2248\n453.8959\n5.820309e+10\n16\n18"
+  },
+  {
+    "objectID": "multiple_models.html#libraries",
+    "href": "multiple_models.html#libraries",
+    "title": "6  Multivariate Regression",
+    "section": "6.1 Libraries",
+    "text": "6.1 Libraries\n\nlibrary(here)\nlibrary(tidyverse)\nlibrary(SLINGtools)\nlibrary(broom)"
   },
   {
     "objectID": "multiple_models.html#import-datasets",
     "href": "multiple_models.html#import-datasets",
-    "title": "5  Multivariate Regression",
-    "section": "5.2 Import Datasets",
-    "text": "5.2 Import Datasets\n\nd_meta <- read_csv(here(\"data/ISLS10_Part2_metadata.csv\"))\nd_wide <- read_csv(here(\"data/ISLS10_Part2_lipidomics_curated.csv\"))"
+    "title": "6  Multivariate Regression",
+    "section": "6.2 Import Datasets",
+    "text": "6.2 Import Datasets\n\nd_meta <- read_csv(here(\"data/ISLS10_Part2_metadata.csv\"))\nd_wide <- read_csv(here(\"data/ISLS10_Part2_lipidomics_curated.csv\"))"
   },
   {
     "objectID": "multiple_models.html#prepare-data",
     "href": "multiple_models.html#prepare-data",
-    "title": "5  Multivariate Regression",
-    "section": "5.3 Prepare Data",
-    "text": "5.3 Prepare Data\n\n# Convert to long format\nd_long <- d_wide |>\n  pivot_longer(cols = -ID, names_to = \"Compound\" , values_to = \"Conc\")\n\n# Combine data and metadata\nd_full <- d_meta |> left_join(d_long, by = \"ID\")\n\n# log-transform and scale (z-score) data\nd_full <- d_full |>\n  group_by(Compound) |>\n  mutate(Conc_log = log2(Conc),\n         Conc_logz = as.numeric(scale(Conc_log)))"
+    "title": "6  Multivariate Regression",
+    "section": "6.3 Prepare Data",
+    "text": "6.3 Prepare Data\n\n# Convert to long format\nd_long <- d_wide |>\n  pivot_longer(cols = -ID, names_to = \"Compound\" , values_to = \"Conc\")\n\n# Combine data and metadata\nd_full <- d_meta |> left_join(d_long, by = \"ID\")\n\n# log-transform and scale (z-score) data\nd_full <- d_full |>\n  group_by(Compound) |>\n  mutate(Conc_log = log2(Conc),\n         Conc_logz = as.numeric(scale(Conc_log)))"
   },
   {
     "objectID": "multiple_models.html#run-regression-for-each-lipid",
     "href": "multiple_models.html#run-regression-for-each-lipid",
-    "title": "5  Multivariate Regression",
-    "section": "5.4 Run regression for each lipid",
-    "text": "5.4 Run regression for each lipid\nIn this example a logistic regression is used. The output of glm() is converted to a tidy table using the broom::tidy() function.\n\nmodel <- as.formula(\"DM ~ Age + Gender + BMI + HbA1c + \n                    SBP + HDL + LDL + TG + Conc_logz\")\n\nd_res <- d_full %>%\n  group_by(Compound) %>%\n  nest() %>%\n  mutate(\n    models = map(data, function(x) glm(model, data = x, family = \"binomial\")), \n    tidy = map(models, function(x) broom::tidy(x))) |> \n  unnest(tidy) |> \n  dplyr::select(-data, -models)\n\nThe results contain the combined estimates, errors, and P values for each term for each lipid species.\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompound\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\nCer d16:1/16:0\n(Intercept)\n-20.955219\n1.886056\n-11.110601\n0.000000\n\n\nCer d16:1/16:0\nAge\n0.032885\n0.010896\n3.017987\n0.002545\n\n\nCer d16:1/16:0\nGender\n0.593323\n0.217179\n2.731950\n0.006296\n\n\nCer d16:1/16:0\nBMI\n0.129663\n0.027600\n4.698024\n0.000003\n\n\nCer d16:1/16:0\nHbA1c\n2.041818\n0.281859\n7.244102\n0.000000\n\n\nCer d16:1/16:0\nSBP\n0.017569\n0.005370\n3.271562\n0.001070\n\n\nCer d16:1/16:0\nHDL\n-0.725890\n0.368385\n-1.970465\n0.048785\n\n\nCer d16:1/16:0\nLDL\n-0.247450\n0.128041\n-1.932579\n0.053288\n\n\nCer d16:1/16:0\nTG\n0.402731\n0.142030\n2.835530\n0.004575\n\n\nCer d16:1/16:0\nConc_logz\n0.197851\n0.113746\n1.739413\n0.081962\n\n\n\n\n\nTo get the effects and P values for the lipids we filter for the term Conc_logz. We futhermore get the adjusted P values (FDR).\n\nd_res_lipids <- d_res |> \n   filter(term == \"Conc_logz\") |> \n   mutate(FDR = p.adjust(p.value, method = \"fdr\")) |> \n   arrange(FDR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompound\nterm\nestimate\nstd.error\nstatistic\np.value\nFDR\n\n\n\n\nSM d16:1/18:0\nConc_logz\n0.408832\n0.119650\n3.416896\n0.000633\n0.000633\n\n\nSM d18:1/18:0\nConc_logz\n0.325500\n0.105045\n3.098661\n0.001944\n0.001944\n\n\nCer d18:0/18:0\nConc_logz\n0.427791\n0.139298\n3.071052\n0.002133\n0.002133\n\n\nHex1Cer d18:2/25:0\nConc_logz\n-0.255110\n0.092979\n-2.743742\n0.006074\n0.006074\n\n\nCer d18:1/18:0\nConc_logz\n0.316480\n0.119278\n2.653288\n0.007971\n0.007971\n\n\nSM d18:1/20:0\nConc_logz\n0.282201\n0.106676\n2.645399\n0.008159\n0.008159"
+    "title": "6  Multivariate Regression",
+    "section": "6.4 Run regression for each lipid",
+    "text": "6.4 Run regression for each lipid\nIn this example a logistic regression is used. The output of glm() is converted to a tidy table using the broom::tidy() function.\n\nmodel <- as.formula(\"DM ~ Age + Gender + BMI + HbA1c + \n                    SBP + HDL + LDL + TG + Conc_logz\")\n\nd_res <- d_full %>%\n  group_by(Compound) %>%\n  nest() %>%\n  mutate(\n    models = map(data, function(x) glm(model, data = x, family = \"binomial\")), \n    tidy = map(models, function(x) broom::tidy(x))) |> \n  unnest(tidy) |> \n  dplyr::select(-data, -models)\n\nThe results contain the combined estimates, errors, and P values for each term for each lipid species.\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompound\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\nCer d16:1/16:0\n(Intercept)\n-20.955219\n1.886056\n-11.110601\n0.000000\n\n\nCer d16:1/16:0\nAge\n0.032885\n0.010896\n3.017987\n0.002545\n\n\nCer d16:1/16:0\nGender\n0.593323\n0.217179\n2.731950\n0.006296\n\n\nCer d16:1/16:0\nBMI\n0.129663\n0.027600\n4.698024\n0.000003\n\n\nCer d16:1/16:0\nHbA1c\n2.041818\n0.281859\n7.244102\n0.000000\n\n\nCer d16:1/16:0\nSBP\n0.017569\n0.005370\n3.271562\n0.001070\n\n\nCer d16:1/16:0\nHDL\n-0.725890\n0.368385\n-1.970465\n0.048785\n\n\nCer d16:1/16:0\nLDL\n-0.247450\n0.128041\n-1.932579\n0.053288\n\n\nCer d16:1/16:0\nTG\n0.402731\n0.142030\n2.835530\n0.004575\n\n\nCer d16:1/16:0\nConc_logz\n0.197851\n0.113746\n1.739413\n0.081962\n\n\n\n\n\nTo get the effects and P values for the lipids we filter for the term Conc_logz. We futhermore get the adjusted P values (FDR).\n\nd_res_lipids <- d_res |> \n   filter(term == \"Conc_logz\") |> \n   mutate(FDR = p.adjust(p.value, method = \"fdr\")) |> \n   arrange(FDR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompound\nterm\nestimate\nstd.error\nstatistic\np.value\nFDR\n\n\n\n\nSM d16:1/18:0\nConc_logz\n0.408832\n0.119650\n3.416896\n0.000633\n0.000633\n\n\nSM d18:1/18:0\nConc_logz\n0.325500\n0.105045\n3.098661\n0.001944\n0.001944\n\n\nCer d18:0/18:0\nConc_logz\n0.427791\n0.139298\n3.071052\n0.002133\n0.002133\n\n\nHex1Cer d18:2/25:0\nConc_logz\n-0.255110\n0.092979\n-2.743742\n0.006074\n0.006074\n\n\nCer d18:1/18:0\nConc_logz\n0.316480\n0.119278\n2.653288\n0.007971\n0.007971\n\n\nSM d18:1/20:0\nConc_logz\n0.282201\n0.106676\n2.645399\n0.008159\n0.008159"
   },
   {
     "objectID": "multiple_models.html#forest-plot",
     "href": "multiple_models.html#forest-plot",
-    "title": "5  Multivariate Regression",
-    "section": "5.5 Forest Plot",
-    "text": "5.5 Forest Plot\nPrepare data\n\n# lipid annotation\nd_lipid_annot <- d_res_lipids |>\n  select(Compound) |>  \n  separate(Compound, \n           into = c(\"lipid_class\", \"fa_chain\"), \n           remove = FALSE, \n           extra = \"drop\",\n           fill = \"right\",  \n           sep = \"/\" )\n\nd_plot <- d_res_lipids |> \n  full_join(d_lipid_annot, by = \"Compound\") |> \n  mutate(\n    est_low = estimate - std.error,\n    est_high = estimate + std.error, \n    signif = FDR < 0.05,\n    label = if_else(signif, fa_chain, \"\")) |> \n  arrange(signif)\n\nPlot\n\nggplot(d_plot, aes(x = lipid_class, y = estimate,color = signif, label = label)) +\n  geom_hline(yintercept = 0) +\n  geom_pointrange(aes(ymin = est_low, ymax = est_high, alpha = signif),\n                  size = 0.5,\n                  position = position_jitter(width = .3, height = 0)) +\n  coord_flip() +\n  scale_color_manual(values = c(\"FALSE\" = \"grey70\", \"TRUE\" = \"red\")) +\n  scale_alpha_manual(values = c(\"FALSE\" = 0.3, \"TRUE\" = 1)) +\n  ggrepel::geom_text_repel(\n    aes(y = estimate),\n    size = 2,\n    max.overlaps = 5,\n    point.padding = .7\n  ) +\n  theme_bw() + \n  theme(legend.position=\"none\")\n\n\n\n\nFigure 1. Forest plot of logistic regression (DM ~ Age + Gender + BMI + HbA1c + SBP + HDL + LDL + TG + Lipid). Species with FDR > 0.05 are highlighted in red."
+    "title": "6  Multivariate Regression",
+    "section": "6.5 Forest Plot",
+    "text": "6.5 Forest Plot\nPrepare data for the plot: get lipid class from lipid names, join it to the data frame, calculate FDR, get upper/lower errors, and set “significant specie”\n\n# lipid annotation\nd_lipid_annot <- d_res_lipids |>\n  select(Compound) |>  \n  separate(Compound, \n           into = c(\"lipid_class\", \"fa_chain\"), \n           remove = FALSE, \n           extra = \"drop\",\n           fill = \"right\",  \n           sep = \"/\" )\n\nd_plot <- d_res_lipids |> \n  full_join(d_lipid_annot, by = \"Compound\") |> \n  mutate(\n    est_low = estimate - std.error,\n    est_high = estimate + std.error, \n    signif = FDR < 0.05,\n    label = if_else(signif, fa_chain, \"\")) |> \n  arrange(signif)\n\nPlot estimates of all lipid species, grouped by lipid class, highlighting significant species in red and label them by the FA chain.\n\nggplot(d_plot, aes(x = lipid_class, y = estimate,color = signif, label = label)) +\n  geom_hline(yintercept = 0) +\n  geom_pointrange(aes(ymin = est_low, ymax = est_high, alpha = signif),\n                  size = 0.5,\n                  position = position_jitter(width = .3, height = 0)) +\n  coord_flip() +\n  scale_color_manual(values = c(\"FALSE\" = \"grey70\", \"TRUE\" = \"red\")) +\n  scale_alpha_manual(values = c(\"FALSE\" = 0.3, \"TRUE\" = 1)) +\n  ggrepel::geom_text_repel(\n    aes(y = estimate),\n    size = 2,\n    max.overlaps = 5,\n    point.padding = .7\n  ) +\n  theme_bw() + \n  theme(legend.position=\"none\")\n\n\n\n\nFigure 1. Forest plot of logistic regression (DM ~ Age + Gender + BMI + HbA1c + SBP + HDL + LDL + TG + Lipid). Species with FDR > 0.05 are highlighted in red."
   }
 ]

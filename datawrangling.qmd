@@ -12,6 +12,7 @@ In this chapter we will look at how read data from files into R \### Prerequisit
 
 ```{r}
 #| label: setup
+#| message: false
 library(here)
 library(tidyverse)
 library(SLINGtools)
@@ -27,6 +28,7 @@ data_file_path <- here("data/Testdata_Lipidomics_MHQuant_Detailed_V2.csv")
 d_orig <- read_MassHunterCSV(data_file_path)
 print(d_orig)
 ```
+
 
 ## Select, remove, re-order, and rename columns
 

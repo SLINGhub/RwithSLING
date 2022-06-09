@@ -104,7 +104,7 @@ kable(head(d_res_lipids),digits = 6)
 
 ## Forest Plot
 
-Prepare data
+Prepare data for the plot: get lipid class from lipid names, join it to the data frame, calculate FDR, get upper/lower errors, and set "significant specie"
 
 ```{r}
 #| label: prep-plotdata
@@ -131,7 +131,7 @@ d_plot <- d_res_lipids |>
   arrange(signif)
 ```
 
-Plot
+Plot estimates of all lipid species, grouped by lipid class, highlighting significant species in red and label them by the FA chain. 
 
 ```{r}
 #| label: forestplot

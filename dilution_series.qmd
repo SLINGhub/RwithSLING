@@ -1,0 +1,114 @@
+# Multivariate Regression
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+source("_common.R")
+library(knitr)
+
+```
+
+## Libraries
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+library(broom)
+
+```
+
+## Overview lm and 'broom' package
+
+```{r}
+#| label: intro
+#| echo: true
+#| message: false
+
+d_test <- tibble(InjVol = c(0,0.2, 0.4, 0.6, 0.8,1),
+                  Response  = c(12, 23, 34,44, 89, 101)) 
+                 
+d_test
+
+# Linear model
+model <- lm(formula = Response ~ InjVol, data = d_test)
+
+# Get result summary
+summary(model)
+
+# Get r^2 only
+summary(model)$r.squared
+
+# Using broom::glance 
+broom::glance(model) 
+
+broom::tidy(model) 
+ 
+```
+
+## Import Datasets
+
+```{r}
+#| label: read-data
+#| echo: true
+#| message: false
+
+d_orig <- read_csv(here("data/Testdata_Lipidomics_flat_wide_annotated_V1.csv"))
+
+```
+
+## Prepare Data
+
+```{r select-rename-columns}
+#| label: prepare-data
+#| echo: true
+#| message: false
+
+# Convert to long format
+d_wide  <- d_orig |> dplyr::select(-AcqTimeStamp, -VialPosition)
+
+d_long <- d_wide |> 
+  pivot_longer(cols = -DataFileName:-InjVol, names_to = "Compound" , values_to = "Area")
+
+d_rqc <- d_long |> filter(QCtype == "RQC")
+
+```
+
+## Run regression for each lipid
+
+In this example a logistic regression is used. The output of `glm()` is converted to a tidy table using the `broom::tidy()` function.
+
+```{r filter-tables}
+#| label: reg-analysis
+#| echo: true
+#| message: false
+#| tbl-cap: "Model results"
+#| tbl-colwidths: [60,40]
+
+
+
+model <- as.formula("Area ~ InjVol")
+
+d_res <- d_rqc %>%
+  group_by(Compound) %>%
+  nest() %>%
+  mutate(
+    models = map(data, function(x) lm(model, data = x)), 
+    tidy = map(models, function(x) broom::glance(x))) |> 
+  unnest(tidy) |> 
+  dplyr::select(-data, -models)
+
+```
+
+The results contain the combined estimates, errors, and *P* values for each term for each lipid species.
+
+```{r}
+#| label: tbl_results
+#| echo: false
+kable(head(d_res, n = 10),digits = 6)
+```
+
+
