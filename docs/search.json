@@ -156,35 +156,35 @@
   {
     "objectID": "dilution_series.html#libraries",
     "href": "dilution_series.html#libraries",
-    "title": "5  Multivariate Regression",
+    "title": "5  Dilution Series",
     "section": "5.1 Libraries",
     "text": "5.1 Libraries\n\nlibrary(here)\nlibrary(tidyverse)\nlibrary(broom)"
   },
   {
     "objectID": "dilution_series.html#overview-lm-and-broom-package",
     "href": "dilution_series.html#overview-lm-and-broom-package",
-    "title": "5  Multivariate Regression",
+    "title": "5  Dilution Series",
     "section": "5.2 Overview lm and ‘broom’ package",
     "text": "5.2 Overview lm and ‘broom’ package\n\nd_test <- tibble(InjVol = c(0,0.2, 0.4, 0.6, 0.8,1),\n                  Response  = c(12, 23, 34,44, 89, 101)) \n                 \nd_test\n\n#> # A tibble: 6 × 2\n#>   InjVol Response\n#>    <dbl>    <dbl>\n#> 1    0         12\n#> 2    0.2       23\n#> 3    0.4       34\n#> 4    0.6       44\n#> 5    0.8       89\n#> 6    1        101\n\n# Linear model\nmodel <- lm(formula = Response ~ InjVol, data = d_test)\n\n# Get result summary\nsummary(model)\n\n#> \n#> Call:\n#> lm(formula = Response ~ InjVol, data = d_test)\n#> \n#> Residuals:\n#>        1        2        3        4        5        6 \n#>   8.1429   0.4857  -7.1714 -15.8286  10.5143   3.8571 \n#> \n#> Coefficients:\n#>             Estimate Std. Error t value Pr(>|t|)   \n#> (Intercept)    3.857      8.043   0.480  0.65656   \n#> InjVol        93.286     13.282   7.024  0.00216 **\n#> ---\n#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n#> \n#> Residual standard error: 11.11 on 4 degrees of freedom\n#> Multiple R-squared:  0.925,  Adjusted R-squared:  0.9062 \n#> F-statistic: 49.33 on 1 and 4 DF,  p-value: 0.002165\n\n# Get r^2 only\nsummary(model)$r.squared\n\n#> [1] 0.9249954\n\n# Using broom::glance \nbroom::glance(model) \n\n#> # A tibble: 1 × 12\n#>   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n#>       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <dbl>  <dbl> <dbl> <dbl>\n#> 1     0.925         0.906  11.1      49.3 0.00216     1  -21.7  49.5  48.9\n#> # … with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>\n\nbroom::tidy(model) \n\n#> # A tibble: 2 × 5\n#>   term        estimate std.error statistic p.value\n#>   <chr>          <dbl>     <dbl>     <dbl>   <dbl>\n#> 1 (Intercept)     3.86      8.04     0.480 0.657  \n#> 2 InjVol         93.3      13.3      7.02  0.00216"
   },
   {
     "objectID": "dilution_series.html#import-datasets",
     "href": "dilution_series.html#import-datasets",
-    "title": "5  Multivariate Regression",
+    "title": "5  Dilution Series",
     "section": "5.3 Import Datasets",
     "text": "5.3 Import Datasets\n\nd_orig <- read_csv(here(\"data/Testdata_Lipidomics_flat_wide_annotated_V1.csv\"))"
   },
   {
     "objectID": "dilution_series.html#prepare-data",
     "href": "dilution_series.html#prepare-data",
-    "title": "5  Multivariate Regression",
+    "title": "5  Dilution Series",
     "section": "5.4 Prepare Data",
     "text": "5.4 Prepare Data\n\n# Convert to long format\nd_wide  <- d_orig |> dplyr::select(-AcqTimeStamp, -VialPosition)\n\nd_long <- d_wide |> \n  pivot_longer(cols = -DataFileName:-InjVol, names_to = \"Compound\" , values_to = \"Area\")\n\nd_rqc <- d_long |> filter(QCtype == \"RQC\")"
   },
   {
     "objectID": "dilution_series.html#run-regression-for-each-lipid",
     "href": "dilution_series.html#run-regression-for-each-lipid",
-    "title": "5  Multivariate Regression",
+    "title": "5  Dilution Series",
     "section": "5.5 Run regression for each lipid",
     "text": "5.5 Run regression for each lipid\nIn this example a logistic regression is used. The output of glm() is converted to a tidy table using the broom::tidy() function.\n\nmodel <- as.formula(\"Area ~ InjVol\")\n\nd_res <- d_rqc %>%\n  group_by(Compound) %>%\n  nest() %>%\n  mutate(\n    models = map(data, function(x) lm(model, data = x)), \n    tidy = map(models, function(x) broom::glance(x))) |> \n  unnest(tidy) |> \n  dplyr::select(-data, -models)\n\nThe results contain the combined estimates, errors, and P values for each term for each lipid species.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompound\nr.squared\nadj.r.squared\nsigma\nstatistic\np.value\ndf\nlogLik\nAIC\nBIC\ndeviance\ndf.residual\nnobs\n\n\n\n\nCE 14:0\n0.637155\n0.614477\n391.7204\n28.09596\n0.000072\n1\n-131.9507\n269.9014\n272.5725\n2.455118e+06\n16\n18\n\n\nCE 15:0\n0.540688\n0.511981\n253.5177\n18.83469\n0.000507\n1\n-124.1187\n254.2373\n256.9084\n1.028340e+06\n16\n18\n\n\nCE 16:0\n0.626274\n0.602917\n44054.0359\n26.81215\n0.000092\n1\n-216.9579\n439.9159\n442.5870\n3.105213e+10\n16\n18\n\n\nCE 16:1\n0.834197\n0.823834\n8622.1216\n80.50006\n0.000000\n1\n-187.5984\n381.1968\n383.8679\n1.189456e+09\n16\n18\n\n\nCE 16:2\n0.609873\n0.585490\n585.7358\n25.01226\n0.000131\n1\n-139.1925\n284.3850\n287.0561\n5.489383e+06\n16\n18\n\n\nCE 17:0\n0.900585\n0.894371\n1178.0217\n144.94082\n0.000000\n1\n-151.7695\n309.5390\n312.2101\n2.220376e+07\n16\n18\n\n\nCE 17:1\n0.945373\n0.941959\n1914.1239\n276.89543\n0.000000\n1\n-160.5071\n327.0142\n329.6854\n5.862192e+07\n16\n18\n\n\nCE 18:0\n0.952998\n0.950061\n8748.1092\n324.41314\n0.000000\n1\n-187.8595\n381.7190\n384.3902\n1.224471e+09\n16\n18\n\n\nCE 18:1\n0.944273\n0.940791\n522750.3432\n271.11631\n0.000000\n1\n-261.4843\n528.9686\n531.6397\n4.372287e+12\n16\n18\n\n\nCE 18:1 d7 (ISTD)\n0.922337\n0.917483\n60313.2929\n190.01887\n0.000000\n1\n-222.6124\n451.2248\n453.8959\n5.820309e+10\n16\n18"
   },
