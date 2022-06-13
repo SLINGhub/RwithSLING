@@ -1,4 +1,4 @@
-# Dilution Series
+# Response/Calibration Curves
 
 ```{r}
 #| label: setup
@@ -18,6 +18,7 @@ library(knitr)
 library(here)
 library(tidyverse)
 library(broom)
+library(ggpmisc)
 
 ```
 
@@ -97,9 +98,14 @@ d_res <- d_rqc %>%
   nest() %>%
   mutate(
     models = map(data, function(x) lm(model, data = x)), 
+    mandel = map(data, function(x) DCVtestkit::calculate_mandel(x, "InjVol", "Area")),
+    ppa = map(data, function(x) DCVtestkit::calculate_pra_linear(x, "InjVol", "Area")),
     tidy = map(models, function(x) broom::glance(x))) |> 
-  unnest(tidy) |> 
+  unnest(c(tidy, mandel)) |> 
   dplyr::select(-data, -models)
+
+# DCVtestkit::calculate_pra_linear, currently returns list instead vector
+d_res$ppa <- d_res$ppa |> unlist()
 
 ```
 
@@ -111,4 +117,55 @@ The results contain the combined estimates, errors, and *P* values for each term
 kable(head(d_res, n = 10),digits = 6)
 ```
 
+```{r}
+
+d_cer  <- d_rqc |>  filter(str_detect(Compound,"Hex"), DilutionSeries =="1")
+
+
+
+ggplot(data = d_cer, aes(x = InjVol , y = Area,group = factor(DilutionSeries))) +
+    stat_poly_line() +
+    stat_poly_eq(aes(label = after_stat(rr.label),
+                     color = ifelse(after_stat(r.squared) < 0.80, "red", "darkgreen")),size = 2.4,lineheight = 1111.5) +
+   scale_color_identity() +
+   scale_y_continuous(limits = c(0, NA))+
+  facet_wrap(~Compound, scales = "free") +
+  
+   geom_point() + theme_light(base_size = 6)
+```
+```{r}
+
+
+
+plot_page <- function(d, col_page, row_page, x_col, y_col, curve_col, feature_col) {
+  ggplot(data = d, aes(x = {{x_col}} , y = {{y_col}}, group = factor({{curve_col}}))) +
+      stat_poly_line() +
+      stat_poly_eq(aes(label = after_stat(rr.label),
+                       color = ifelse(after_stat(r.squared) < 0.80, "red", "darkgreen")),size = 1.4) +
+     scale_color_identity() +
+     scale_y_continuous(limits = c(0, NA))+
+     facet_wrap(vars({{feature_col}}), scales = "free", nrow = row_page, ncol = col_page) +
+     geom_point() + theme_light(base_size = 6)
+}
+
+n_col = 5
+n_row = 4
+
+
+plot_page(d_cer, col_page = 4, row_page = 5, x_col = InjVol, y_col = Area , curve_col = DilutionSeries, feature_col = Compound)
+
+d <- d_rqc #|> filter(str_detect(Compound, "PC"))
+
+d_rqc_grp <- d %>%
+  left_join(tibble(Compound = unique(.$Compound)) |> 
+              mutate(grp = ceiling(row_number()/(n_col * n_row)))) %>% 
+  group_by(grp) %>%
+  nest() %>%
+  mutate(plt = map(data, ~ plot_page(.,col_page = 4, row_page = 5, x_col = InjVol, y_col = Area , curve_col = DilutionSeries, feature_col = Compound)))
+
+pdf('pltALL.pdf',paper = "A4r")
+d_rqc_grp$plt
+dev.off()
+
+```
 
