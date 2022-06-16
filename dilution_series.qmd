@@ -43,9 +43,8 @@ summary(model)
 # Get r^2 only
 summary(model)$r.squared
 
-# Using broom::glance 
+# Using broom functions to summarize model results into a table
 broom::glance(model) 
-
 broom::tidy(model) 
  
 ```
@@ -72,7 +71,9 @@ d_orig <- read_csv(here("data/Testdata_Lipidomics_flat_wide_annotated_V1.csv"))
 d_wide  <- d_orig |> dplyr::select(-AcqTimeStamp, -VialPosition)
 
 d_long <- d_wide |> 
-  pivot_longer(cols = -DataFileName:-InjVol, names_to = "Compound" , values_to = "Area")
+  pivot_longer(cols = -DataFileName:-InjVol, 
+               names_to = "Compound" , 
+               values_to = "Area")
 
 d_rqc <- d_long |> filter(QCtype == "RQC")
 
@@ -98,14 +99,14 @@ d_res <- d_rqc %>%
   nest() %>%
   mutate(
     models = map(data, function(x) lm(model, data = x)), 
-    mandel = map(data, function(x) DCVtestkit::calculate_mandel(x, "InjVol", "Area")),
-    ppa = map(data, function(x) DCVtestkit::calculate_pra_linear(x, "InjVol", "Area")),
+    #mandel = map(data, \(x) DCVtestkit::calculate_mandel(x, "InjVol", "Area")),
+    #ppa = map(data, \(x) DCVtestkit::calculate_pra_linear(x, "InjVol", "Area")),
     tidy = map(models, function(x) broom::glance(x))) |> 
-  unnest(c(tidy, mandel)) |> 
+  unnest(c(tidy)) |> 
   dplyr::select(-data, -models)
 
-# DCVtestkit::calculate_pra_linear, currently returns list instead vector
-d_res$ppa <- d_res$ppa |> unlist()
+# Fix DCVtestkit::calculate_pra_linear currently returning a list instead vector
+# d_res$ppa <- unlist(d_res$ppa)
 
 ```
 
@@ -117,55 +118,102 @@ The results contain the combined estimates, errors, and *P* values for each term
 kable(head(d_res, n = 10),digits = 6)
 ```
 
+## Regression Plots
+
+Plot one page with different lipids and stats info
+
 ```{r}
 
+# Select only Glycosphingolipids
 d_cer  <- d_rqc |>  filter(str_detect(Compound,"Hex"), DilutionSeries =="1")
 
-
-
-ggplot(data = d_cer, aes(x = InjVol , y = Area,group = factor(DilutionSeries))) +
-    stat_poly_line() +
-    stat_poly_eq(aes(label = after_stat(rr.label),
-                     color = ifelse(after_stat(r.squared) < 0.80, "red", "darkgreen")),size = 2.4,lineheight = 1111.5) +
-   scale_color_identity() +
-   scale_y_continuous(limits = c(0, NA))+
-  facet_wrap(~Compound, scales = "free") +
-  
-   geom_point() + theme_light(base_size = 6)
+# Plot
+ggplot(data = d_cer, aes(x = InjVol, y = Area, group = factor(DilutionSeries))) +
+  stat_poly_line() +
+  stat_poly_eq(
+    aes(
+      label = after_stat(rr.label),
+      color = ifelse(after_stat(r.squared) < 0.80, "red", "darkgreen")
+    ),
+  size = 2.4,
+  lineheight = 1111.5) +
+  scale_color_identity() +
+  scale_y_continuous(limits = c(0, NA)) +
+  facet_wrap( ~ Compound, scales = "free") +
+  geom_point() + theme_light(base_size = 6)
 ```
+
+Multi-page plot. One way is to use `ggforce::facet_wrap_paginate()`but this function can be slow with large datasets. Here another way using *purrr::map()*
+
 ```{r}
 
 
 
-plot_page <- function(d, col_page, row_page, x_col, y_col, curve_col, feature_col) {
-  ggplot(data = d, aes(x = {{x_col}} , y = {{y_col}}, group = factor({{curve_col}}))) +
+# function to plot 1 page
+plot_page <-
+  function(d,col_page,row_page,x_col,y_col,curve_col,feature_col) {
+    ggplot(data = d, aes(x = {{x_col}} , y = {{y_col}}, group = factor({{curve_col}}))) +
       stat_poly_line() +
-      stat_poly_eq(aes(label = after_stat(rr.label),
-                       color = ifelse(after_stat(r.squared) < 0.80, "red", "darkgreen")),size = 1.4) +
-     scale_color_identity() +
-     scale_y_continuous(limits = c(0, NA))+
-     facet_wrap(vars({{feature_col}}), scales = "free", nrow = row_page, ncol = col_page) +
-     geom_point() + theme_light(base_size = 6)
-}
+      stat_poly_eq(aes(
+        label = after_stat(rr.label),
+        color = ifelse(after_stat(r.squared) < 0.80, "red", "darkgreen")
+      ), size = 1.4) +
+      scale_color_identity() +
+      scale_y_continuous(limits = c(0, NA)) +
+      facet_wrap(vars({
+        {
+          feature_col
+        }
+      }),
+      scales = "free",
+      nrow = row_page,
+      ncol = col_page) +
+      geom_point() + theme_light(base_size = 6)
+  }
 
 n_col = 5
 n_row = 4
 
 
-plot_page(d_cer, col_page = 4, row_page = 5, x_col = InjVol, y_col = Area , curve_col = DilutionSeries, feature_col = Compound)
+plot_page(d_cer,col_page = 4,row_page = 5,x_col = InjVol,y_col = Area ,curve_col = DilutionSeries,
+ feature_col = Compound
+)
 
-d <- d_rqc #|> filter(str_detect(Compound, "PC"))
+d <-
+ d_rqc |> filter(DilutionSeries == "2") #|> filter(str_detect(Compound, "PC"))
 
 d_rqc_grp <- d %>%
-  left_join(tibble(Compound = unique(.$Compound)) |> 
-              mutate(grp = ceiling(row_number()/(n_col * n_row)))) %>% 
+  left_join(tibble(Compound = unique(.$Compound)) |>
+              mutate(grp = ceiling(row_number() / (n_col * n_row)))) %>%
   group_by(grp) %>%
   nest() %>%
-  mutate(plt = map(data, ~ plot_page(.,col_page = 4, row_page = 5, x_col = InjVol, y_col = Area , curve_col = DilutionSeries, feature_col = Compound)))
+  mutate(plt = map(
+data,
+ ~ plot_page(
+.,
+col_page = 4,
+ row_page = 5,
+ x_col = InjVol,
+ y_col = Area ,
+ curve_col = DilutionSeries,
+ feature_col = Compound
+)
+))
 
-pdf('pltALL.pdf',paper = "A4r")
+pdf('pltALL.pdf', paper = "A4r")
 d_rqc_grp$plt
 dev.off()
 
 ```
 
+```{r}
+d_rqc_grp <- d %>%
+  group_by(Compound) %>%
+  mutate(grp = ceiling(cur_group_id()/(n_col * n_row))) %>%
+  group_by(grp) %>%
+  nest() %>%
+  mutate(plt = map(data, ~ plot_page(.,col_page = 4, row_page = 5, x_col = InjVol, y_col = Area , curve_col = DilutionSeries, feature_col = Compound)))
+
+d_rqc_grp |> pull(plt)
+
+```

@@ -2,42 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://slinghub.github.io/RwithSLING/index.html</loc>
-    <lastmod>2022-06-09T06:20:11.557Z</lastmod>
+    <lastmod>2022-06-16T07:26:58.120Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/intro.html</loc>
-    <lastmod>2022-06-09T06:20:09.273Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.062Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tutorials.html</loc>
-    <lastmod>2022-06-09T06:20:09.275Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.069Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/import_data.html</loc>
-    <lastmod>2022-06-09T06:20:09.278Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.076Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tables.html</loc>
-    <lastmod>2022-06-09T06:20:09.280Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.084Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/datawrangling.html</loc>
-    <lastmod>2022-06-09T06:20:09.284Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.093Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/dilution_series.html</loc>
-    <lastmod>2022-06-09T06:20:09.287Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.105Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/multiple_models.html</loc>
-    <lastmod>2022-06-09T06:20:09.291Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.116Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/workflows.html</loc>
-    <lastmod>2022-06-09T06:20:09.293Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/import_MSdatasets.html</loc>
+    <lastmod>2022-06-16T07:26:44.131Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/references.html</loc>
-    <lastmod>2022-06-09T06:20:09.296Z</lastmod>
+    <lastmod>2022-06-16T07:26:44.140Z</lastmod>
   </url>
 </urlset>
