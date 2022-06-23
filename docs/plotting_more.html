@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.426">
+<meta name="generator" content="quarto-0.9.309">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -123,8 +123,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-sidebar floating">
-
+<body class="floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -220,6 +219,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </a>
     </div>
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  </div>
+</li>
     </ul>
   </li>
         <li class="sidebar-item">
@@ -241,7 +245,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data"> <span class="header-section-number">6.3</span> Prepare Data</a></li>
   <li><a href="#sum-up-lipids-per-class" id="toc-sum-up-lipids-per-class" class="nav-link" data-scroll-target="#sum-up-lipids-per-class"> <span class="header-section-number">6.4</span> Sum up lipids per class</a></li>
   <li><a href="#mean-and-sd-per-class-and-group" id="toc-mean-and-sd-per-class-and-group" class="nav-link" data-scroll-target="#mean-and-sd-per-class-and-group"> <span class="header-section-number">6.5</span> Mean and SD per Class and Group</a></li>
-  <li><a href="#plotting-one-curve" id="toc-plotting-one-curve" class="nav-link" data-scroll-target="#plotting-one-curve"> <span class="header-section-number">6.6</span> Plotting one curve</a></li>
+  <li><a href="#bar-chart-of-one-lipid-class" id="toc-bar-chart-of-one-lipid-class" class="nav-link" data-scroll-target="#bar-chart-of-one-lipid-class"> <span class="header-section-number">6.6</span> Bar chart of one lipid class</a></li>
+  <li><a href="#bar-chart-with-all-lipid-classes" id="toc-bar-chart-with-all-lipid-classes" class="nav-link" data-scroll-target="#bar-chart-with-all-lipid-classes"> <span class="header-section-number">6.7</span> Bar chart with all lipid classes</a></li>
+  <li><a href="#bar-chart-using-pre-calculated-means-and-sd" id="toc-bar-chart-using-pre-calculated-means-and-sd" class="nav-link" data-scroll-target="#bar-chart-using-pre-calculated-means-and-sd"> <span class="header-section-number">6.8</span> Bar chart using pre-calculated means and SD</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/plotting_more.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -2775,30 +2781,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="plotting-one-curve" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="plotting-one-curve"><span class="header-section-number">6.6</span> Plotting one curve</h2>
+<section id="bar-chart-of-one-lipid-class" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="bar-chart-of-one-lipid-class"><span class="header-section-number">6.6</span> Bar chart of one lipid class</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d_sum_1 <span class="ot">&lt;-</span> d_sum <span class="sc">|&gt;</span> <span class="fu">filter</span>(lipidclass <span class="sc">==</span> <span class="st">"LPC"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_sum_1, <span class="fu">aes</span>(<span class="at">x =</span> lipidclass, <span class="at">y =</span> Conc, <span class="at">fill =</span> Group)) <span class="sc">+</span> </span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">fun.y =</span> <span class="st">"mean"</span>, <span class="at">position =</span> <span class="st">'dodge'</span>) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">'dodge'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>#&gt; Warning: Ignoring unknown parameters: fun.y</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d_sum_2 <span class="ot">&lt;-</span> d_sum </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_sum_1, <span class="fu">aes</span>(<span class="at">x =</span> lipidclass, <span class="at">y =</span> Conc, <span class="at">fill =</span> Group)) <span class="sc">+</span> </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">fun.y =</span> <span class="st">"mean"</span>, <span class="at">position =</span> <span class="st">'dodge'</span>) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">'dodge'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">fun.data =</span> <span class="st">"mean_sdl"</span>, <span class="at">fun.args =</span> <span class="fu">list</span>(<span class="at">mult =</span> <span class="dv">1</span>), </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span>.<span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: Ignoring unknown parameters: fun.y</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="plotting_more_files/figure-html/plot-1-1.png" class="img-fluid" width="576"></p>
 </div>
+</div>
+</section>
+<section id="bar-chart-with-all-lipid-classes" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="bar-chart-with-all-lipid-classes"><span class="header-section-number">6.7</span> Bar chart with all lipid classes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_sum, <span class="fu">aes</span>(<span class="at">x =</span> lipidclass, <span class="at">y =</span> Conc, <span class="at">fill =</span> Group)) <span class="sc">+</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">fun.y =</span> <span class="st">"mean"</span>, <span class="at">position =</span> <span class="st">'dodge'</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">fun.data =</span> <span class="st">"mean_sdl"</span>, <span class="at">fun.args =</span> <span class="fu">list</span>(<span class="at">mult =</span> <span class="dv">1</span>), </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span>.<span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Warning: Ignoring unknown parameters: fun.y</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; No summary function supplied, defaulting to `mean_se()`</code></pre>
+</div>
 <div class="cell-output-display">
-<p><img src="plotting_more_files/figure-html/plot-1-2.png" class="img-fluid" width="576"></p>
+<p><img src="plotting_more_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+</section>
+<section id="bar-chart-using-pre-calculated-means-and-sd" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="bar-chart-using-pre-calculated-means-and-sd"><span class="header-section-number">6.8</span> Bar chart using pre-calculated means and SD</h2>
+<p>This example is using the table <code>d_sum_grp</code> with means and SD of all classes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_sum_grp, <span class="fu">aes</span>(<span class="at">x =</span> lipidclass, <span class="at">y =</span> conc_mean, <span class="at">fill =</span> Group)) <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,  <span class="at">position =</span> <span class="st">'dodge'</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conc_mean <span class="sc">-</span> conc_sd, <span class="at">ymax =</span> conc_mean <span class="sc">+</span> conc_sd), </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span>.<span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="plotting_more_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
 
@@ -2806,7 +2833,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 
 </main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {

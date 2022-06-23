@@ -78,6 +78,7 @@ d_sum <- d_annot |>
 #| echo: false
 kable(head(d_sum, n = 6),digits = 3)
 ```
+
 ## Mean and SD per Class and Group
 
 ```{r filter-tables}
@@ -90,14 +91,14 @@ d_sum_grp <- d_sum |>
   summarise(conc_mean = mean(Conc),
             conc_sd = sd(Conc))
 ```
+
 ```{r}
 #| label: tbl_data-3
 #| echo: false
 kable(head(d_sum_grp, n = 6),digits = 3)
 ```
 
-
-## Plotting one curve
+## Bar chart of one lipid class
 
 ```{r select-rename-columns}
 #| label: plot-1
@@ -108,13 +109,27 @@ d_sum_1 <- d_sum |> filter(lipidclass == "LPC")
 
 ggplot(d_sum_1, aes(x = lipidclass, y = Conc, fill = Group)) + 
   geom_bar(stat = "summary", fun.y = "mean", position = 'dodge') +
-  geom_errorbar(stat = "summary", width = 0.5, position = 'dodge')
-
-d_sum_2 <- d_sum 
-
-ggplot(d_sum_1, aes(x = lipidclass, y = Conc, fill = Group)) + 
-  geom_bar(stat = "summary", fun.y = "mean", position = 'dodge') +
-  geom_errorbar(stat = "summary", width = 0.5, position = 'dodge')
+  geom_errorbar(stat = "summary", fun.data = "mean_sdl", fun.args = list(mult = 1), 
+                width = 0.5, position = position_dodge(width=.9))
 
 ```
 
+## Bar chart with all lipid classes
+
+```{r}
+ggplot(d_sum, aes(x = lipidclass, y = Conc, fill = Group)) + 
+  geom_bar(stat = "summary", fun.y = "mean", position = 'dodge') +
+    geom_errorbar(stat = "summary", fun.data = "mean_sdl", fun.args = list(mult = 1), 
+                  width = 0.5, position = position_dodge(width=.9))
+```
+
+## Bar chart using pre-calculated means and SD
+
+This example is using the table `d_sum_grp` with means and SD of all classes 
+
+```{r}
+ggplot(d_sum_grp, aes(x = lipidclass, y = conc_mean, fill = Group)) + 
+  geom_bar(stat = "identity",  position = 'dodge') +
+  geom_errorbar(aes(ymin = conc_mean - conc_sd, ymax = conc_mean + conc_sd), 
+                stat = "identity", width = 0.5, position = position_dodge(width=.9))
+```

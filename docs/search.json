@@ -369,5 +369,26 @@
     "title": "9  Read MS datasets into R",
     "section": "9.2 Import all data from an Agilent MassHunter CSV file",
     "text": "9.2 Import all data from an Agilent MassHunter CSV file\nDetail MassHunter Quant.\n\n\ndata_file_path <- here::here(\"data/Testdata_Lipidomics_MHQuant_Detailed_V2.csv\")\nd_all_long <- SLINGtools::read_MassHunterCSV(data_file_path)\n\nReading 'Testdata_Lipidomics_MHQuant_Detailed_V2.csv' ... \n\nindexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [====--] 2.15GB/s, eta:  0s\nindexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [====] 361.72MB/s, eta:  0s\n                                                                                \nImported  215 samples with 428 transitions \n\nprint(d_all_long)\n\n# A tibble: 92,020 × 14\n   DataFileName     DataName SampleType AcqTimeStamp        VialPosition Feature\n   <chr>            <chr>    <chr>      <dttm>              <chr>        <chr>  \n 1 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 14:0\n 2 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 15:0\n 3 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 16:0\n 4 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 16:1\n 5 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 16:2\n 6 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 17:0\n 7 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 17:1\n 8 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 18:0\n 9 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 18:1\n10 001_EQC_TQC pre… 001_EQC… EQC        2018-04-12 18:28:00 Vial 2       CE 18:…\n# … with 92,010 more rows, and 8 more variables: IonPolarity <fct>,\n#   PrecursorMZ <dbl>, ProductMZ <dbl>, CollisionEnergy <dbl>, RT <dbl>,\n#   Area <dbl>, FWHM <dbl>, MI <lgl>"
+  },
+  {
+    "objectID": "plotting_more.html#bar-chart-of-one-lipid-class",
+    "href": "plotting_more.html#bar-chart-of-one-lipid-class",
+    "title": "6  Plotting More",
+    "section": "6.6 Bar chart of one lipid class",
+    "text": "6.6 Bar chart of one lipid class\n\nd_sum_1 <- d_sum |> filter(lipidclass == \"LPC\")\n\nggplot(d_sum_1, aes(x = lipidclass, y = Conc, fill = Group)) + \n  geom_bar(stat = \"summary\", fun.y = \"mean\", position = 'dodge') +\n  geom_errorbar(stat = \"summary\", fun.data = \"mean_sdl\", fun.args = list(mult = 1), \n                width = 0.5, position = position_dodge(width=.9))\n\n#> Warning: Ignoring unknown parameters: fun.y"
+  },
+  {
+    "objectID": "plotting_more.html#bar-chart-with-all-lipid-classes",
+    "href": "plotting_more.html#bar-chart-with-all-lipid-classes",
+    "title": "6  Plotting More",
+    "section": "6.7 Bar chart with all lipid classes",
+    "text": "6.7 Bar chart with all lipid classes\n\nggplot(d_sum, aes(x = lipidclass, y = Conc, fill = Group)) + \n  geom_bar(stat = \"summary\", fun.y = \"mean\", position = 'dodge') +\n    geom_errorbar(stat = \"summary\", fun.data = \"mean_sdl\", fun.args = list(mult = 1), \n                  width = 0.5, position = position_dodge(width=.9))\n\n#> Warning: Ignoring unknown parameters: fun.y\n\n\n#> No summary function supplied, defaulting to `mean_se()`"
+  },
+  {
+    "objectID": "plotting_more.html#bar-chart-using-pre-calculated-means-and-sd",
+    "href": "plotting_more.html#bar-chart-using-pre-calculated-means-and-sd",
+    "title": "6  Plotting More",
+    "section": "6.8 Bar chart using pre-calculated means and SD",
+    "text": "6.8 Bar chart using pre-calculated means and SD\nThis example is using the table d_sum_grp with means and SD of all classes\n\nggplot(d_sum_grp, aes(x = lipidclass, y = conc_mean, fill = Group)) + \n  geom_bar(stat = \"identity\",  position = 'dodge') +\n  geom_errorbar(aes(ymin = conc_mean - conc_sd, ymax = conc_mean + conc_sd), \n                stat = \"identity\", width = 0.5, position = position_dodge(width=.9))"
   }
 ]
