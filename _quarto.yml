@@ -17,6 +17,8 @@ book:
       - import_data.qmd
       - tables.qmd
       - datawrangling.qmd
+      - plotting_basics.qmd
+      - plotting_more.qmd
       - dilution_series.qmd
       - multiple_models.qmd
     - part: workflows.qmd

@@ -1,0 +1,268 @@
+# Plotting Basics
+
+We explore plotting using dilution series data as an example
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+source("_common.R")
+library(knitr)
+
+```
+
+## Libraries
+
+The package `ggpmisc` will only be used once in this chapter. It provides additional functions for the annotating and plotting of fitted models
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+library(ggpmisc)
+```
+
+## Import Datasets
+
+We import a lipidomics dataset in a flat table with additinal columns indicating QC types, injection volumes, and dilution series number
+
+```{r}
+#| label: read-data
+#| echo: true
+#| message: false
+
+d_orig <- read_csv(here("data/Testdata_Lipidomics_flat_wide_annotated_V1.csv"))
+
+```
+
+```{r}
+#| label: tbl-data
+#| echo: false
+kable(head(d_orig, n = 6),digits = 3)
+```
+
+## Prepare Data
+
+```{r select-rename-columns}
+#| label: prepare-data
+#| echo: true
+#| message: false
+
+# Convert to long format
+d_long <- d_orig|> 
+  pivot_longer(cols = -DataFileName:-InjVol, 
+               names_to = "Lipid" , 
+               values_to = "Area")
+
+# Get a table with RQCs only and sort by Lipid
+d_rqc <- d_long |> 
+  filter(QCtype == "RQC") |> 
+  arrange(Lipid)
+
+#Have a look at the table using View(d_rqc)
+```
+
+## Plot a single curve
+
+```{r filter-tables}
+#| label: filter-1
+#| echo: true
+#| message: false
+
+#Select data from one single lipid from dilution curve
+d_forplot <- d_rqc  |> filter(Lipid == "LPC 16:1", CurveNo == 1)
+```
+
+```{r}
+#| label: tbl_data-2
+#| echo: false
+kable(d_forplot,digits = 3)
+```
+
+## Plotting one curve
+
+::: panel-tabset
+## ggplot2
+
+```{r select-rename-columns}
+#| label: plot-1
+#| echo: true
+#| message: false
+
+ggplot(d_forplot, aes(x = InjVol, y = Area)) + 
+  geom_point(size =5, color="red") +
+  #geom_line() +
+  scale_x_continuous(name = "Injection Volume", limits = c(-0.1, NA)) + 
+  labs(title = "Response of LPC 16:1", y = "Peak Area [CPS]") +
+  geom_smooth(method = "lm",se = TRUE, color = "blue", linetype = "dotted") +
+  theme_light()
+
+```
+
+## base R
+
+```{r select-rename-columns}
+#| label: plot-2
+#| echo: true
+#| message: false
+
+
+plot(
+  x = d_forplot$InjVol,
+  y = d_forplot$Area,
+  pch = 16,
+  cex = 1.5,
+  col = "red",
+  xlab = "Injection Volume",
+  ylab = "Peak Area [CPS]",
+  main = "Response of LPC 16:1"
+)
+abline(lm(Area ~ InjVol, data = d_forplot), col = "blue")
+
+# more work will be needed to plot confidence intervals
+
+```
+:::
+
+## Plotting multiple curves
+
+```{r}
+#| label: plot-3
+#| echo: true
+#| message: false
+
+#Select data from one single lipid from ALL dilution curves
+d_forplot_2 <- d_rqc  |> filter(Lipid == "LPC 16:1")
+
+ggplot(d_forplot_2, aes(x = InjVol, y = Area, color = factor(CurveNo))) + 
+  geom_point(size =5) +
+  scale_x_continuous(name = "Injection Volume", limits = c(0, NA)) + 
+  labs(title = "Response of LPC 16:1", y = "Peak Area [CPS]") +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dotted") +
+  theme_light()
+```
+
+## Faceted plot from different lipids of one curve
+
+```{r}
+#| label: plot-4
+#| echo: true
+#| message: false
+
+#Select data from all LPCs from  dilution curve 1
+d_forplot_3 <- d_rqc  |> filter(str_detect(Lipid, "LPC 2"), CurveNo == 2)
+
+ggplot(d_forplot_3, aes(x = InjVol, y = Area, color = factor(CurveNo))) + 
+  geom_point(size = 2) +
+  scale_x_continuous(name = "Injection Volume", limits = c(0, NA)) + 
+  labs(title = "Response Curves", y = "Peak Area [CPS]") +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dotted", size = 0.6) +
+  facet_wrap(~Lipid, scales = "free") +
+  theme_light(base_size = 8)
+
+```
+
+## Add $R^2$ to the plots
+
+```{r}
+#| label: plot-5
+#| echo: true
+#| message: false
+
+# Plot
+ggplot(data = d_forplot_3, aes(x = InjVol, y = Area, 
+                               group = factor(CurveNo))) +
+  stat_poly_line() +
+  stat_poly_eq(
+    aes(
+      label = after_stat(rr.label),
+      color = if_else(after_stat(r.squared) < 0.96, "red", "black")
+    ),
+  size = 2.4,
+  lineheight = 1111.5) +
+  scale_color_identity() +
+  scale_y_continuous(limits = c(0, NA)) +
+  facet_wrap( ~ Lipid, scales = "free") +
+  geom_point() + theme_light(base_size = 6)
+
+```
+
+## Faceted plot from different lipids of ALL curves
+
+```{r}
+#| label: plot-6
+#| echo: true
+#| message: false
+
+#Select data from all LPCs from  dilution curve 1
+d_forplot_4 <- d_rqc  |> filter(str_detect(Lipid, "LPC 2"))
+
+ggplot(d_forplot_4, aes(x = InjVol, y = Area, 
+                        color = factor(CurveNo))) + 
+  geom_point(size = 2) +
+  scale_x_continuous(name = "Injection Volume", limits = c(0, NA)) + 
+  labs(title = "Response Curves", y = "Peak Area [CPS]") +
+  geom_smooth(method = "lm", se = FALSE, 
+              linetype = "dotted", size = 0.6) +
+  facet_wrap(~Lipid, scales = "free") +
+  theme_light(base_size = 8)
+```
+
+## Faceted plots over multiple pages
+
+One option is to use \`ggforce::facet_wrap_paginate()\` but this function can be slow and has some bugs with large datasets. Here an alternative way using \*purrr::map()\*
+
+```{r}
+#| label: plot-7
+#| echo: true
+#| message: false
+
+
+# Define function to plot 1 page
+plot_page <-
+  function(d, rows_page, columns_page) {
+    ggplot(data = d, aes(x = InjVol , y = Area, group = factor(CurveNo))) +
+      stat_poly_line() +
+      stat_poly_eq(aes(
+        label = after_stat(rr.label),
+        color = ifelse(after_stat(r.squared) < 0.80, "red", "darkgreen")
+      ), size = 1.4) +
+      scale_color_identity() +
+      scale_y_continuous(limits = c(0, NA)) +
+      facet_wrap(vars(Lipid),
+      scales = "free",
+      nrow = rows_page,
+      ncol = columns_page) +
+      geom_point() + theme_light(base_size = 6)
+  }
+
+# Select all LPCs
+d_forplot_5 <- d_rqc  |> filter(str_detect(Lipid, "LPC "), CurveNo == 2)
+
+# Interate through pages
+
+
+rows_page = 4
+columns_page = 5
+
+d_rqc_grp <- d_forplot_5 %>%
+  left_join(tibble(Lipid = unique(.$Lipid)) |>
+              mutate(grp = ceiling(row_number() / (rows_page * columns_page)))) %>%
+  group_by(grp) %>%
+  nest() %>%
+  mutate(plt = map(data, ~ plot_page(.,rows_page =  rows_page, columns_page =  5)))
+
+# Print pages 
+
+d_rqc_grp$plt
+
+# Save pages
+
+#pdf('pltALL.pdf', paper = "A4r")
+#d_rqc_grp$plt
+#dev.off()
+
+
+```

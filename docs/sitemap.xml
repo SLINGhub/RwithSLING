@@ -2,46 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://slinghub.github.io/RwithSLING/index.html</loc>
-    <lastmod>2022-06-16T07:26:58.120Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.516Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/intro.html</loc>
-    <lastmod>2022-06-16T07:26:44.062Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.532Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tutorials.html</loc>
-    <lastmod>2022-06-16T07:26:44.069Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.547Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/import_data.html</loc>
-    <lastmod>2022-06-16T07:26:44.076Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.562Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tables.html</loc>
-    <lastmod>2022-06-16T07:26:44.084Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.576Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/datawrangling.html</loc>
-    <lastmod>2022-06-16T07:26:44.093Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.592Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/plotting_basics.html</loc>
+    <lastmod>2022-06-23T05:52:39.621Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/plotting_more.html</loc>
+    <lastmod>2022-06-23T05:52:39.669Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/dilution_series.html</loc>
-    <lastmod>2022-06-16T07:26:44.105Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.706Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/multiple_models.html</loc>
-    <lastmod>2022-06-16T07:26:44.116Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.728Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/workflows.html</loc>
-    <lastmod>2022-06-16T07:26:44.124Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.751Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/import_MSdatasets.html</loc>
-    <lastmod>2022-06-16T07:26:44.131Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.766Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/references.html</loc>
-    <lastmod>2022-06-16T07:26:44.140Z</lastmod>
+    <lastmod>2022-06-23T05:52:39.785Z</lastmod>
   </url>
 </urlset>

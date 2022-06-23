@@ -1,0 +1,120 @@
+# Plotting More
+
+We explore plotting concentration data as box plots
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+source("_common.R")
+library(knitr)
+
+```
+
+## Libraries
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+
+```
+
+## Import Datasets
+
+We import a lipidomics dataset in a flat table with additinal columns indicating QC types, injection volumes, and dilution series number
+
+```{r}
+#| label: read-data
+#| echo: true
+#| message: false
+
+d_orig <- read_csv(here("data/Metabolites-1614644-supplementary.csv"))
+
+```
+
+```{r}
+#| label: tbl-data
+#| echo: false
+kable(head(d_orig, n = 6),digits = 3)
+```
+
+## Prepare Data
+
+```{r select-rename-columns}
+#| label: prepare-data
+#| echo: true
+#| message: false
+
+# Convert to long format
+d_long <- d_orig|> 
+  pivot_longer(cols = -SubjectID:-Group, 
+               names_to = "Lipid" , 
+               values_to = "Conc")
+
+
+d_annot <- d_long |> separate(col = Lipid, into = c("lipidclass", "chain"), sep = " ", remove = FALSE) 
+
+
+#Have a look at the table using View(d_rqc)
+```
+
+## Sum up lipids per class
+
+```{r filter-tables}
+#| label: sum-lipids
+#| echo: true
+#| message: false
+
+d_sum <- d_annot |> 
+  group_by(SubjectID, Group, lipidclass) |> 
+  summarise(Conc = sum(Conc))
+```
+
+```{r}
+#| label: tbl_data-2
+#| echo: false
+kable(head(d_sum, n = 6),digits = 3)
+```
+## Mean and SD per Class and Group
+
+```{r filter-tables}
+#| label: sum-lipids-more
+#| echo: true
+#| message: false
+
+d_sum_grp <- d_sum |> 
+  group_by(Group, lipidclass) |> 
+  summarise(conc_mean = mean(Conc),
+            conc_sd = sd(Conc))
+```
+```{r}
+#| label: tbl_data-3
+#| echo: false
+kable(head(d_sum_grp, n = 6),digits = 3)
+```
+
+
+## Plotting one curve
+
+```{r select-rename-columns}
+#| label: plot-1
+#| echo: true
+#| message: false
+
+d_sum_1 <- d_sum |> filter(lipidclass == "LPC")
+
+ggplot(d_sum_1, aes(x = lipidclass, y = Conc, fill = Group)) + 
+  geom_bar(stat = "summary", fun.y = "mean", position = 'dodge') +
+  geom_errorbar(stat = "summary", width = 0.5, position = 'dodge')
+
+d_sum_2 <- d_sum 
+
+ggplot(d_sum_1, aes(x = lipidclass, y = Conc, fill = Group)) + 
+  geom_bar(stat = "summary", fun.y = "mean", position = 'dodge') +
+  geom_errorbar(stat = "summary", width = 0.5, position = 'dodge')
+
+```
+

@@ -19,6 +19,7 @@ library(here)
 library(tidyverse)
 library(SLINGtools)
 library(broom)
+library(ggrepel)
 
 ```
 
@@ -131,7 +132,7 @@ d_plot <- d_res_lipids |>
   arrange(signif)
 ```
 
-Plot estimates of all lipid species, grouped by lipid class, highlighting significant species in red and label them by the FA chain. 
+Plot estimates of all lipid species, grouped by lipid class, highlighting significant species in red and label them by the FA chain.
 
 ```{r}
 #| label: forestplot
