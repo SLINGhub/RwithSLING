@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.426">
+<meta name="generator" content="quarto-0.9.309">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>RwithSLING - 9&nbsp; Read MS datasets into R</title>
+<title>RwithSLING - 10&nbsp; Read MS datasets into R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,6 +87,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
+<link href="./references.html" rel="next">
+<link href="./workflows.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -121,14 +123,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-sidebar floating">
-
+<body class="floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -200,12 +201,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box plots with stats of a full dataset</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
   </div>
 </li>
     </ul>
@@ -218,6 +224,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </a>
     </div>
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  </div>
+</li>
     </ul>
   </li>
         <li class="sidebar-item">
@@ -234,8 +245,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#import-peak-areas-from-agilent-masshunter-csv-file" id="toc-import-peak-areas-from-agilent-masshunter-csv-file" class="nav-link active" data-scroll-target="#import-peak-areas-from-agilent-masshunter-csv-file"> <span class="header-section-number">9.1</span> Import peak areas from Agilent MassHunter CSV file</a></li>
-  <li><a href="#import-all-data-from-an-agilent-masshunter-csv-file" id="toc-import-all-data-from-an-agilent-masshunter-csv-file" class="nav-link" data-scroll-target="#import-all-data-from-an-agilent-masshunter-csv-file"> <span class="header-section-number">9.2</span> Import all data from an Agilent MassHunter CSV file</a></li>
+  <li><a href="#import-peak-areas-from-agilent-masshunter-csv-file" id="toc-import-peak-areas-from-agilent-masshunter-csv-file" class="nav-link active" data-scroll-target="#import-peak-areas-from-agilent-masshunter-csv-file"> <span class="header-section-number">10.1</span> Import peak areas from Agilent MassHunter CSV file</a></li>
+  <li><a href="#import-all-data-from-an-agilent-masshunter-csv-file" id="toc-import-all-data-from-an-agilent-masshunter-csv-file" class="nav-link" data-scroll-target="#import-all-data-from-an-agilent-masshunter-csv-file"> <span class="header-section-number">10.2</span> Import all data from an Agilent MassHunter CSV file</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/import_MSdatasets.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -244,7 +255,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></h1>
 </div>
 
 
@@ -262,8 +273,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>Pre-processed MS datasets refers to data exported from MS rawdata processing software, such as Agilent MassHunter, Sciex Multiquant, and open-source tools as MRMkit and Skyline. These datasets usually contain peak/signal intensities and associated data such as retention time, FWHM, as well as information about the sample.</p>
 <p>The R package <a href="https://github.com/SLINGhub/SLINGtools">SLINGtools</a> provided helper functions to import data files obtained from different tools.</p>
-<section id="import-peak-areas-from-agilent-masshunter-csv-file" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="import-peak-areas-from-agilent-masshunter-csv-file"><span class="header-section-number">9.1</span> Import peak areas from Agilent MassHunter CSV file</h2>
+<section id="import-peak-areas-from-agilent-masshunter-csv-file" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="import-peak-areas-from-agilent-masshunter-csv-file"><span class="header-section-number">10.1</span> Import peak areas from Agilent MassHunter CSV file</h2>
 <p><img src="images/paste-B702CE09.png" class="img-fluid"></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SLINGtools)</span>
@@ -272,8 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading 'Testdata_Lipidomics_MHQuant_Detailed_V2.csv' ... 
 
-indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [===---] 2.15GB/s, eta:  0s
-indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [====] 607.82MB/s, eta:  0s
+indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [======] 2.15GB/s, eta:  0s
                                                                                 
 Imported  215 samples with 428 transitions </code></pre>
 </div>
@@ -302,8 +312,8 @@ Imported  215 samples with 428 transitions </code></pre>
 </div>
 </div>
 </section>
-<section id="import-all-data-from-an-agilent-masshunter-csv-file" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="import-all-data-from-an-agilent-masshunter-csv-file"><span class="header-section-number">9.2</span> Import all data from an Agilent MassHunter CSV file</h2>
+<section id="import-all-data-from-an-agilent-masshunter-csv-file" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="import-all-data-from-an-agilent-masshunter-csv-file"><span class="header-section-number">10.2</span> Import all data from an Agilent MassHunter CSV file</h2>
 <p>Detail <a href="https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software/data-analysis/quantitative-analysis">MassHunter Quant</a>.</p>
 <p><img src="images/paste-A1421EC0.png" class="img-fluid"></p>
 <div class="cell">
@@ -312,8 +322,7 @@ Imported  215 samples with 428 transitions </code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading 'Testdata_Lipidomics_MHQuant_Detailed_V2.csv' ... 
 
-indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [====--] 2.15GB/s, eta:  0s
-indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [====] 361.72MB/s, eta:  0s
+indexing Testdata_Lipidomics_MHQuant_Detailed_V2.csv [======] 2.15GB/s, eta:  0s
                                                                                 
 Imported  215 samples with 428 transitions </code></pre>
 </div>
@@ -342,7 +351,7 @@ Imported  215 samples with 428 transitions </code></pre>
 </section>
 
 </main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {
@@ -518,6 +527,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./workflows.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Workflows</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

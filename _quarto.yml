@@ -19,6 +19,7 @@ book:
       - datawrangling.qmd
       - plotting_basics.qmd
       - plotting_more.qmd
+      - dotplot_lipidomics.qmd
       - dilution_series.qmd
       - multiple_models.qmd
     - part: workflows.qmd

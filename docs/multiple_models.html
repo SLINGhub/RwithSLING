@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>RwithSLING - 8&nbsp; Multivariate Regression</title>
+<title>RwithSLING - 9&nbsp; Multivariate Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -201,12 +201,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box plots with stats of a full dataset</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
   </div>
 </li>
     </ul>
@@ -221,7 +226,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -240,11 +245,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">8.1</span> Libraries</a></li>
-  <li><a href="#import-datasets" id="toc-import-datasets" class="nav-link" data-scroll-target="#import-datasets"> <span class="header-section-number">8.2</span> Import Datasets</a></li>
-  <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data"> <span class="header-section-number">8.3</span> Prepare Data</a></li>
-  <li><a href="#run-regression-for-each-lipid" id="toc-run-regression-for-each-lipid" class="nav-link" data-scroll-target="#run-regression-for-each-lipid"> <span class="header-section-number">8.4</span> Run regression for each lipid</a></li>
-  <li><a href="#forest-plot" id="toc-forest-plot" class="nav-link" data-scroll-target="#forest-plot"> <span class="header-section-number">8.5</span> Forest Plot</a></li>
+  <li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">9.1</span> Libraries</a></li>
+  <li><a href="#import-datasets" id="toc-import-datasets" class="nav-link" data-scroll-target="#import-datasets"> <span class="header-section-number">9.2</span> Import Datasets</a></li>
+  <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data"> <span class="header-section-number">9.3</span> Prepare Data</a></li>
+  <li><a href="#run-regression-for-each-lipid" id="toc-run-regression-for-each-lipid" class="nav-link" data-scroll-target="#run-regression-for-each-lipid"> <span class="header-section-number">9.4</span> Run regression for each lipid</a></li>
+  <li><a href="#forest-plot" id="toc-forest-plot" class="nav-link" data-scroll-target="#forest-plot"> <span class="header-section-number">9.5</span> Forest Plot</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/multiple_models.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -253,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></h1>
 </div>
 
 
@@ -272,8 +277,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 
 </div>
-<section id="libraries" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">8.1</span> Libraries</h2>
+<section id="libraries" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">9.1</span> Libraries</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -282,15 +287,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="import-datasets" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="import-datasets"><span class="header-section-number">8.2</span> Import Datasets</h2>
+<section id="import-datasets" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="import-datasets"><span class="header-section-number">9.2</span> Import Datasets</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d_meta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/ISLS10_Part2_metadata.csv"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>d_wide <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/ISLS10_Part2_lipidomics_curated.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="prepare-data" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="prepare-data"><span class="header-section-number">8.3</span> Prepare Data</h2>
+<section id="prepare-data" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="prepare-data"><span class="header-section-number">9.3</span> Prepare Data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long format</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>d_long <span class="ot">&lt;-</span> d_wide <span class="sc">|&gt;</span></span>
@@ -306,8 +311,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">Conc_logz =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(Conc_log)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="run-regression-for-each-lipid" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="run-regression-for-each-lipid"><span class="header-section-number">8.4</span> Run regression for each lipid</h2>
+<section id="run-regression-for-each-lipid" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="run-regression-for-each-lipid"><span class="header-section-number">9.4</span> Run regression for each lipid</h2>
 <p>In this example a logistic regression is used. The output of <code>glm()</code> is converted to a tidy table using the <code>broom::tidy()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="st">"DM ~ Age + Gender + BMI + HbA1c + </span></span>
@@ -519,8 +524,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="forest-plot" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="forest-plot"><span class="header-section-number">8.5</span> Forest Plot</h2>
+<section id="forest-plot" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="forest-plot"><span class="header-section-number">9.5</span> Forest Plot</h2>
 <p>Prepare data for the plot: get lipid class from lipid names, join it to the data frame, calculate FDR, get upper/lower errors, and set “significant specie”</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lipid annotation</span></span>
@@ -753,7 +758,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./dilution_series.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
