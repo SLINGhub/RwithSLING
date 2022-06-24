@@ -449,38 +449,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plt =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">plot_one_page</span>(.,<span class="at">n_row =</span> rows_page, <span class="at">n_col =</span> columns_page)))</span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>my_plots<span class="sc">$</span>plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [[1]]</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; 
-#&gt; [[2]]</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; 
-#&gt; [[3]]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as pdf</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="at">file =</span> <span class="st">"myplot.pdf"</span>, <span class="at">onefile =</span> <span class="cn">TRUE</span>, <span class="at">paper =</span> <span class="st">"A4r"</span>, <span class="at">width =</span> <span class="dv">11</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>my_plots<span class="sc">$</span>plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [[1]]</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; 
-#&gt; [[2]]</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; 
-#&gt; [[3]]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; png 
-#&gt;   2</code></pre>
-</div>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>my_plots<span class="sc">$</span>plt</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co"># as pdf</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co"># pdf(file = "myplot.pdf", onefile = TRUE, paper = "A4r", width = 11)</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co"># my_plots$plt</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co"># dev.off()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="dotplot_lipidomics_files/figure-html/plot-2-1.png" class="img-fluid" width="576"></p>
 </div>
