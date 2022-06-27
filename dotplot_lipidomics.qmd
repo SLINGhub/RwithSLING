@@ -1,6 +1,4 @@
-# Box plots with stats of a full dataset
-
-
+# Box/dot plots with Contrasts
 
 ```{r}
 #| label: setup
@@ -22,30 +20,30 @@ library(tidyverse)
 
 ```
 
-## Import and prepare dataset
+## Data Format
 
-We import a lipidomics dataset with lipid concentrations as a flat table. The table also contains the experiment group (Column `Group`) and the Sample ID (`SubjectID`) 
+The examples below require a tidy ('long-format') table with following columns: `SubjectID`, `Group`, `Lipid` and `Conc`. See chapters xxxx on how to prepare data in this format. In this example a test dataset is used that is converted into the tidy format.
+
 ```{r}
-#| label: read-data
+#| label: read-testdata
 #| echo: true
 #| message: false
 
-d_orig <- read_csv(here("data/Metabolites-1614644-supplementary.csv"))
-
-# Convert to long format
-d_long <- d_orig|> 
-  pivot_longer(cols = -SubjectID:-Group, names_to = "Lipid", values_to = "Conc")
+# Load and format test data
+d_long <- read_csv(here("data/Metabolites-1614644-supplementary.csv")) |> 
+  pivot_longer(cols = -c(SubjectID, Group), names_to = "Lipid", values_to = "Conc")
 
 ```
 
 ```{r}
 #| label: tbl-data
 #| echo: false
-kable(head(d_long, n = 6),digits = 3)
+#| tbl-cap: "Test data in tidy format"
+
+kable(head(d_long, n = 5),digits = 2, caption = NULL)
 ```
 
-
-## Box/dot plot with comparisons
+## Single faceted box/dot plot
 
 This is for one page (means one plot with n rows and m columns)
 
@@ -56,17 +54,19 @@ This is for one page (means one plot with n rows and m columns)
 #| fig-height: 10
 #| results: hide
 
-# Order the groups as you wish (otherwise it will be alphabetical)
+# OPTIONAL: order your groups as you wish (otherwise it will be alphabetical)
 d_long$Group <- factor(d_long$Group, 
                        levels = c("Healthy", "Cushing", "Hypothyroidism"))
 
-# Define your color for each group, 
-# can also get colors (e.g. #1b80a1) via e.g. https://g.co/kgs/DQH6Fr
+# OPTIONAL: define specific color for each group, 
 my_colors <- c(Healthy = "grey50", Cushing = "red", Hypothyroidism = "#1b80a1")
 
-# We just take the CE here, as we cannot plot 200 lipids in one page
+# OPTIONAL: Subset your data
 d_plot <- d_long |> filter(str_detect(Lipid, "CE"))
 
+
+# IMPORTANT: Change variable names to match your data (i.e. Group, Conc, Lipid)
+# IMPORTANT: Change group names and add/remove comparisons in `ggsignif()`
 ggplot(d_plot, aes(x = Group, y = Conc, color = Group,fill = Group)) + 
   geom_boxplot(alpha = 0.2, lwd=0.3, outlier.shape = NA) +
   geom_jitter(size = 0.5,width = 0.2) +
@@ -94,11 +94,9 @@ ggplot(d_plot, aes(x = Group, y = Conc, color = Group,fill = Group)) +
 
 ```
 
-## Box/dot plot with comparisons of a full dataset (multiple pages)
+## Multi-page faceted box/dot plot
 
-Here we make the same plots as before but over multiple pages/figures, like this we can make boxplots for each lipid
-If you adopt this for your own data, you need to set number of plots per page (number of rows and columns), also you need to update it with your group names and colors. 
-
+Here we make the same plots as before but over multiple pages/figures, like this we can make boxplots for each lipid If you adopt this for your own data, you need to set number of plots per page (number of rows and columns), also you need to update it with your group names and colors.
 
 ```{r select-rename-columns}
 #| label: plot-2
@@ -154,17 +152,26 @@ columns_page = 5
 
 my_plots <- d_plot %>%
   group_by(Lipid) |> 
-  mutate(grp_number = ceiling(cur_group_id()/ (rows_page * columns_page))) |> 
-  group_by(grp_number) %>%
+  mutate(page_no = ceiling(cur_group_id()/ (rows_page * columns_page))) |> 
+  group_by(page_no) %>%
   nest() %>%
   mutate(plt = map(data, ~ plot_one_page(.,n_row = rows_page, n_col = columns_page)))
 
 my_plots$plt
+```
 
-# as pdf
+Save multi-page plot a PDF
 
-# pdf(file = "myplot.pdf", onefile = TRUE, paper = "A4r", width = 11)
-# my_plots$plt
-# dev.off()
+```{r select-rename-columns}
+#| label: save-to-pdf
+#| echo: true
+#| message: false
+#| fig-height: 10
+#| results: hide
+#| eval: false
+
+pdf(file = "myplot.pdf", onefile = TRUE, paper = "A4r", width = 11)
+my_plots$plt
+dev.off()
 
 ```

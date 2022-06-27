@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>RwithSLING - 7&nbsp; Box plots with stats of a full dataset</title>
+<title>RwithSLING - 7&nbsp; Box/dot plots with Contrasts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box plots with stats of a full dataset</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -201,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box plots with stats of a full dataset</span></a>
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -246,9 +246,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">7.1</span> Libraries</a></li>
-  <li><a href="#import-and-prepare-dataset" id="toc-import-and-prepare-dataset" class="nav-link" data-scroll-target="#import-and-prepare-dataset"> <span class="header-section-number">7.2</span> Import and prepare dataset</a></li>
-  <li><a href="#boxdot-plot-with-comparisons" id="toc-boxdot-plot-with-comparisons" class="nav-link" data-scroll-target="#boxdot-plot-with-comparisons"> <span class="header-section-number">7.3</span> Box/dot plot with comparisons</a></li>
-  <li><a href="#boxdot-plot-with-comparisons-of-a-full-dataset-multiple-pages" id="toc-boxdot-plot-with-comparisons-of-a-full-dataset-multiple-pages" class="nav-link" data-scroll-target="#boxdot-plot-with-comparisons-of-a-full-dataset-multiple-pages"> <span class="header-section-number">7.4</span> Box/dot plot with comparisons of a full dataset (multiple pages)</a></li>
+  <li><a href="#data-format" id="toc-data-format" class="nav-link" data-scroll-target="#data-format"> <span class="header-section-number">7.2</span> Data Format</a></li>
+  <li><a href="#single-faceted-boxdot-plot" id="toc-single-faceted-boxdot-plot" class="nav-link" data-scroll-target="#single-faceted-boxdot-plot"> <span class="header-section-number">7.3</span> Single faceted box/dot plot</a></li>
+  <li><a href="#multi-page-faceted-boxdot-plot" id="toc-multi-page-faceted-boxdot-plot" class="nav-link" data-scroll-target="#multi-page-faceted-boxdot-plot"> <span class="header-section-number">7.4</span> Multi-page faceted box/dot plot</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/dotplot_lipidomics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -257,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box plots with stats of a full dataset</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></h1>
 </div>
 
 
@@ -283,22 +283,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="import-and-prepare-dataset" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="import-and-prepare-dataset"><span class="header-section-number">7.2</span> Import and prepare dataset</h2>
-<p>We import a lipidomics dataset with lipid concentrations as a flat table. The table also contains the experiment group (Column <code>Group</code>) and the Sample ID (<code>SubjectID</code>) ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d_orig <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/Metabolites-1614644-supplementary.csv"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long format</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>d_long <span class="ot">&lt;-</span> d_orig<span class="sc">|&gt;</span> </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>SubjectID<span class="sc">:-</span>Group, <span class="at">names_to =</span> <span class="st">"Lipid"</span>, <span class="at">values_to =</span> <span class="st">"Conc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>:::</p>
-<div class="cell tbl-parent quarto-layout-panel">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
+<section id="data-format" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="data-format"><span class="header-section-number">7.2</span> Data Format</h2>
+<p>The examples below require a tidy (‘long-format’) table with following columns: <code>SubjectID</code>, <code>Group</code>, <code>Lipid</code> and <code>Conc</code>. See chapters xxxx on how to prepare data in this format. In this example a test dataset is used that is converted into the tidy format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and format test data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>d_long <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/Metabolites-1614644-supplementary.csv"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(SubjectID, Group), <span class="at">names_to =</span> <span class="st">"Lipid"</span>, <span class="at">values_to =</span> <span class="st">"Conc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-data" class="anchored">
 <table class="table table-sm table-striped">
+<caption>Table 7.1: Test data in tidy format</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">SubjectID</th>
@@ -312,37 +309,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;">HB_01</td>
 <td style="text-align: left;">Healthy</td>
 <td style="text-align: left;">CE 16:0</td>
-<td style="text-align: right;">36.820</td>
+<td style="text-align: right;">36.82</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HB_01</td>
 <td style="text-align: left;">Healthy</td>
 <td style="text-align: left;">CE 17:0</td>
-<td style="text-align: right;">1.016</td>
+<td style="text-align: right;">1.02</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HB_01</td>
 <td style="text-align: left;">Healthy</td>
 <td style="text-align: left;">CE 17:1</td>
-<td style="text-align: right;">1.344</td>
+<td style="text-align: right;">1.34</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HB_01</td>
 <td style="text-align: left;">Healthy</td>
 <td style="text-align: left;">CE 18:0</td>
-<td style="text-align: right;">12.343</td>
+<td style="text-align: right;">12.34</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HB_01</td>
 <td style="text-align: left;">Healthy</td>
 <td style="text-align: left;">CE 18:1</td>
-<td style="text-align: right;">573.827</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">HB_01</td>
-<td style="text-align: left;">Healthy</td>
-<td style="text-align: left;">CE 18:2</td>
-<td style="text-align: right;">4783.391</td>
+<td style="text-align: right;">573.83</td>
 </tr>
 </tbody>
 </table>
@@ -350,52 +341,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="boxdot-plot-with-comparisons" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="boxdot-plot-with-comparisons"><span class="header-section-number">7.3</span> Box/dot plot with comparisons</h2>
+<section id="single-faceted-boxdot-plot" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="single-faceted-boxdot-plot"><span class="header-section-number">7.3</span> Single faceted box/dot plot</h2>
 <p>This is for one page (means one plot with n rows and m columns)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Order the groups as you wish (otherwise it will be alphabetical)</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># OPTIONAL: order your groups as you wish (otherwise it will be alphabetical)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>d_long<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(d_long<span class="sc">$</span>Group, </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Healthy"</span>, <span class="st">"Cushing"</span>, <span class="st">"Hypothyroidism"</span>))</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define your color for each group, </span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># can also get colors (e.g. #1b80a1) via e.g. https://g.co/kgs/DQH6Fr</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Healthy =</span> <span class="st">"grey50"</span>, <span class="at">Cushing =</span> <span class="st">"red"</span>, <span class="at">Hypothyroidism =</span> <span class="st">"#1b80a1"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># We just take the CE here, as we cannot plot 200 lipids in one page</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>d_plot <span class="ot">&lt;-</span> d_long <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(Lipid, <span class="st">"CE"</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># OPTIONAL: define specific color for each group, </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Healthy =</span> <span class="st">"grey50"</span>, <span class="at">Cushing =</span> <span class="st">"red"</span>, <span class="at">Hypothyroidism =</span> <span class="st">"#1b80a1"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># OPTIONAL: Subset your data</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>d_plot <span class="ot">&lt;-</span> d_long <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(Lipid, <span class="st">"CE"</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_plot, <span class="fu">aes</span>(<span class="at">x =</span> Group, <span class="at">y =</span> Conc, <span class="at">color =</span> Group,<span class="at">fill =</span> Group)) <span class="sc">+</span> </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">lwd=</span><span class="fl">0.3</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="fl">0.5</span>,<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Lipid, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">+</span> </span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="cn">NA</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">15</span>)))<span class="sc">+</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> my_colors) <span class="sc">+</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors) <span class="sc">+</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  ggsignif<span class="sc">::</span><span class="fu">geom_signif</span>(</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">comparisons =</span> <span class="fu">list</span>(</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">"Healthy"</span>, <span class="st">"Cushing"</span>) ,</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">"Cushing"</span>, <span class="st">"Hypothyroidism"</span>), </span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">"Healthy"</span>, <span class="st">"Hypothyroidism"</span>)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    ), </span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">test =</span> <span class="st">"t.test"</span>, </span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">test.args =</span> <span class="fu">list</span>(<span class="at">paired=</span><span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">map_signif_level =</span> <span class="fu">c</span>(<span class="st">"***"</span><span class="ot">=</span><span class="fl">0.001</span>, <span class="st">"**"</span><span class="ot">=</span><span class="fl">0.01</span>, <span class="st">"*"</span><span class="ot">=</span><span class="fl">0.05</span>, <span class="st">" "</span> <span class="ot">=</span> <span class="dv">1</span>),</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">margin_top =</span> <span class="fl">0.05</span>, <span class="at">step_increase =</span> <span class="fl">0.1</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">0.2</span>, </span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">tip_length =</span> <span class="fl">0.05</span>, <span class="at">textsize =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">7</span>) <span class="sc">+</span> </span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>( <span class="at">size=</span><span class="dv">6</span>, <span class="at">angle =</span> <span class="dv">45</span>,<span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position=</span><span class="st">"none"</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># IMPORTANT: Change variable names to match your data (i.e. Group, Conc, Lipid)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># IMPORTANT: Change group names and add/remove comparisons in `ggsignif()`</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_plot, <span class="fu">aes</span>(<span class="at">x =</span> Group, <span class="at">y =</span> Conc, <span class="at">color =</span> Group,<span class="at">fill =</span> Group)) <span class="sc">+</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">lwd=</span><span class="fl">0.3</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="fl">0.5</span>,<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Lipid, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="cn">NA</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">15</span>)))<span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> my_colors) <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors) <span class="sc">+</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  ggsignif<span class="sc">::</span><span class="fu">geom_signif</span>(</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">comparisons =</span> <span class="fu">list</span>(</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">"Healthy"</span>, <span class="st">"Cushing"</span>) ,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">"Cushing"</span>, <span class="st">"Hypothyroidism"</span>), </span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">"Healthy"</span>, <span class="st">"Hypothyroidism"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">test =</span> <span class="st">"t.test"</span>, </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">test.args =</span> <span class="fu">list</span>(<span class="at">paired=</span><span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">map_signif_level =</span> <span class="fu">c</span>(<span class="st">"***"</span><span class="ot">=</span><span class="fl">0.001</span>, <span class="st">"**"</span><span class="ot">=</span><span class="fl">0.01</span>, <span class="st">"*"</span><span class="ot">=</span><span class="fl">0.05</span>, <span class="st">" "</span> <span class="ot">=</span> <span class="dv">1</span>),</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">margin_top =</span> <span class="fl">0.05</span>, <span class="at">step_increase =</span> <span class="fl">0.1</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">0.2</span>, </span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">tip_length =</span> <span class="fl">0.05</span>, <span class="at">textsize =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">7</span>) <span class="sc">+</span> </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>( <span class="at">size=</span><span class="dv">6</span>, <span class="at">angle =</span> <span class="dv">45</span>,<span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position=</span><span class="st">"none"</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="dotplot_lipidomics_files/figure-html/plot-1-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
 </section>
-<section id="boxdot-plot-with-comparisons-of-a-full-dataset-multiple-pages" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="boxdot-plot-with-comparisons-of-a-full-dataset-multiple-pages"><span class="header-section-number">7.4</span> Box/dot plot with comparisons of a full dataset (multiple pages)</h2>
+<section id="multi-page-faceted-boxdot-plot" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="multi-page-faceted-boxdot-plot"><span class="header-section-number">7.4</span> Multi-page faceted box/dot plot</h2>
 <p>Here we make the same plots as before but over multiple pages/figures, like this we can make boxplots for each lipid If you adopt this for your own data, you need to set number of plots per page (number of rows and columns), also you need to update it with your group names and colors.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Order the groups as you wish (otherwise it will be alphabetical), if you are </span></span>
@@ -444,18 +437,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>my_plots <span class="ot">&lt;-</span> d_plot <span class="sc">%&gt;%</span></span>
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Lipid) <span class="sc">|&gt;</span> </span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grp_number =</span> <span class="fu">ceiling</span>(<span class="fu">cur_group_id</span>()<span class="sc">/</span> (rows_page <span class="sc">*</span> columns_page))) <span class="sc">|&gt;</span> </span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(grp_number) <span class="sc">%&gt;%</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">page_no =</span> <span class="fu">ceiling</span>(<span class="fu">cur_group_id</span>()<span class="sc">/</span> (rows_page <span class="sc">*</span> columns_page))) <span class="sc">|&gt;</span> </span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(page_no) <span class="sc">%&gt;%</span></span>
 <span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plt =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">plot_one_page</span>(.,<span class="at">n_row =</span> rows_page, <span class="at">n_col =</span> columns_page)))</span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>my_plots<span class="sc">$</span>plt</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co"># as pdf</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co"># pdf(file = "myplot.pdf", onefile = TRUE, paper = "A4r", width = 11)</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co"># my_plots$plt</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co"># dev.off()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>my_plots<span class="sc">$</span>plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="dotplot_lipidomics_files/figure-html/plot-2-1.png" class="img-fluid" width="576"></p>
 </div>
@@ -465,6 +452,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <p><img src="dotplot_lipidomics_files/figure-html/plot-2-3.png" class="img-fluid" width="576"></p>
 </div>
+</div>
+<p>Save multi-page plot a PDF</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="at">file =</span> <span class="st">"myplot.pdf"</span>, <span class="at">onefile =</span> <span class="cn">TRUE</span>, <span class="at">paper =</span> <span class="st">"A4r"</span>, <span class="at">width =</span> <span class="dv">11</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>my_plots<span class="sc">$</span>plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
