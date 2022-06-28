@@ -1,4 +1,4 @@
-# Bar chart of lipid classes with contrasts
+# Bar chart with contrasts
 
 Bar charts showing total composition per lipid class and statistical comparisons between groups are still often seen in the literature.
 
