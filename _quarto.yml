@@ -18,7 +18,7 @@ book:
       - tables.qmd
       - datawrangling.qmd
       - plotting_basics.qmd
-      - barchart_lipiomics.qmd
+      - barchart_lipidomics.qmd
       - dotplot_lipidomics.qmd
       - dilution_series.qmd
       - multiple_models.qmd
