@@ -30,15 +30,15 @@
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/plotting_more.html</loc>
-    <lastmod>2022-06-24T09:57:12.587Z</lastmod>
+    <lastmod>2022-06-28T09:36:13.171Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/dotplot_lipidomics.html</loc>
-    <lastmod>2022-06-27T04:15:55.519Z</lastmod>
+    <lastmod>2022-06-28T09:41:09.625Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/dilution_series.html</loc>
-    <lastmod>2022-06-27T04:14:48.921Z</lastmod>
+    <lastmod>2022-06-28T09:41:04.701Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/multiple_models.html</loc>
@@ -55,5 +55,9 @@
   <url>
     <loc>https://slinghub.github.io/RwithSLING/references.html</loc>
     <lastmod>2022-06-24T09:57:12.650Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/barchart_lipiomics.html</loc>
+    <lastmod>2022-06-28T09:41:07.535Z</lastmod>
   </url>
 </urlset>
