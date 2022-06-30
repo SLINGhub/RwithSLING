@@ -50,19 +50,13 @@ ggplot(data = cars, aes(x = speed, y = dist)) + geom_point()
 
 ## Important R data types
 
-+------------------+---------------+-------------------------+----------------------+
-| Type             | Short         | Description             | Example(s)           |
-+==================+===============+=========================+======================+
-| Numeric (double) | `<dbl>`       | Floating point number   | `3.14159`            |
-+------------------+---------------+-------------------------+----------------------+
-| Character        | `<char>`      | Character (text) string | `"S1P d18:1", "BQC"` |
-+------------------+---------------+-------------------------+----------------------+
-| Logical          | `<lgl>`       | True or False, 1 or 0   | `TRUE; FALSE`        |
-+------------------+---------------+-------------------------+----------------------+
-| Integer          | `<int>`       | Number without digits   | `3L; 7011L; -13L`    |
-+------------------+---------------+-------------------------+----------------------+
-| Factor           | `<fct>`       | Categorical data        | `BQC; TQC; SPL`      |
-+------------------+---------------+-------------------------+----------------------+
+| Type             | Short    | Description             | Example(s)           |
+|------------------|----------|-------------------------|----------------------|
+| Numeric (double) | `<dbl>`  | Floating point number   | `3.14159`            |
+| Character        | `<char>` | Character (text) string | `"S1P d18:1", "BQC"` |
+| Logical          | `<lgl>`  | True or False, 1 or 0   | `TRUE; FALSE`        |
+| Integer          | `<int>`  | Number without digits   | `3L; 7011L; -13L`    |
+| Factor           | `<fct>`  | Categorical data        | `BQC; TQC; SPL`      |
 
 Moreover there are data and time types, i.e. date `<dt>`, time `<tm>` and datetime `<dttm>`
 

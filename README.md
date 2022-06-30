@@ -1,6 +1,5 @@
 # RwithSLING
 
-
 This is the repository for the book RwithSLING
 
 ## Code of Conduct
