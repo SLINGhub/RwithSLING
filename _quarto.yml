@@ -7,24 +7,30 @@ book:
   author: 
   - name: "Bo Burla"
     affiliation: "Singapore Lipidomics Incubator @ NUS"
-
   date: "5/13/2022"
+  
+  reader-mode: true
+  
   chapters:
     - index.qmd
+    
     - intro.qmd
+    
     - part: tutorials.qmd
       chapters: 
-      - import_data.qmd
-      - tables.qmd
-      - datawrangling.qmd
-      - plotting_basics.qmd
-      - barchart_lipidomics.qmd
-      - dotplot_lipidomics.qmd
-      - dilution_series.qmd
-      - multiple_models.qmd
+        - import_data.qmd
+        - tables.qmd
+        - datawrangling.qmd
+        - plotting_basics.qmd
+        - barchart_lipidomics.qmd
+        - dotplot_lipidomics.qmd
+        - dilution_series.qmd
+        - multiple_models.qmd
+        
     - part: workflows.qmd
       chapters: 
-      - import_MSdatasets.qmd
+        - import_MSdatasets.qmd
+        
     - references.qmd
 
   page-footer:
@@ -47,7 +53,8 @@ format:
         - cosmo
         - RwithSLING.scss
       dark: darkly
-      code-link: true
+    code-link: true
+    callout-appearance: simple
 
   pdf:
     documentclass: scrreprt
