@@ -87,7 +87,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
-<link href="./barchart_lipidomics.html" rel="next">
+<link href="./data_processing.html" rel="next">
 <link href="./datawrangling.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -197,22 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bar chart of lipid classes with contrasts</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
   </div>
 </li>
     </ul>
@@ -227,7 +212,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -254,8 +259,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#plotting-multiple-curves" id="toc-plotting-multiple-curves" class="nav-link" data-scroll-target="#plotting-multiple-curves"> <span class="header-section-number">5.6</span> Plotting multiple curves</a></li>
   <li><a href="#faceted-plot-from-different-lipids-of-one-curve" id="toc-faceted-plot-from-different-lipids-of-one-curve" class="nav-link" data-scroll-target="#faceted-plot-from-different-lipids-of-one-curve"> <span class="header-section-number">5.7</span> Faceted plot from different lipids of one curve</a></li>
   <li><a href="#add-r2-to-the-plots" id="toc-add-r2-to-the-plots" class="nav-link" data-scroll-target="#add-r2-to-the-plots"> <span class="header-section-number">5.8</span> Add <span class="math inline">\(R^2\)</span> to the plots</a></li>
-  <li><a href="#faceted-plot-from-different-lipids-of-all-curves" id="toc-faceted-plot-from-different-lipids-of-all-curves" class="nav-link" data-scroll-target="#faceted-plot-from-different-lipids-of-all-curves"> <span class="header-section-number">5.9</span> Faceted plot from different lipids of ALL curves</a></li>
+  <li><a href="#faceted-plot-from-different-lipids-of-all-curves" id="toc-faceted-plot-from-different-lipids-of-all-curves" class="nav-link" data-scroll-target="#faceted-plot-from-different-lipids-of-all-curves"> <span class="header-section-number">5.9</span> Faceted plot from different lipids of all curves</a></li>
   <li><a href="#faceted-plots-over-multiple-pages" id="toc-faceted-plots-over-multiple-pages" class="nav-link" data-scroll-target="#faceted-plots-over-multiple-pages"> <span class="header-section-number">5.10</span> Faceted plots over multiple pages</a></li>
+  <li><a href="#save-multi-page-plot-a-pdf" id="toc-save-multi-page-plot-a-pdf" class="nav-link" data-scroll-target="#save-multi-page-plot-a-pdf"> <span class="header-section-number">5.11</span> Save multi-page plot a PDF</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/plotting_basics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -3949,7 +3955,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 <section id="faceted-plot-from-different-lipids-of-all-curves" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="faceted-plot-from-different-lipids-of-all-curves"><span class="header-section-number">5.9</span> Faceted plot from different lipids of ALL curves</h2>
+<h2 data-number="5.9" class="anchored" data-anchor-id="faceted-plot-from-different-lipids-of-all-curves"><span class="header-section-number">5.9</span> Faceted plot from different lipids of all curves</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select data from all LPCs from  dilution curve 1</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>d_forplot_4 <span class="ot">&lt;-</span> d_rqc  <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(Lipid, <span class="st">"LPC 2"</span>))</span>
@@ -4009,15 +4015,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Print pages </span></span>
 <span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>d_rqc_grp<span class="sc">$</span>plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [[1]]</code></pre>
-</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: Removed 101 rows containing missing values (geom_smooth).</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; 
-#&gt; [[2]]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: Removed 1 rows containing non-finite values (stat_poly_line).</code></pre>
@@ -4031,17 +4030,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save pages</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#pdf('pltALL.pdf', paper = "A4r")</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#d_rqc_grp$plt</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.off()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="plotting_basics_files/figure-html/plot-7-1.png" class="img-fluid" width="576"></p>
 </div>
 <div class="cell-output-display">
 <p><img src="plotting_basics_files/figure-html/plot-7-2.png" class="img-fluid" width="576"></p>
 </div>
+</div>
+</section>
+<section id="save-multi-page-plot-a-pdf" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="save-multi-page-plot-a-pdf"><span class="header-section-number">5.11</span> Save multi-page plot a PDF</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="at">file =</span> <span class="st">"dilutions.pdf"</span>, <span class="at">onefile =</span> <span class="cn">TRUE</span>, <span class="at">paper =</span> <span class="st">"A4r"</span>, <span class="at">width =</span> <span class="dv">11</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>d_rqc_grp<span class="sc">$</span>plt<span class="sc">$</span>plt</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -4231,8 +4233,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./barchart_lipidomics.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bar chart of lipid classes with contrasts</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data_processing.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

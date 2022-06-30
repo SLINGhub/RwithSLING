@@ -1,0 +1,78 @@
+# Post-processing/QC
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+source("_common.R")
+library(knitr)
+
+```
+
+## Libraries
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+#| results: hide
+library(here)
+library(tidyverse)
+```
+
+## Data Format
+
+The examples below require a tidy ('long-format') table with following columns: `DataFileName`, `Feature` and `Area`. See chapters xxxx on how to prepare data in this format. For this chapter we use the example data
+
+```{r}
+#| label: read-testdata
+#| echo: true
+#| message: false
+#| results: hide
+
+# Load and format test data
+mydataset_orig <- read_csv(here("data/Testdata_Lipidomics_flat_wide_V3.csv"))
+
+# Convert to long format
+mydataset <- mydataset_orig |> 
+  pivot_longer(-DataFileName, names_to = "Feature", values_to = "Area")
+```
+
+Alternatively, to import a MassHunter CSV file you can use `read_MassHunterCSV` from the `SLINGtools` (<https://slinghub.github.io/SLINGtools>) package
+
+```{r}
+#| label: read-testdataHM
+#| echo: true
+#| message: false
+#| results: hide
+
+mydataset <- SLINGtools::read_MassHunterCSV(
+  file = here("data/Testdata_MHQuant_Detailed_V3.csv"))
+```
+
+## Annotate
+
+```{r}
+
+d <- mydataset |> 
+  select(DataFileName, Lipid = Feature, Area) |> 
+  separate(col = DataFileName, 
+           into = c("ID", "QCtype", "SampleID"), 
+           sep = "_", 
+           remove = FALSE)
+
+```
+
+## RunScatter
+
+This is for one page (means one plot with n rows and m columns)
+
+```{r}
+#| label: plot-1
+#| echo: true
+#| message: false
+#| fig-height: 10
+#| results: hide
+
+
+```

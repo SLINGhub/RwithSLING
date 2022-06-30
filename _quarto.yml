@@ -18,12 +18,13 @@ book:
       - tables.qmd
       - datawrangling.qmd
       - plotting_basics.qmd
+      - data_processing.qmd
+    - part: workflows.qmd
+      chapters:
       - barchart_lipidomics.qmd
       - dotplot_lipidomics.qmd
       - dilution_series.qmd
       - multiple_models.qmd
-    - part: workflows.qmd
-      chapters: 
       - import_MSdatasets.qmd
     - references.qmd
 

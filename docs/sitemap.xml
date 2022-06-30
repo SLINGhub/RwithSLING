@@ -2,58 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://slinghub.github.io/RwithSLING/index.html</loc>
-    <lastmod>2022-06-28T10:05:49.202Z</lastmod>
+    <lastmod>2022-06-30T07:30:47.401Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/intro.html</loc>
-    <lastmod>2022-06-28T10:09:03.544Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.631Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tutorials.html</loc>
-    <lastmod>2022-06-28T10:05:40.982Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.639Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/import_data.html</loc>
-    <lastmod>2022-06-28T10:05:40.989Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.646Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tables.html</loc>
-    <lastmod>2022-06-28T10:05:40.997Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.655Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/datawrangling.html</loc>
-    <lastmod>2022-06-28T10:05:41.006Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.665Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/plotting_basics.html</loc>
-    <lastmod>2022-06-28T10:05:41.024Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.683Z</lastmod>
   </url>
   <url>
-    <loc>https://slinghub.github.io/RwithSLING/barchart_lipidomics.html</loc>
-    <lastmod>2022-06-28T10:15:18.855Z</lastmod>
-  </url>
-  <url>
-    <loc>https://slinghub.github.io/RwithSLING/dotplot_lipidomics.html</loc>
-    <lastmod>2022-06-28T10:09:10.767Z</lastmod>
-  </url>
-  <url>
-    <loc>https://slinghub.github.io/RwithSLING/dilution_series.html</loc>
-    <lastmod>2022-06-28T10:05:41.059Z</lastmod>
-  </url>
-  <url>
-    <loc>https://slinghub.github.io/RwithSLING/multiple_models.html</loc>
-    <lastmod>2022-06-28T10:05:41.068Z</lastmod>
+    <loc>https://slinghub.github.io/RwithSLING/data_processing.html</loc>
+    <lastmod>2022-06-30T07:30:43.703Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/workflows.html</loc>
-    <lastmod>2022-06-28T10:05:41.076Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.713Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/barchart_lipidomics.html</loc>
+    <lastmod>2022-06-30T07:30:43.722Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/dotplot_lipidomics.html</loc>
+    <lastmod>2022-06-30T07:30:43.735Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/dilution_series.html</loc>
+    <lastmod>2022-06-30T07:30:43.745Z</lastmod>
+  </url>
+  <url>
+    <loc>https://slinghub.github.io/RwithSLING/multiple_models.html</loc>
+    <lastmod>2022-06-30T07:30:43.755Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/import_MSdatasets.html</loc>
-    <lastmod>2022-06-28T10:05:41.083Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.763Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/references.html</loc>
-    <lastmod>2022-06-28T10:05:41.090Z</lastmod>
+    <lastmod>2022-06-30T07:30:43.771Z</lastmod>
   </url>
 </urlset>

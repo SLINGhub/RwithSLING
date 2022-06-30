@@ -160,7 +160,7 @@ my_plots <- d_plot %>%
 my_plots$plt
 ```
 
-Save multi-page plot a PDF
+## Save multi-page plot a PDF
 
 ```{r select-rename-columns}
 #| label: save-to-pdf

@@ -189,7 +189,7 @@ ggplot(data = d_forplot_3, aes(x = InjVol, y = Area,
 
 ```
 
-## Faceted plot from different lipids of ALL curves
+## Faceted plot from different lipids of all curves
 
 ```{r}
 #| label: plot-6
@@ -218,6 +218,7 @@ One option is to use \`ggforce::facet_wrap_paginate()\` but this function can be
 #| label: plot-7
 #| echo: true
 #| message: false
+#| results: hide
 
 
 # Define function to plot 1 page
@@ -258,11 +259,20 @@ d_rqc_grp <- d_forplot_5 %>%
 
 d_rqc_grp$plt
 
-# Save pages
+```
 
-#pdf('pltALL.pdf', paper = "A4r")
-#d_rqc_grp$plt
-#dev.off()
+## Save multi-page plot a PDF
 
+```{r select-rename-columns}
+#| label: save-to-pdf
+#| echo: true
+#| message: false
+#| fig-height: 10
+#| results: hide
+#| eval: false
+
+pdf(file = "dilutions.pdf", onefile = TRUE, paper = "A4r", width = 11)
+d_rqc_grp$plt$plt
+dev.off()
 
 ```

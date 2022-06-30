@@ -120,5 +120,3 @@ The results contain the combined estimates, errors, and *P* values for each term
 #| echo: false
 kable(head(d_res, n = 10),digits = 6)
 ```
-
-
