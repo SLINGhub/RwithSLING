@@ -1,3 +1,9 @@
+---
+bibliography: references.bib
+number-sections: true
+suppress-bibliography: false
+---
+
 # Import data into R
 
 ```{r}
@@ -8,103 +14,103 @@ source("_common.R")
 
 ## Introduction
 
-::: {.callout-note appearance="simple"}
-Verify the integrity of your data files and imported data - do not just assume all is fine
-:::
+Importing data is often the first step in a data analysis project. Quality and integrity of imported data is key for the subsequent analysis - *Quality In Quality Out*. A good overview of data import in R helps to ensure integrity, completeness and efficient import of data .
 
-Data analysis projects often start by importing data from files. It is easier to start with clearly structured, clean and consistent data files:
-
--   Tidy data: *observations* (e.g. samples) as *rows*, *variables* (e.g. compounds) as *columns*
--   First row contains column names
--   No nested columns and rows
--   No text before and after the table
-
-We will be using `readr` (from tidyverse) and `readxl` packages in this chapter:
+## Libraries
 
 ```{r}
-#| label: setup
+#| label: load-lib
+#| echo: true
 #| message: false
 library(here)
 library(tidyverse)
 library(readxl)
 ```
 
-## Read CSV files
-
-**Hint**: Inspect the summery provided by `read_csv()` to verify correct data types were assigned
+## Read CSV files {#sec-readcsv}
 
 ```{r}
-#| label: read-flat-CSV
-d_wide <- read_csv(file = here("data/Testdata_Lipidomics_flat_wide_V2.csv"), 
+#| label: read-csv
+#| echo: true
+#| message: false
+# Read a CSV file
+mydata <- read_csv(file = here("data/Testdata_wide.csv"), 
                    col_names = TRUE, 
-                   trim_ws = TRUE)
-
+                   trim_ws = TRUE,
+                   na = c("", "NA", "ND"))
 ```
 
-To remove white-spaces before and after text, set `trim_ws = TRUE`.
-
-## Read Excel tables
-
-Importing Excel tables can be done via the package s `readxl`. Note: you will need to define which sheet to import (e.g. below `Sheet1`).
+The console output summarizes the data types assigned to the different columns
 
 ```{r}
-#| label: read-flat-XLS
-library(readxl)
-d_wide <- read_xlsx(path = here::here("data/Testdata_Lipidomics_flat_wide_V2.xlsx"),
+#| label: read-csv-out
+#| echo: false
+#| message: true
+# Read a CSV file
+mydata <- read_csv(file = here("data/Testdata_wide.csv"), 
+                   col_names = TRUE, 
+                   trim_ws = TRUE,
+                   na = c("", "NA", "ND"))
+```
+
+**Output**
+
+A data frame (tibble)
+
+**Parameters**
+
+-   `col_names = TRUE` means the first row defines column names (default is TRUE)
+-   `trim_ws = TRUE` removes white-spaces before and after text (default is TRUE)
+-   `na` defines which text values are to be treated as missing values (NA). See also [Section @sec-missingvalues]
+
+## Read EXCEL sheets
+
+```{r}
+#| label: read-xls
+#| echo: true
+#| message: true
+# Read a sheet from an EXCEL xlsx file
+mydata <- read_xlsx(path = here::here("data/Testdata_wide.xlsx"),
                             sheet = "Sheet1",
                             trim_ws = TRUE, 
-                            na = c("ND"))
-print(d_wide)
-
+                            na = c("", "NA", "ND"), )
 ```
+**Output**
 
-::: callout-note
-## Verify integrity of imported data
+A data frame (tibble)
 
--   Do not assume imported data fine without having reason to do so
--   Ensure data types were correctly assigned
--   Ensure missing values are correctly handled
+**Parameters**
+
+-   `sheet` defines the Excel sheet to be imported
+-   For other parameters, see [Section @sec-readcsv]
+
+## Remarks {#sec-remarks}
+
+::: {.callout-note style="background-color: #EBEBEB;" appearance="simple"}
+Verify the integrity of imported data - do not just assume all is fine
 :::
 
-## Data Types
+### Date File Formats {#sec-dataformats}
+
+-   Use structured and consistent data files as input data
+-   First row should contain column names.
+-   Avoid rows before and after the table (e.g. descriptions or notes)
+-   *Rows* should contain *observations* (e.g. samples) and *columns* the *variables* (e.g. compounds)
+
+### Missing Values {#sec-missingvalues}
+
+-   `read_csv()` or `read_xlsx()` assign empty/missing values as `NA` (*Not Available*).
+-   Data files may contain specific text values for missing values (e.g.,"*ND"*, "*LOD"*, *"hemolytic")*. By default, `read_csv()` and `read_xlsx()` assign columns with such values as text (character) instead as numeric - even if there is just one such text value. You can use the `na` parameter to set text values to be interpreted as NA (see example)
+-   Column that contain only missing values will be assigned the data type `logical`
+
+### Data Types {#sec-datatypes}
 
 -   **Note:** `read_csv()` or `read_xlsx()` will by default ***guess*** the data type of each column.
 -   Typical data types are numbers (`dbl`), text (`chr`), logical (`lgl`) and factor (`fct`)
+-   If a column contains only one cell with text, the full column will be defined as text.
+-   Columns that contains only missing values will be assigned the data type `logical`
 -   You can define the column types already at import (see `?read_csv`).
 
-## Missing Values
+## More Readings
 
--   Data files often contain missing values, i.e. as empty cells.
--   `read_csv()` or `read_xlsx()` assign empty/missing values as `NA` (*Not Available*).
--   Missing values will in general not affect to data type guessed by `read_csv()`
--   Exception: Column contains only massing values, in this case it will be of type `logical`
--   However, if data files contain specific text values for missing values (e.g.,"*ND"*, "*LOD"*, *"na")*, then `read_csv()` or `read_xlsx()` assign the column by default as character (text)
-
-Results from e.g. clinical chemistry, frequently indicate not available data with a short text such as *"clotted"*, *"hemolytic"*, *"no received"* to explain why a value was not reported. What happens when we import such a file using `read_csv` with default parameters:
-
-```{r}
-#| label: read-flat-CSV-ND
-data_file_path <- here::here("data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv")
-d_wide <- readr::read_csv(data_file_path, trim_ws = TRUE)
-
-```
-
--   `read_csv()` was mislead by the presence of unknown text values and guessed the data types wrongly as `<char>` for some columns.
--   We also have two columns of the type `<lgl>`, which stand for logical (`TRUE`/`FALSE`). In this case all peak areas of CE 16:2 were missing, and `read_csv` has no way to guess the intended data type. In which case it chooses `<lgl>` will be chosen as default.
--   We will not be able to perform any calculations for columns that are text or logical.
--   We need to explicitly tell R which values to interpret as missing values (`NA`).
--   We can do by providing the `na` parameter a list of texts that should be interpreted as `NA` :
-
-```{r}
-#| label: read-flat-CSV-na
-data_file_path <- here::here("data/Testdata_Lipidomics_flat_wide_with_differentNA_V2.csv")
-d_wide <- readr::read_csv(data_file_path, 
-                          trim_ws = TRUE, 
-                          na = c("ND", "LOD"))
-print(d_wide)
-
-```
-
-## Other Considerations
-
--   White spaces or double spaces, White spaces before or after text fields can (and often will) cause issues downstream, therefore I suggest to trim whitespaces, e.g. by setting `trim_ws = TRUE`
+1.  [@r4ds_dataimport]

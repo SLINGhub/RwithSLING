@@ -57,9 +57,13 @@ mydataset <- SLINGtools::read_MassHunterCSV(
 d <- mydataset |> 
   select(DataFileName, Lipid = Feature, Area) |> 
   separate(col = DataFileName, 
-           into = c("ID", "QCtype", "SampleID"), 
+           into = c("RunID", "QCtype", "SampleName"),
+           convert = TRUE,
            sep = "_", 
-           remove = FALSE)
+           remove = FALSE) |> 
+  mutate(SampleName = str_replace(SampleName, ".d", "")) 
+
+
 
 ```
 
@@ -73,6 +77,25 @@ This is for one page (means one plot with n rows and m columns)
 #| message: false
 #| fig-height: 10
 #| results: hide
+
+
+d_plot <- d |>
+  filter(str_detect(string = Lipid, pattern = fixed("ISTD"))) |> 
+  filter(QCtype %in% c("SPL", "RQC", "TQC", "BQC", "PBLK"))
+
+d_plot$QCtype <- factor(d_plot$QCtype, levels = c("SPL", "RQC", "TQC", "BQC", "PBLK"))
+
+d_plot <- d_plot |> arrange(QCtype)
+
+qc_colors <- c("SPL"="grey50", "TQC" = "blue", "BQC" = "red", 
+               "RQC" = "grey80", PBLK="green", "NA" = "black")
+
+ggplot(data = d_plot,
+       mapping = aes(x=RunID, y=Area)) +
+  geom_point(aes(color = QCtype), size = 1.5) +
+  facet_wrap(vars(Lipid), scales = "free_y") + 
+  scale_color_manual(values = qc_colors ) +
+  theme_grey(base_size = 8)
 
 
 ```

@@ -1,0 +1,122 @@
+# Subset and Reorganize Columns
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("_common.R")
+```
+
+## Introduction
+
+A subset is a part of a larger dataset, i.e. selection of rows and columns of a data table.
+
+Functions from the Tidyverse packages (`dplyr` and `tidyr`) will be used in this tutorial. As example data a lipidomics dataset is being used here.
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+
+mydata <- read_csv(file = here("data/Testdata_wide.csv"))
+```
+
+## Select columns
+
+Subset by selecting specific columns using `dplyr::select()`. Use ticks `` ` ` `` when column names contain white spaces. To select a consecutive range of columns use the operator `:`, and to refer to the last column use `last_col()`.
+
+```{r}
+#| label: select-1
+#| echo: true
+#| message: false
+mysubset1 <- mydata |> select(DataFileName, SPLType, `CE 14:0`:`CE 22:6`) 
+mysubset2 <- mydata |> select(DataFileName, SPLType, `TG 48:0`:last_col()) 
+
+```
+
+## Remove columns
+
+To remove specific columns, add the `!` operator in front of the column name(s)
+
+```{r}
+#| label: select-2
+#| echo: true
+#| message: false
+mysubset <- mydata |> 
+  select(!VialPosition, !(`CE 14:0`:`CE 24:4`), !`TG 48:0`:last_col()) 
+
+```
+
+## Select columns with specific text patterns in their names
+
+To select columns with a specific string (text) in column names use the `dplyr` functions `contains()`, `starts_with()`, and `ends_with()`:
+
+```{r}
+#| label: select-3
+#| echo: true
+#| message: false
+
+mysubset <- mydata |> select(DataFileName, contains("ISTD")) 
+mysubset <- mydata |> select(DataFileName, starts_with("Cer"))
+mysubset <- mydata |> select(DataFileName, ends_with(":4")) 
+mysubset <- mydata |> select(DataFileName, contains("ISTD") & starts_with("PC"))
+
+# Using regular expressions
+mysubset <- mydata |> select(DataFileName, matches("ISTD|^PC")) 
+
+```
+
+To use [regular expressions](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html) for selecting columns use `matches()`:
+
+```{r}
+#| label: select-4
+#| echo: true
+#| message: false
+# select columns with ISTD or starting with PC in the column name.
+mysubset <- mydata |> select(DataFileName, matches("ISTD|^PC")) 
+```
+
+You can also use select with other functions returning TRUE/FALSE by using `where()`:
+
+```{r}
+#| label: select-5
+#| echo: true
+#| message: false
+
+mysubset <- mydata |> select(DataFileName, where(is.numeric)) 
+```
+
+## Reorder columns
+
+Use `relocate()` with the same helper functions as used with `select()`, e.g., `contains():`
+
+```{r}
+#| label: select-6
+#| echo: true
+#| message: false
+
+mydata2 <- mydata |> relocate(SPLType, DataFileName) 
+mydata2 <- mydata |> relocate(contains("ISTD"), .before = `CE 14:0`) 
+mydata2 <- mydata |> relocate(contains("ISTD"), .after = last_col())
+```
+
+Here an example to sort column names alphabetically
+
+```{r}
+#| label: select-7
+#| echo: true
+#| message: false
+
+mydata2 <- mydata |> relocate(order(colnames(mydata)))
+```
+
+You can also reorder when using `select()` function. Use `everything()` to add remaining columns
+
+```{r}
+#| label: select-8
+#| echo: true
+#| message: false
+
+mydata2 <- mydata |> select(SPLType, DataFileName, contains("ISTD"), everything()) 
+```

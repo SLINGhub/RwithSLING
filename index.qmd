@@ -1,10 +1,8 @@
 # Welcome {.unnumbered}
 
-This online book aims to provide an applied quick-start introduction into the processing, management, and analysis of mass spectrometry (MS)-based lipidomics datasets and associated study metadata using R.
+This online book aims to provide an applied quick-start introduction into the processing, management, and analysis of mass spectrometry (MS)-based lipidomics datasets and associated study metadata using R. This book was and is mainly written during the RwithSLING workshop sessions at SLING that started in 2022.
 
 The books is structured into two parts: (i) **Tutorials** introduce a few basic but applied concepts of using R , and (ii) **Recipes** provide workflows and sample code for data processing, and data analysis and visualization tasks frequently used in the lab.
-
-This book was and is mainly written during the RwithSLING workshop sessions at SLING that started in 2022.
 
 Feedback and contributions are very welcome!
 
