@@ -48,7 +48,7 @@ mysubset <- mydata |>
 
 ```
 
-## Select columns with specific text patterns in their names
+## Select columns with specific text in their names
 
 To select columns with a specific string (text) in column names use the `dplyr` functions `contains()`, `starts_with()`, and `ends_with()`:
 
@@ -67,14 +67,40 @@ mysubset <- mydata |> select(DataFileName, matches("ISTD|^PC"))
 
 ```
 
-To use [regular expressions](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html) for selecting columns use `matches()`:
+## Select columns using text patterns (regular expressions)
+
+To selecting column contain specific text patterns use `matches()`. This function uses [regular expressions](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html) to match column names. A few key elements in regular expression strings:
+
+-   To search for different strings: `|` (OR operator)
+-   Starts with: `^` Ends with: `$`
+-   Escape character: `\\`. Symbols as :\|\\/\[\] etc have a function in regular expression, if you want search for them you need add `\\` in front
+-   Selections `[ ]` are used to indicate any of the characters is allowed. Use `-` to indicate ranges, and\
+    `^` to exclude any of the characters. Examples: `[abcd]`, `[a-d]`, `[1234]`, `[1-4]`, `[^SI]`
+-   Dot `.` indicates any character, `\\d` any digit, `\\D` any non-digit, `\\s` any whitespace, `\\S` any non-whitespace
+-   Plus `+` means any, and `{`n`}` a defined number n of the preceding characters or symbols.\
+    Examples: `[1-9]+`, `[1-9]{6}`, `\\d{6}`, `\\s+`
 
 ```{r}
 #| label: select-4
 #| echo: true
 #| message: false
-# select columns with ISTD or starting with PC in the column name.
-mysubset <- mydata |> select(DataFileName, matches("ISTD|^PC")) 
+#| include: false
+# select PE and PC species (= match either PC or PE)
+mydata |> select(DataFileName, matches("^PC|^PE")) 
+
+# select species ending with :4 (e.g. CE 20:4). Need 'escape' the : using \\
+mydata |> select(DataFileName, matches("\\:4$")) 
+
+# select PC, PE, PI, PS and PG. Match a P at start and a selection of C,E,I,S,G
+mydata |> select(DataFileName, matches("^P[CEISG]"))
+
+# select all PC but not PC O- and PC P- (match PC start, a space, and a digit)
+mydata |> select(DataFileName, matches("^PC \\d"))
+
+# select all Cer with with FA chains C14-C18
+mydata |> select(DataFileName, matches("^Cer .+/1[4-8]"))
+mydata |> select(DataFileName, matches("^Cer d\\d{2}\\:[0-2]\\/1[4-8]"))
+
 ```
 
 You can also use select with other functions returning TRUE/FALSE by using `where()`:

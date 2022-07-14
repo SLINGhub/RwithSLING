@@ -84,7 +84,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./tables.html" rel="next">
+<link href="./regular_expressions.html" rel="next">
 <link href="./import_data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -176,22 +176,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
+  <a href="./regular_expressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with text patterns (regular expressions)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
+  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
   </div>
 </li>
     </ul>
@@ -206,27 +211,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
+  <a href="./pca_plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">PCA Plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
+  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -241,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
+  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
   </div>
 </li>
     </ul>
@@ -260,8 +270,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">3.1</span> Introduction</a></li>
   <li><a href="#select-columns" id="toc-select-columns" class="nav-link" data-scroll-target="#select-columns"> <span class="header-section-number">3.2</span> Select columns</a></li>
   <li><a href="#remove-columns" id="toc-remove-columns" class="nav-link" data-scroll-target="#remove-columns"> <span class="header-section-number">3.3</span> Remove columns</a></li>
-  <li><a href="#select-columns-with-specific-text-patterns-in-their-names" id="toc-select-columns-with-specific-text-patterns-in-their-names" class="nav-link" data-scroll-target="#select-columns-with-specific-text-patterns-in-their-names"> <span class="header-section-number">3.4</span> Select columns with specific text patterns in their names</a></li>
-  <li><a href="#reorder-columns" id="toc-reorder-columns" class="nav-link" data-scroll-target="#reorder-columns"> <span class="header-section-number">3.5</span> Reorder columns</a></li>
+  <li><a href="#select-columns-with-specific-text-in-their-names" id="toc-select-columns-with-specific-text-in-their-names" class="nav-link" data-scroll-target="#select-columns-with-specific-text-in-their-names"> <span class="header-section-number">3.4</span> Select columns with specific text in their names</a></li>
+  <li><a href="#select-columns-using-text-patterns-regular-expressions" id="toc-select-columns-using-text-patterns-regular-expressions" class="nav-link" data-scroll-target="#select-columns-using-text-patterns-regular-expressions"> <span class="header-section-number">3.5</span> Select columns using text patterns (regular expressions)</a></li>
+  <li><a href="#reorder-columns" id="toc-reorder-columns" class="nav-link" data-scroll-target="#reorder-columns"> <span class="header-section-number">3.6</span> Reorder columns</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/select_filter_data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -304,8 +315,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mysubset</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">VialPosition</span>, <span class="op">!</span><span class="op">(</span><span class="va">`CE 14:0`</span><span class="op">:</span><span class="va">`CE 24:4`</span><span class="op">)</span>, <span class="op">!</span><span class="va">`TG 48:0`</span><span class="op">:</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="select-columns-with-specific-text-patterns-in-their-names" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="select-columns-with-specific-text-patterns-in-their-names">
-<span class="header-section-number">3.4</span> Select columns with specific text patterns in their names</h2>
+</section><section id="select-columns-with-specific-text-in-their-names" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="select-columns-with-specific-text-in-their-names">
+<span class="header-section-number">3.4</span> Select columns with specific text in their names</h2>
 <p>To select columns with a specific string (text) in column names use the <code>dplyr</code> functions <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>, and <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mysubset</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">DataFileName</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"ISTD"</span><span class="op">)</span><span class="op">)</span> 
@@ -316,30 +327,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="co"># Using regular expressions</span>
 <span class="va">mysubset</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">DataFileName</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"ISTD|^PC"</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To use <a href="https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html">regular expressions</a> for selecting columns use <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches()</a></code>:</p>
-<div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># select columns with ISTD or starting with PC in the column name.</span>
-<span class="va">mysubset</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">DataFileName</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"ISTD|^PC"</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section><section id="select-columns-using-text-patterns-regular-expressions" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="select-columns-using-text-patterns-regular-expressions">
+<span class="header-section-number">3.5</span> Select columns using text patterns (regular expressions)</h2>
+<p>To selecting column contain specific text patterns use <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches()</a></code>. This function uses <a href="https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html">regular expressions</a> to match column names. A few key elements in regular expression strings:</p>
+<ul>
+<li>To search for different strings: <code>|</code> (OR operator)</li>
+<li>Starts with: <code>^</code> Ends with: <code>$</code>
+</li>
+<li>Escape character: <code>\\</code>. Symbols as :|\/[] etc have a function in regular expression, if you want search for them you need add <code>\\</code> in front</li>
+<li>Selections <code>[ ]</code> are used to indicate any of the characters is allowed. Use <code>-</code> to indicate ranges, and<br><code>^</code> to exclude any of the characters. Examples: <code>[abcd]</code>, <code>[a-d]</code>, <code>[1234]</code>, <code>[1-4]</code>, <code>[^SI]</code>
+</li>
+<li>Dot <code>.</code> indicates any character, <code>\\d</code> any digit, <code>\\D</code> any non-digit, <code>\\s</code> any whitespace, <code>\\S</code> any non-whitespace</li>
+<li>Plus <code>+</code> means any, and <code>{</code>n<code>}</code> a defined number n of the preceding characters or symbols.<br>
+Examples: <code>[1-9]+</code>, <code>[1-9]{6}</code>, <code>\\d{6}</code>, <code>\\s+</code>
+</li>
+</ul>
 <p>You can also use select with other functions returning TRUE/FALSE by using <code>where()</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mysubset</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">DataFileName</span>, <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mysubset</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">DataFileName</span>, <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="reorder-columns" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="reorder-columns">
-<span class="header-section-number">3.5</span> Reorder columns</h2>
+</section><section id="reorder-columns" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="reorder-columns">
+<span class="header-section-number">3.6</span> Reorder columns</h2>
 <p>Use <code><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate()</a></code> with the same helper functions as used with <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>, e.g., <code>contains():</code></p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">SPLType</span>, <span class="va">DataFileName</span><span class="op">)</span> 
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">SPLType</span>, <span class="va">DataFileName</span><span class="op">)</span> 
 <span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"ISTD"</span><span class="op">)</span>, .before <span class="op">=</span> <span class="va">`CE 14:0`</span><span class="op">)</span> 
 <span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"ISTD"</span><span class="op">)</span>, .after <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here an example to sort column names alphabetically</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can also reorder when using <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function. Use <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code> to add remaining columns</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">SPLType</span>, <span class="va">DataFileName</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"ISTD"</span><span class="op">)</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">SPLType</span>, <span class="va">DataFileName</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"ISTD"</span><span class="op">)</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -524,8 +545,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./tables.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./regular_expressions.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with text patterns (regular expressions)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

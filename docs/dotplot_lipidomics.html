@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.629">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>RwithSLING - 9&nbsp; Box/dot plots with Contrasts</title>
+<title>RwithSLING - 11&nbsp; Box/dot plots with Contrasts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span>
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -176,22 +176,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
+  <a href="./regular_expressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with text patterns (regular expressions)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
+  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
   </div>
 </li>
     </ul>
@@ -206,27 +211,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
+  <a href="./pca_plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">PCA Plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
+  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -241,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
+  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
   </div>
 </li>
     </ul>
@@ -257,17 +267,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">9.1</span> Libraries</a></li>
-  <li><a href="#data-format" id="toc-data-format" class="nav-link" data-scroll-target="#data-format"> <span class="header-section-number">9.2</span> Data Format</a></li>
-  <li><a href="#single-faceted-boxdot-plot" id="toc-single-faceted-boxdot-plot" class="nav-link" data-scroll-target="#single-faceted-boxdot-plot"> <span class="header-section-number">9.3</span> Single faceted box/dot plot</a></li>
-  <li><a href="#multi-page-faceted-boxdot-plot" id="toc-multi-page-faceted-boxdot-plot" class="nav-link" data-scroll-target="#multi-page-faceted-boxdot-plot"> <span class="header-section-number">9.4</span> Multi-page faceted box/dot plot</a></li>
-  <li><a href="#save-multi-page-plot-a-pdf" id="toc-save-multi-page-plot-a-pdf" class="nav-link" data-scroll-target="#save-multi-page-plot-a-pdf"> <span class="header-section-number">9.5</span> Save multi-page plot a PDF</a></li>
+<li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">11.1</span> Libraries</a></li>
+  <li><a href="#data-format" id="toc-data-format" class="nav-link" data-scroll-target="#data-format"> <span class="header-section-number">11.2</span> Data Format</a></li>
+  <li><a href="#single-faceted-boxdot-plot" id="toc-single-faceted-boxdot-plot" class="nav-link" data-scroll-target="#single-faceted-boxdot-plot"> <span class="header-section-number">11.3</span> Single faceted box/dot plot</a></li>
+  <li><a href="#multi-page-faceted-boxdot-plot" id="toc-multi-page-faceted-boxdot-plot" class="nav-link" data-scroll-target="#multi-page-faceted-boxdot-plot"> <span class="header-section-number">11.4</span> Multi-page faceted box/dot plot</a></li>
+  <li><a href="#save-multi-page-plot-a-pdf" id="toc-save-multi-page-plot-a-pdf" class="nav-link" data-scroll-target="#save-multi-page-plot-a-pdf"> <span class="header-section-number">11.5</span> Save multi-page plot a PDF</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/dotplot_lipidomics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span>
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span>
 </h1>
 </div>
 
@@ -283,14 +293,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell">
 
 </div>
-<section id="libraries" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="libraries">
-<span class="header-section-number">9.1</span> Libraries</h2>
+<section id="libraries" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="libraries">
+<span class="header-section-number">11.1</span> Libraries</h2>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data-format" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="data-format">
-<span class="header-section-number">9.2</span> Data Format</h2>
+</section><section id="data-format" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="data-format">
+<span class="header-section-number">11.2</span> Data Format</h2>
 <p>The examples below require a tidy (‘long-format’) table with following columns: <code>SubjectID</code>, <code>Group</code>, <code>Lipid</code> and <code>Conc</code>. See chapters xxxx on how to prepare data in this format. In this example a test dataset is used that is converted into the tidy format.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Load and format test data</span>
@@ -301,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <div id="tbl-data" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 9.1: Test data in tidy format</caption>
+<caption>Table 11.1: Test data in tidy format</caption>
 <thead><tr class="header">
 <th style="text-align: left;">SubjectID</th>
 <th style="text-align: left;">Group</th>
@@ -344,8 +354,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</section><section id="single-faceted-boxdot-plot" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="single-faceted-boxdot-plot">
-<span class="header-section-number">9.3</span> Single faceted box/dot plot</h2>
+</section><section id="single-faceted-boxdot-plot" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="single-faceted-boxdot-plot">
+<span class="header-section-number">11.3</span> Single faceted box/dot plot</h2>
 <p>This is for one page (means one plot with n rows and m columns)</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># OPTIONAL: order your groups as you wish (otherwise it will be alphabetical)</span>
@@ -389,8 +399,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="dotplot_lipidomics_files/figure-html/plot-1-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="multi-page-faceted-boxdot-plot" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="multi-page-faceted-boxdot-plot">
-<span class="header-section-number">9.4</span> Multi-page faceted box/dot plot</h2>
+</section><section id="multi-page-faceted-boxdot-plot" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="multi-page-faceted-boxdot-plot">
+<span class="header-section-number">11.4</span> Multi-page faceted box/dot plot</h2>
 <p>Here we make the same plots as before but over multiple pages/figures, like this we can make boxplots for each lipid If you adopt this for your own data, you need to set number of plots per page (number of rows and columns), also you need to update it with your group names and colors.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Order the groups as you wish (otherwise it will be alphabetical), if you are </span>
@@ -455,8 +465,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="dotplot_lipidomics_files/figure-html/plot-2-3.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="save-multi-page-plot-a-pdf" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="save-multi-page-plot-a-pdf">
-<span class="header-section-number">9.5</span> Save multi-page plot a PDF</h2>
+</section><section id="save-multi-page-plot-a-pdf" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="save-multi-page-plot-a-pdf">
+<span class="header-section-number">11.5</span> Save multi-page plot a PDF</h2>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html">pdf</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"myplot.pdf"</span>, onefile <span class="op">=</span> <span class="cn">TRUE</span>, paper <span class="op">=</span> <span class="st">"A4r"</span>, width <span class="op">=</span> <span class="fl">11</span><span class="op">)</span>
 <span class="va">my_plots</span><span class="op">$</span><span class="va">plt</span>
@@ -641,12 +651,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./barchart_lipidomics.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./dilution_series.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

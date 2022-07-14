@@ -1,0 +1,99 @@
+# PCA Plots
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+source("_common.R")
+library(knitr)
+
+```
+
+## Introduction
+
+This tutorial is based on a nice blog post by Claus Wilke: <https://clauswilke.com/blog/2020/09/07/pca-tidyverse-style/>
+
+Functions from the Tidyverse packages (`dplyr` , `tidyr`, `ggplot2`) and `broom` will be used in this tutorial. As example data a lipidomics dataset is imported that contains the lipid concentrations as columns and with one additional column indicating the experimental group
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+library(broom)
+library(cowplot)
+
+```
+
+```{r}
+#| label: read-data
+#| echo: true
+#| message: false
+
+d_long <- read_csv(here("data/Metabolites-1614644-supplementary.csv")) 
+```
+
+```{r}
+#| label: tbl-data
+#| echo: false
+#| tbl-cap: "Test dataset in tidy format"
+kable(head(d_long, n = 5),digits = 2)
+```
+
+## Transform and Scale the Data
+
+```{r}
+#| label: prcomp
+#| echo: true
+#| message: false
+
+pca_res <- d_long %>% 
+  select(where(is.numeric)) %>% # retain only numeric columns
+  log2() |> 
+  prcomp(scale = TRUE)
+
+```
+
+Compare this to plotting non-normalized concentrations
+
+```{r}
+#| label: pcaplot-1
+#| echo: false
+#| message: false
+
+# Use broom to make the data ggplot ready and include annotations
+pca_annot <- pca_res |> broom::augment(d_long)
+
+ggplot(data = pca_annot, aes(.fittedPC1, .fittedPC2, color = Group)) + 
+geom_point(size = 1.5) + 
+stat_ellipse(level = 0.95) +
+theme_light() +
+theme(aspect.ratio=1)
+
+```
+
+```{r}
+#| label: pcaplot-2
+#| echo: false
+#| message: false
+
+# Use broom to make the data ggplot ready and include annotations
+pca_annot <- pca_res |> broom::augment(d_long)
+
+pca_12 <- ggplot(data = pca_annot, aes(.fittedPC1, .fittedPC2, color = Group)) + 
+  geom_point(size = 1.5) + 
+  stat_ellipse(level = 0.95)+
+  theme_light() +
+  theme(aspect.ratio=1) + theme(legend.position = "none")
+
+
+pca_34 <- ggplot(data = pca_annot, aes(.fittedPC3, .fittedPC4, color = Group)) + 
+  geom_point(size = 1.5) + 
+  stat_ellipse(level = 0.95) +
+  theme_light() +
+theme(aspect.ratio=1) + theme(legend.position = "none")
+
+cowplot::plot_grid(pca_12, pca_34, nrow = 1, rel_widths = c(1,1), labels = c("A","B"))
+
+```

@@ -57,7 +57,7 @@ kable(head(d_sum, n = 5),digits = 2)
 
 The display of significance brackets of statistical comparisons without groups of a grouped bar chart needs a work- around when using the `ggsignf` package. In this case the significance levels and precise x and y coordinates have to be manually calculated and provided to `ggsignif::geom_signif`.
 
-In this example below we use lipid class concentration normalized to the reference group. 
+In this example below we use lipid class concentration normalized to the reference group.
 
 ```{r}
 #| label: plot-barchart

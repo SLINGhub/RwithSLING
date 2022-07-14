@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.629">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>RwithSLING - 6&nbsp; Plotting Basics</title>
+<title>RwithSLING - 7&nbsp; Plotting Basics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Plotting Basics</span>
+<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Basics</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -176,22 +176,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
+  <a href="./regular_expressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with text patterns (regular expressions)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
+  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
   </div>
 </li>
     </ul>
@@ -206,27 +211,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
+  <a href="./pca_plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">PCA Plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
+  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -241,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
+  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
   </div>
 </li>
     </ul>
@@ -257,23 +267,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">6.1</span> Libraries</a></li>
-  <li><a href="#import-datasets" id="toc-import-datasets" class="nav-link" data-scroll-target="#import-datasets"> <span class="header-section-number">6.2</span> Import Datasets</a></li>
-  <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data"> <span class="header-section-number">6.3</span> Prepare Data</a></li>
-  <li><a href="#plot-a-single-curve" id="toc-plot-a-single-curve" class="nav-link" data-scroll-target="#plot-a-single-curve"> <span class="header-section-number">6.4</span> Plot a single curve</a></li>
-  <li><a href="#plotting-one-curve" id="toc-plotting-one-curve" class="nav-link" data-scroll-target="#plotting-one-curve"> <span class="header-section-number">6.5</span> Plotting one curve</a></li>
-  <li><a href="#plotting-multiple-curves" id="toc-plotting-multiple-curves" class="nav-link" data-scroll-target="#plotting-multiple-curves"> <span class="header-section-number">6.6</span> Plotting multiple curves</a></li>
-  <li><a href="#faceted-plot-from-different-lipids-of-one-curve" id="toc-faceted-plot-from-different-lipids-of-one-curve" class="nav-link" data-scroll-target="#faceted-plot-from-different-lipids-of-one-curve"> <span class="header-section-number">6.7</span> Faceted plot from different lipids of one curve</a></li>
-  <li><a href="#add-r2-to-the-plots" id="toc-add-r2-to-the-plots" class="nav-link" data-scroll-target="#add-r2-to-the-plots"> <span class="header-section-number">6.8</span> Add <span class="math inline">\(R^2\)</span> to the plots</a></li>
-  <li><a href="#faceted-plot-from-different-lipids-of-all-curves" id="toc-faceted-plot-from-different-lipids-of-all-curves" class="nav-link" data-scroll-target="#faceted-plot-from-different-lipids-of-all-curves"> <span class="header-section-number">6.9</span> Faceted plot from different lipids of all curves</a></li>
-  <li><a href="#faceted-plots-over-multiple-pages" id="toc-faceted-plots-over-multiple-pages" class="nav-link" data-scroll-target="#faceted-plots-over-multiple-pages"> <span class="header-section-number">6.10</span> Faceted plots over multiple pages</a></li>
-  <li><a href="#save-multi-page-plot-a-pdf" id="toc-save-multi-page-plot-a-pdf" class="nav-link" data-scroll-target="#save-multi-page-plot-a-pdf"> <span class="header-section-number">6.11</span> Save multi-page plot a PDF</a></li>
+<li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">7.1</span> Libraries</a></li>
+  <li><a href="#import-datasets" id="toc-import-datasets" class="nav-link" data-scroll-target="#import-datasets"> <span class="header-section-number">7.2</span> Import Datasets</a></li>
+  <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data"> <span class="header-section-number">7.3</span> Prepare Data</a></li>
+  <li><a href="#plot-a-single-curve" id="toc-plot-a-single-curve" class="nav-link" data-scroll-target="#plot-a-single-curve"> <span class="header-section-number">7.4</span> Plot a single curve</a></li>
+  <li><a href="#plotting-one-curve" id="toc-plotting-one-curve" class="nav-link" data-scroll-target="#plotting-one-curve"> <span class="header-section-number">7.5</span> Plotting one curve</a></li>
+  <li><a href="#plotting-multiple-curves" id="toc-plotting-multiple-curves" class="nav-link" data-scroll-target="#plotting-multiple-curves"> <span class="header-section-number">7.6</span> Plotting multiple curves</a></li>
+  <li><a href="#faceted-plot-from-different-lipids-of-one-curve" id="toc-faceted-plot-from-different-lipids-of-one-curve" class="nav-link" data-scroll-target="#faceted-plot-from-different-lipids-of-one-curve"> <span class="header-section-number">7.7</span> Faceted plot from different lipids of one curve</a></li>
+  <li><a href="#add-r2-to-the-plots" id="toc-add-r2-to-the-plots" class="nav-link" data-scroll-target="#add-r2-to-the-plots"> <span class="header-section-number">7.8</span> Add <span class="math inline">\(R^2\)</span> to the plots</a></li>
+  <li><a href="#faceted-plot-from-different-lipids-of-all-curves" id="toc-faceted-plot-from-different-lipids-of-all-curves" class="nav-link" data-scroll-target="#faceted-plot-from-different-lipids-of-all-curves"> <span class="header-section-number">7.9</span> Faceted plot from different lipids of all curves</a></li>
+  <li><a href="#faceted-plots-over-multiple-pages" id="toc-faceted-plots-over-multiple-pages" class="nav-link" data-scroll-target="#faceted-plots-over-multiple-pages"> <span class="header-section-number">7.10</span> Faceted plots over multiple pages</a></li>
+  <li><a href="#save-multi-page-plot-a-pdf" id="toc-save-multi-page-plot-a-pdf" class="nav-link" data-scroll-target="#save-multi-page-plot-a-pdf"> <span class="header-section-number">7.11</span> Save multi-page plot a PDF</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/plotting_basics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Plotting Basics</span>
+<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Basics</span>
 </h1>
 </div>
 
@@ -290,16 +300,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 
 </div>
-<section id="libraries" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="libraries">
-<span class="header-section-number">6.1</span> Libraries</h2>
+<section id="libraries" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="libraries">
+<span class="header-section-number">7.1</span> Libraries</h2>
 <p>The package <code>ggpmisc</code> will only be used once in this chapter. It provides additional functions for the annotating and plotting of fitted models</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.r4photobiology.info/ggpmisc/">ggpmisc</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="import-datasets" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="import-datasets">
-<span class="header-section-number">6.2</span> Import Datasets</h2>
+</section><section id="import-datasets" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="import-datasets">
+<span class="header-section-number">7.2</span> Import Datasets</h2>
 <p>We import a lipidomics dataset in a flat table with additinal columns indicating QC types, injection volumes, and dilution series number</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">d_orig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/Testdata_Lipidomics_flat_wide_annotated_V1.csv"</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3757,8 +3767,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</section><section id="prepare-data" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="prepare-data">
-<span class="header-section-number">6.3</span> Prepare Data</h2>
+</section><section id="prepare-data" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="prepare-data">
+<span class="header-section-number">7.3</span> Prepare Data</h2>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Convert to long format</span>
 <span class="va">d_long</span> <span class="op">&lt;-</span> <span class="va">d_orig</span>|&gt; 
@@ -3773,8 +3783,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <span class="co">#Have a look at the table using View(d_rqc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="plot-a-single-curve" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="plot-a-single-curve">
-<span class="header-section-number">6.4</span> Plot a single curve</h2>
+</section><section id="plot-a-single-curve" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="plot-a-single-curve">
+<span class="header-section-number">7.4</span> Plot a single curve</h2>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#Select data from one single lipid from dilution curve</span>
 <span class="va">d_forplot</span> <span class="op">&lt;-</span> <span class="va">d_rqc</span>  |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Lipid</span> <span class="op">==</span> <span class="st">"LPC 16:1"</span>, <span class="va">CurveNo</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3843,8 +3853,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-</section><section id="plotting-one-curve" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="plotting-one-curve">
-<span class="header-section-number">6.5</span> Plotting one curve</h2>
+</section><section id="plotting-one-curve" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="plotting-one-curve">
+<span class="header-section-number">7.5</span> Plotting one curve</h2>
 <div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">ggplot2</a></li>
@@ -3887,8 +3897,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</section><section id="plotting-multiple-curves" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="plotting-multiple-curves">
-<span class="header-section-number">6.6</span> Plotting multiple curves</h2>
+</section><section id="plotting-multiple-curves" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="plotting-multiple-curves">
+<span class="header-section-number">7.6</span> Plotting multiple curves</h2>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#Select data from one single lipid from ALL dilution curves</span>
 <span class="va">d_forplot_2</span> <span class="op">&lt;-</span> <span class="va">d_rqc</span>  |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Lipid</span> <span class="op">==</span> <span class="st">"LPC 16:1"</span><span class="op">)</span>
@@ -3903,8 +3913,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="plotting_basics_files/figure-html/plot-3-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="faceted-plot-from-different-lipids-of-one-curve" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="faceted-plot-from-different-lipids-of-one-curve">
-<span class="header-section-number">6.7</span> Faceted plot from different lipids of one curve</h2>
+</section><section id="faceted-plot-from-different-lipids-of-one-curve" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="faceted-plot-from-different-lipids-of-one-curve">
+<span class="header-section-number">7.7</span> Faceted plot from different lipids of one curve</h2>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#Select data from all LPCs from  dilution curve 1</span>
 <span class="va">d_forplot_3</span> <span class="op">&lt;-</span> <span class="va">d_rqc</span>  |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">Lipid</span>, <span class="st">"LPC 2"</span><span class="op">)</span>, <span class="va">CurveNo</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span>
@@ -3920,8 +3930,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="plotting_basics_files/figure-html/plot-4-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="add-r2-to-the-plots" class="level2" data-number="6.8"><h2 data-number="6.8" class="anchored" data-anchor-id="add-r2-to-the-plots">
-<span class="header-section-number">6.8</span> Add <span class="math inline">\(R^2\)</span> to the plots</h2>
+</section><section id="add-r2-to-the-plots" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="add-r2-to-the-plots">
+<span class="header-section-number">7.8</span> Add <span class="math inline">\(R^2\)</span> to the plots</h2>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Plot</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d_forplot_3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">InjVol</span>, y <span class="op">=</span> <span class="va">Area</span>, 
@@ -3945,8 +3955,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="plotting_basics_files/figure-html/plot-5-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="faceted-plot-from-different-lipids-of-all-curves" class="level2" data-number="6.9"><h2 data-number="6.9" class="anchored" data-anchor-id="faceted-plot-from-different-lipids-of-all-curves">
-<span class="header-section-number">6.9</span> Faceted plot from different lipids of all curves</h2>
+</section><section id="faceted-plot-from-different-lipids-of-all-curves" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="faceted-plot-from-different-lipids-of-all-curves">
+<span class="header-section-number">7.9</span> Faceted plot from different lipids of all curves</h2>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#Select data from all LPCs from  dilution curve 1</span>
 <span class="va">d_forplot_4</span> <span class="op">&lt;-</span> <span class="va">d_rqc</span>  |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">Lipid</span>, <span class="st">"LPC 2"</span><span class="op">)</span><span class="op">)</span>
@@ -3964,8 +3974,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="plotting_basics_files/figure-html/plot-6-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="faceted-plots-over-multiple-pages" class="level2" data-number="6.10"><h2 data-number="6.10" class="anchored" data-anchor-id="faceted-plots-over-multiple-pages">
-<span class="header-section-number">6.10</span> Faceted plots over multiple pages</h2>
+</section><section id="faceted-plots-over-multiple-pages" class="level2" data-number="7.10"><h2 data-number="7.10" class="anchored" data-anchor-id="faceted-plots-over-multiple-pages">
+<span class="header-section-number">7.10</span> Faceted plots over multiple pages</h2>
 <p>One option is to use `ggforce::facet_wrap_paginate()` but this function can be slow and has some bugs with large datasets. Here an alternative way using *purrr::map()*</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Define function to plot 1 page</span>
@@ -4027,8 +4037,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="plotting_basics_files/figure-html/plot-7-2.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="save-multi-page-plot-a-pdf" class="level2" data-number="6.11"><h2 data-number="6.11" class="anchored" data-anchor-id="save-multi-page-plot-a-pdf">
-<span class="header-section-number">6.11</span> Save multi-page plot a PDF</h2>
+</section><section id="save-multi-page-plot-a-pdf" class="level2" data-number="7.11"><h2 data-number="7.11" class="anchored" data-anchor-id="save-multi-page-plot-a-pdf">
+<span class="header-section-number">7.11</span> Save multi-page plot a PDF</h2>
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html">pdf</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"dilutions.pdf"</span>, onefile <span class="op">=</span> <span class="cn">TRUE</span>, paper <span class="op">=</span> <span class="st">"A4r"</span>, width <span class="op">=</span> <span class="fl">11</span><span class="op">)</span>
 <span class="va">d_rqc_grp</span><span class="op">$</span><span class="va">plt</span><span class="op">$</span><span class="va">plt</span>
@@ -4213,12 +4223,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./datawrangling.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Select and plot</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Select and plot</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./data_processing.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

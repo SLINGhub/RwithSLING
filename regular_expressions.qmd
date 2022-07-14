@@ -1,0 +1,76 @@
+# Working with text patterns (regular expressions)
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("_common.R")
+```
+
+## Introduction
+
+Functions from the Tidyverse packages (`dplyr` and `tidyr`) will be used in this tutorial. As example data the lipid names of a lipidomics dataset is being.
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+
+mydata <- read_csv(file = here("data/Testdata_wide.csv")) |> names()
+```
+
+
+
+To selecting column contain specific text patterns use `matches()`. To select rows, replace and remove specific text in rows and cells use functions of the stringr package, which all start with str_.  using fu This function uses [regular expressions](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html) to match column names. A few key elements in regular expression strings:
+
+-   To search for different strings: `|` (OR operator)
+-   Starts with: `^` Ends with: `$`
+-   Escape character: `\\`. Symbols as :\|\\/\[\] etc have a function in regular expression, if you want search for them you need add `\\` in front
+-   Selections `[ ]` are used to indicate any of the characters is allowed. Use `-` to indicate ranges, and \
+    `^` to exclude any of the characters. Examples: `[abcd]`, `[a-d]`, `[1234]`, `[1-4]`, `[^SI]`
+-   Dot `.` indicates any character, `\\d` any digit, `\\D` any non-digit, `\\s` any whitespace, `\\S` any non-whitespace
+-   Plus `+` means any, and `{`n`}` a defined number n of the preceding characters or symbols. \
+    Examples: `[1-9]+`, `[1-9]{6}`, `\\d{6}`, `\\s+`
+
+```{r}
+#| label: select-4
+#| echo: true
+#| message: false
+#| include: false
+
+# select PE and PC species (= match either PC or PE)
+mydata |> str_subset("^PC|^PE")
+
+# select species ending with :4 (e.g. CE 20:4). Need 'escape' the : using \\
+mydata |> str_subset("\\:4$") 
+
+# select PC, PE, PI, PS and PG. Match a P at start and a selection of C,E,I,S,G
+mydata |> str_subset("^P[CEISG]")
+
+# select all PC but not PC O- and PC P- (match PC start, a space, and a digit)
+mydata |> str_subset("^PC \\d")
+
+# select all Cer with with FA chains C14-C18
+mydata |> str_subset("^Cer .+/1[4-8]")
+mydata |> str_subset("^Cer d\\d{2}\\:[0-2]\\/1[4-8]")
+
+```
+
+
+To test or explore your regular expressions the stringr function str_view() can be helpful..
+
+```{r}
+#| label: select-5
+#| echo: true
+#| message: false
+#| results: false
+
+
+# Shows all elements with matched items highlighted
+mydata |> str_view("^Cer d\\d{2}\\:[0-2]\\/1[4-8]", match = FALSE)
+
+# Shows only matched items with matches characters highlighted
+mydata |> str_view("^Cer d\\d{2}\\:[0-2]\\/1[4-8]", match = TRUE)
+```
+

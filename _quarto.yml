@@ -16,12 +16,14 @@ book:
       chapters: 
       - import_data.qmd
       - select_filter_data.qmd
+      - regular_expressions.qmd
       - tables.qmd
       - datawrangling.qmd
       - plotting_basics.qmd
       - data_processing.qmd
     - part: workflows.qmd
       chapters:
+      - pca_plots.qmd
       - barchart_lipidomics.qmd
       - dotplot_lipidomics.qmd
       - dilution_series.qmd

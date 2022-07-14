@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.629">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>RwithSLING - 10&nbsp; Regressions for many lipids</title>
+<title>RwithSLING - 12&nbsp; Regressions for many lipids</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span>
+<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -176,22 +176,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
+  <a href="./regular_expressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with text patterns (regular expressions)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
+  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
   </div>
 </li>
     </ul>
@@ -206,27 +211,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
+  <a href="./pca_plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">PCA Plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
+  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -241,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
+  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
   </div>
 </li>
     </ul>
@@ -257,17 +267,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">10.1</span> Libraries</a></li>
-  <li><a href="#overview-lm-and-broom-package" id="toc-overview-lm-and-broom-package" class="nav-link" data-scroll-target="#overview-lm-and-broom-package"> <span class="header-section-number">10.2</span> Overview lm and ‘broom’ package</a></li>
-  <li><a href="#import-datasets" id="toc-import-datasets" class="nav-link" data-scroll-target="#import-datasets"> <span class="header-section-number">10.3</span> Import Datasets</a></li>
-  <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data"> <span class="header-section-number">10.4</span> Prepare Data</a></li>
-  <li><a href="#run-regression-for-each-lipid" id="toc-run-regression-for-each-lipid" class="nav-link" data-scroll-target="#run-regression-for-each-lipid"> <span class="header-section-number">10.5</span> Run regression for each lipid</a></li>
+<li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">12.1</span> Libraries</a></li>
+  <li><a href="#overview-lm-and-broom-package" id="toc-overview-lm-and-broom-package" class="nav-link" data-scroll-target="#overview-lm-and-broom-package"> <span class="header-section-number">12.2</span> Overview lm and ‘broom’ package</a></li>
+  <li><a href="#import-datasets" id="toc-import-datasets" class="nav-link" data-scroll-target="#import-datasets"> <span class="header-section-number">12.3</span> Import Datasets</a></li>
+  <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data"> <span class="header-section-number">12.4</span> Prepare Data</a></li>
+  <li><a href="#run-regression-for-each-lipid" id="toc-run-regression-for-each-lipid" class="nav-link" data-scroll-target="#run-regression-for-each-lipid"> <span class="header-section-number">12.5</span> Run regression for each lipid</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/dilution_series.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span>
+<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span>
 </h1>
 </div>
 
@@ -283,16 +293,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell">
 
 </div>
-<section id="libraries" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="libraries">
-<span class="header-section-number">10.1</span> Libraries</h2>
+<section id="libraries" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="libraries">
+<span class="header-section-number">12.1</span> Libraries</h2>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.r4photobiology.info/ggpmisc/">ggpmisc</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="overview-lm-and-broom-package" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="overview-lm-and-broom-package">
-<span class="header-section-number">10.2</span> Overview lm and ‘broom’ package</h2>
+</section><section id="overview-lm-and-broom-package" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="overview-lm-and-broom-package">
+<span class="header-section-number">12.2</span> Overview lm and ‘broom’ package</h2>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">d_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>InjVol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>,<span class="fl">1</span><span class="op">)</span>,
                   Response  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">23</span>, <span class="fl">34</span>,<span class="fl">44</span>, <span class="fl">89</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> 
@@ -357,13 +367,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 2 InjVol         93.3      13.3      7.02  0.00216</code></pre>
 </div>
 </div>
-</section><section id="import-datasets" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="import-datasets">
-<span class="header-section-number">10.3</span> Import Datasets</h2>
+</section><section id="import-datasets" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="import-datasets">
+<span class="header-section-number">12.3</span> Import Datasets</h2>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">d_orig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/Testdata_Lipidomics_flat_wide_annotated_V1.csv"</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="prepare-data" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="prepare-data">
-<span class="header-section-number">10.4</span> Prepare Data</h2>
+</section><section id="prepare-data" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="prepare-data">
+<span class="header-section-number">12.4</span> Prepare Data</h2>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Convert to long format</span>
 
@@ -378,8 +388,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">QCtype</span> <span class="op">==</span> <span class="st">"RQC"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Lipid</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="run-regression-for-each-lipid" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="run-regression-for-each-lipid">
-<span class="header-section-number">10.5</span> Run regression for each lipid</h2>
+</section><section id="run-regression-for-each-lipid" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="run-regression-for-each-lipid">
+<span class="header-section-number">12.5</span> Run regression for each lipid</h2>
 <p>In this example a logistic regression is used. The output of <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> is converted to a tidy table using the <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy()</a></code> function.</p>
 <div class="cell" data-tbl-cap="Model results">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span><span class="st">"Area ~ InjVol"</span><span class="op">)</span>
@@ -766,12 +776,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./dotplot_lipidomics.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./multiple_models.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

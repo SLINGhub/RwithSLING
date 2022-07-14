@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.629">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>RwithSLING - 4&nbsp; Data Formats and Types in R</title>
+<title>RwithSLING - 5&nbsp; Data Formats and Types in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./datawrangling.html" rel="next">
-<link href="./select_filter_data.html" rel="prev">
+<link href="./regular_expressions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -59,7 +59,7 @@ ul.task-list{list-style: none;}
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span>
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -113,22 +113,27 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tables.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
+  <a href="./regular_expressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with text patterns (regular expressions)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  <a href="./datawrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Select and plot</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
+  <a href="./plotting_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_processing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
   </div>
 </li>
     </ul>
@@ -143,27 +148,32 @@ ul.task-list{list-style: none;}
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
+  <a href="./pca_plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">PCA Plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
+  <a href="./barchart_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Bar chart with contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
+  <a href="./dotplot_lipidomics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Box/dot plots with Contrasts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  <a href="./dilution_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regressions for many lipids</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
+  <a href="./multiple_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_MSdatasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Read MS datasets into R</span></a>
   </div>
 </li>
     </ul>
@@ -178,7 +188,7 @@ ul.task-list{list-style: none;}
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
+  <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
   </div>
 </li>
     </ul>
@@ -194,17 +204,17 @@ ul.task-list{list-style: none;}
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">4.1</span> Introduction</a></li>
-  <li><a href="#important-r-data-types" id="toc-important-r-data-types" class="nav-link" data-scroll-target="#important-r-data-types"> <span class="header-section-number">4.2</span> Important R data types</a></li>
-  <li><a href="#converting-data-types" id="toc-converting-data-types" class="nav-link" data-scroll-target="#converting-data-types"> <span class="header-section-number">4.3</span> Converting Data Types</a></li>
-  <li><a href="#important-r-data-formats" id="toc-important-r-data-formats" class="nav-link" data-scroll-target="#important-r-data-formats"> <span class="header-section-number">4.4</span> Important R data formats</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"> <span class="header-section-number">4.5</span> </a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">5.1</span> Introduction</a></li>
+  <li><a href="#important-r-data-types" id="toc-important-r-data-types" class="nav-link" data-scroll-target="#important-r-data-types"> <span class="header-section-number">5.2</span> Important R data types</a></li>
+  <li><a href="#converting-data-types" id="toc-converting-data-types" class="nav-link" data-scroll-target="#converting-data-types"> <span class="header-section-number">5.3</span> Converting Data Types</a></li>
+  <li><a href="#important-r-data-formats" id="toc-important-r-data-formats" class="nav-link" data-scroll-target="#important-r-data-formats"> <span class="header-section-number">5.4</span> Important R data formats</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"> <span class="header-section-number">5.5</span> </a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/tables.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span>
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Formats and Types in R</span>
 </h1>
 </div>
 
@@ -217,11 +227,11 @@ ul.task-list{list-style: none;}
   </div>
   
 
-</header><section id="introduction" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">4.1</span> Introduction</h2>
+</header><section id="introduction" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">5.1</span> Introduction</h2>
 <p>Like in Excel, data can be of different types.</p>
-</section><section id="important-r-data-types" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="important-r-data-types">
-<span class="header-section-number">4.2</span> Important R data types</h2>
+</section><section id="important-r-data-types" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="important-r-data-types">
+<span class="header-section-number">5.2</span> Important R data types</h2>
 <table class="table">
 <colgroup>
 <col style="width: 22%">
@@ -285,8 +295,8 @@ ul.task-list{list-style: none;}
 <td><code>2022-01-31 13:15</code></td>
 </tr>
 </tbody>
-</table></section><section id="converting-data-types" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="converting-data-types">
-<span class="header-section-number">4.3</span> Converting Data Types</h2>
+</table></section><section id="converting-data-types" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="converting-data-types">
+<span class="header-section-number">5.3</span> Converting Data Types</h2>
 <table class="table">
 <colgroup>
 <col style="width: 8%">
@@ -323,8 +333,8 @@ ul.task-list{list-style: none;}
 <td><code>lubridate::as_datetime("31-12-2022 13:15")</code></td>
 </tr>
 </tbody>
-</table></section><section id="important-r-data-formats" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="important-r-data-formats">
-<span class="header-section-number">4.4</span> Important R data formats</h2>
+</table></section><section id="important-r-data-formats" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="important-r-data-formats">
+<span class="header-section-number">5.4</span> Important R data formats</h2>
 <table class="table">
 <colgroup>
 <col style="width: 7%">
@@ -359,8 +369,8 @@ Tibble</td>
 <td><code>list(  Studysite = c("NUH", "SGH"),  Cohort = tibble(No = c(1,2),  Size = c(110,332)))</code></td>
 </tr>
 </tbody>
-</table></section><section id="section" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="section">
-<span class="header-section-number">4.5</span> </h2>
+</table></section><section id="section" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="section">
+<span class="header-section-number">5.5</span> </h2>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -539,13 +549,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./select_filter_data.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Subset and Reorganize Columns</span></span>
+      <a href="./regular_expressions.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with text patterns (regular expressions)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./datawrangling.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Select and plot</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Select and plot</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
