@@ -308,9 +308,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Examples: <code>[1-9]+</code>, <code>[1-9]{6}</code>, <code>\\d{6}</code>, <code>\\s+</code>
 </li>
 </ul>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># select PE and PC species (= match either PC or PE)</span>
+<span class="va">mydata</span> |&gt; <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="st">"^PC|^PE"</span><span class="op">)</span>
+
+<span class="co"># select species ending with :4 (e.g. CE 20:4). Need 'escape' the : using \\</span>
+<span class="va">mydata</span> |&gt; <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="st">"\\:4$"</span><span class="op">)</span> 
+
+<span class="co"># select PC, PE, PI, PS and PG. Match a P at start and a selection of C,E,I,S,G</span>
+<span class="va">mydata</span> |&gt; <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="st">"^P[CEISG]"</span><span class="op">)</span>
+
+<span class="co"># select all PC but not PC O- and PC P- (match PC start, a space, and a digit)</span>
+<span class="va">mydata</span> |&gt; <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="st">"^PC \\d"</span><span class="op">)</span>
+
+<span class="co"># select all Cer with with FA chains C14-C18</span>
+<span class="va">mydata</span> |&gt; <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="st">"^Cer .+/1[4-8]"</span><span class="op">)</span>
+<span class="va">mydata</span> |&gt; <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="st">"^Cer d\\d{2}\\:[0-2]\\/1[4-8]"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>To test or explore your regular expressions the stringr function str_view() can be helpful..</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Shows all elements with matched items highlighted</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Shows all elements with matched items highlighted</span>
 <span class="va">mydata</span> |&gt; <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_view.html">str_view</a></span><span class="op">(</span><span class="st">"^Cer d\\d{2}\\:[0-2]\\/1[4-8]"</span>, match <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co"># Shows only matched items with matches characters highlighted</span>

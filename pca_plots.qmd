@@ -59,11 +59,13 @@ Compare this to plotting non-normalized concentrations
 
 ```{r}
 #| label: pcaplot-1
-#| echo: false
+#| echo: true
 #| message: false
 
 # Use broom to make the data ggplot ready and include annotations
 pca_annot <- pca_res |> broom::augment(d_long)
+
+pca_contrib <- pca_res |> tidy(matrix = "eigenvalues")
 
 ggplot(data = pca_annot, aes(.fittedPC1, .fittedPC2, color = Group)) + 
 geom_point(size = 1.5) + 
@@ -75,8 +77,10 @@ theme(aspect.ratio=1)
 
 ```{r}
 #| label: pcaplot-2
-#| echo: false
+#| echo: true
 #| message: false
+#| fig-width: 6
+#| fig-height: 3
 
 # Use broom to make the data ggplot ready and include annotations
 pca_annot <- pca_res |> broom::augment(d_long)
@@ -85,15 +89,17 @@ pca_12 <- ggplot(data = pca_annot, aes(.fittedPC1, .fittedPC2, color = Group)) +
   geom_point(size = 1.5) + 
   stat_ellipse(level = 0.95)+
   theme_light() +
-  theme(aspect.ratio=1) + theme(legend.position = "none")
+  theme(legend.position = "none")
 
 
 pca_34 <- ggplot(data = pca_annot, aes(.fittedPC3, .fittedPC4, color = Group)) + 
   geom_point(size = 1.5) + 
   stat_ellipse(level = 0.95) +
   theme_light() +
-theme(aspect.ratio=1) + theme(legend.position = "none")
+theme(legend.position = "none")
 
-cowplot::plot_grid(pca_12, pca_34, nrow = 1, rel_widths = c(1,1), labels = c("A","B"))
+cowplot::plot_grid(pca_12, pca_34, nrow = 1, 
+                   rel_widths = c(1,1), 
+                   labels = c("A","B"))
 
 ```

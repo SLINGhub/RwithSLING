@@ -20,24 +20,22 @@ library(tidyverse)
 mydata <- read_csv(file = here("data/Testdata_wide.csv")) |> names()
 ```
 
-
-
-To selecting column contain specific text patterns use `matches()`. To select rows, replace and remove specific text in rows and cells use functions of the stringr package, which all start with str_.  using fu This function uses [regular expressions](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html) to match column names. A few key elements in regular expression strings:
+To selecting column contain specific text patterns use `matches()`. To select rows, replace and remove specific text in rows and cells use functions of the stringr package, which all start with str\_. using fu This function uses [regular expressions](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html) to match column names. A few key elements in regular expression strings:
 
 -   To search for different strings: `|` (OR operator)
 -   Starts with: `^` Ends with: `$`
 -   Escape character: `\\`. Symbols as :\|\\/\[\] etc have a function in regular expression, if you want search for them you need add `\\` in front
--   Selections `[ ]` are used to indicate any of the characters is allowed. Use `-` to indicate ranges, and \
+-   Selections `[ ]` are used to indicate any of the characters is allowed. Use `-` to indicate ranges, and\
     `^` to exclude any of the characters. Examples: `[abcd]`, `[a-d]`, `[1234]`, `[1-4]`, `[^SI]`
 -   Dot `.` indicates any character, `\\d` any digit, `\\D` any non-digit, `\\s` any whitespace, `\\S` any non-whitespace
--   Plus `+` means any, and `{`n`}` a defined number n of the preceding characters or symbols. \
+-   Plus `+` means any, and `{`n`}` a defined number n of the preceding characters or symbols.\
     Examples: `[1-9]+`, `[1-9]{6}`, `\\d{6}`, `\\s+`
 
 ```{r}
 #| label: select-4
 #| echo: true
 #| message: false
-#| include: false
+#| eval: false
 
 # select PE and PC species (= match either PC or PE)
 mydata |> str_subset("^PC|^PE")
@@ -57,7 +55,6 @@ mydata |> str_subset("^Cer d\\d{2}\\:[0-2]\\/1[4-8]")
 
 ```
 
-
 To test or explore your regular expressions the stringr function str_view() can be helpful..
 
 ```{r}
@@ -65,6 +62,7 @@ To test or explore your regular expressions the stringr function str_view() can 
 #| echo: true
 #| message: false
 #| results: false
+#| output: false
 
 
 # Shows all elements with matched items highlighted
@@ -73,4 +71,3 @@ mydata |> str_view("^Cer d\\d{2}\\:[0-2]\\/1[4-8]", match = FALSE)
 # Shows only matched items with matches characters highlighted
 mydata |> str_view("^Cer d\\d{2}\\:[0-2]\\/1[4-8]", match = TRUE)
 ```
-
