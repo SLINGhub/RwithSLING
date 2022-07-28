@@ -32,6 +32,7 @@ book:
     - part: appendices.qmd
       chapters:
       - data_types_formats.qmd
+      - regular_expressions.qmd
     - references.qmd
 
   page-footer:

@@ -103,3 +103,84 @@ cowplot::plot_grid(pca_12, pca_34, nrow = 1,
                    labels = c("A","B"))
 
 ```
+```{r}
+#| label: pcaplot-3
+#| echo: true
+#| message: false
+#| fig-width: 6
+#| fig-height: 3
+
+
+# PCA plot of merged
+
+
+ 
+m_log <- d_long  |> 
+  dplyr::select(-Group) |> 
+  dplyr::select(where(~!any(is.na(.)))) |> 
+  column_to_rownames("SubjectID") |> 
+  log2() 
+
+d_annot <- d_long |> 
+  select(SubjectID, Group)|> 
+  column_to_rownames("SubjectID")
+
+d_annot$Group <- factor(d_annot$Group)
+
+
+# get pca result with annotation
+pca_res <- PCAtools::pca(mat = m_log, center = TRUE, 
+                         metadata = d_annot , 
+                         scale = TRUE, 
+                         transposed = TRUE)
+```
+
+```{r}
+#| label: pcaplot-4
+#| echo: true
+#| message: false
+#| fig-width: 6
+#| fig-height: 6
+#| 
+  p_PCA <- PCAtools::biplot(
+    pca_res,
+    x = 1,
+    y = 2 ,
+    colby = "Group",
+    #colkey = colby_color,
+    legendPosition = 'right',
+    pointSize = 3,
+    lengthLoadingsArrowsFactor = 1.5,
+    lab = NULL,
+    sizeLoadingsNames = 2.5,
+    alphaLoadingsArrow = 0.1,
+    colLoadingsNames = "grey35",
+    showLoadings = TRUE,
+    ntopLoadings = 20,
+    drawConnectorsLoadings = T,
+    boxedLoadingsNames = T,
+    widthLoadingsArrows = 0.5,
+    widthConnectorsLoadings = 0.001,
+    max.overlaps = 33,
+    ellipseType = "t",
+    # xlim = c(-22, 25),
+    # ylim = c(-21, 20),
+    ellipse = TRUE,
+    ellipseLevel = 0.95,
+    ellipseLineSize = 1,
+    ellipseFill = TRUE,
+    ellipseAlpha = .05,
+    gridlines.minor = FALSE,
+  )
+
+p_PCA
+    # theme(
+    #   aspect.ratio = 1,
+    #   panel.grid.major = element_line(size = .5),
+    #   legend.position = c(.91, .93),
+    #   legend.title = element_blank(),
+    #   legend.background = element_rect(fill = alpha("white", 0.0), inherit.blank = TRUE)
+    # )
+
+```
+

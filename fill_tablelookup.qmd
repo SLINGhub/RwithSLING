@@ -1,0 +1,95 @@
+# Lookup 
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("_common.R")
+```
+
+## Introduction
+
+Functions from the Tidyverse packages (`dplyr` and `tidyr`) will be used in this tutorial. As example data the lipid names of a lipidomics dataset is being.
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+library(glue)
+
+# Make some test data
+
+my_database <- tibble(
+  ID = 1:7, 
+  lipid = c("CE 16:0", "Cer d18:1/16:0", "Hex3Cer d18:1/22:0", "LPC 17:0", "LPC O-18:0", "Cer 32:1;2", "LPE 20:0"),
+  MZ = c(642.6071, 538.5020,1108.8231, 510.355416, 510.391802, 510.488071, 510.355416)
+)
+
+my_results <- tribble(
+  ~FeatureNo, ~mz,
+  1, 1108.8241,
+  2, 642.607,
+  3, 642.657,
+  4, 642.87,
+  5, 538.5021,
+  6, 510.391802,
+  7, 510.390902,
+  8, 510.32822,
+  9, 123.32,
+  10, 0, 
+  11, NA,
+  12, -1313.12
+)
+
+my_database
+my_results
+```
+
+```{r}
+#| label: select-4
+#| echo: true
+#| message: false
+#| eval: false
+
+# Define function to search database (takes 1 value, returns 1 value, or NA + warnings)
+
+get_feature <- function(database, mz, ppm) {
+  if(mz <= 0 |is.na(mz)){
+    cat("Invalid mz\n")
+    return(NA)
+  }
+  
+  res <- database |> filter(MZ > mz - mz * ppm/1E6, MZ < mz + mz * ppm/1E6) |> pull(lipid)
+  
+  if (length(res) == 0){
+    print(glue("Feature m/z={mz} has no match"))
+    return(NA)
+  } else if (length(res) > 1) {
+    matches <- paste0(res, collapse = "; ")
+    print(glue("Feature m/z={mz} has {length(res)} matches: {matches}"))
+    return(NA)
+  }
+  res
+}
+
+# some first tests of the function
+
+get_feature(my_database, 1108.83, 1)
+get_feature(my_database, 1108.83, 11)
+get_feature(my_database, 1108.83, 1000000)
+get_feature(my_database, NA)
+get_feature(my_database, NA, 11)
+
+```
+
+```{r}
+
+# use function on a dataset
+
+my_annotated_results <- my_results |> 
+  rowwise() |>   # do not forget this 
+  mutate(lipid = get_feature(database = my_database, mz = mz, ppm = 100))
+
+```
+

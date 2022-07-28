@@ -254,6 +254,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./data_types_formats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Types and Structures</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regular_expressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with text patterns (regular expressions)</span></a>
+  </div>
+</li>
     </ul>
 </li>
         <li class="sidebar-item">
@@ -2404,6 +2409,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="st">"B"</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="pca_plots_files/figure-html/pcaplot-2-1.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># PCA plot of merged</span>
+
+
+ 
+<span class="va">m_log</span> <span class="op">&lt;-</span> <span class="va">d_long</span>  |&gt; 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Group</span><span class="op">)</span> |&gt; 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="op">~</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"SubjectID"</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="op">)</span> 
+
+<span class="va">d_annot</span> <span class="op">&lt;-</span> <span class="va">d_long</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">SubjectID</span>, <span class="va">Group</span><span class="op">)</span>|&gt; 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"SubjectID"</span><span class="op">)</span>
+
+<span class="va">d_annot</span><span class="op">$</span><span class="va">Group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">d_annot</span><span class="op">$</span><span class="va">Group</span><span class="op">)</span>
+
+
+<span class="co"># get pca result with annotation</span>
+<span class="va">pca_res</span> <span class="op">&lt;-</span> <span class="fu">PCAtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/PCAtools/man/pca.html">pca</a></span><span class="op">(</span>mat <span class="op">=</span> <span class="va">m_log</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, 
+                         metadata <span class="op">=</span> <span class="va">d_annot</span> , 
+                         scale <span class="op">=</span> <span class="cn">TRUE</span>, 
+                         transposed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R">  <span class="va">p_PCA</span> <span class="op">&lt;-</span> <span class="fu">PCAtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/PCAtools/man/biplot.html">biplot</a></span><span class="op">(</span>
+    <span class="va">pca_res</span>,
+    x <span class="op">=</span> <span class="fl">1</span>,
+    y <span class="op">=</span> <span class="fl">2</span> ,
+    colby <span class="op">=</span> <span class="st">"Group"</span>,
+    <span class="co">#colkey = colby_color,</span>
+    legendPosition <span class="op">=</span> <span class="st">'right'</span>,
+    pointSize <span class="op">=</span> <span class="fl">3</span>,
+    lengthLoadingsArrowsFactor <span class="op">=</span> <span class="fl">1.5</span>,
+    lab <span class="op">=</span> <span class="cn">NULL</span>,
+    sizeLoadingsNames <span class="op">=</span> <span class="fl">2.5</span>,
+    alphaLoadingsArrow <span class="op">=</span> <span class="fl">0.1</span>,
+    colLoadingsNames <span class="op">=</span> <span class="st">"grey35"</span>,
+    showLoadings <span class="op">=</span> <span class="cn">TRUE</span>,
+    ntopLoadings <span class="op">=</span> <span class="fl">20</span>,
+    drawConnectorsLoadings <span class="op">=</span> <span class="cn">T</span>,
+    boxedLoadingsNames <span class="op">=</span> <span class="cn">T</span>,
+    widthLoadingsArrows <span class="op">=</span> <span class="fl">0.5</span>,
+    widthConnectorsLoadings <span class="op">=</span> <span class="fl">0.001</span>,
+    max.overlaps <span class="op">=</span> <span class="fl">33</span>,
+    ellipseType <span class="op">=</span> <span class="st">"t"</span>,
+    <span class="co"># xlim = c(-22, 25),</span>
+    <span class="co"># ylim = c(-21, 20),</span>
+    ellipse <span class="op">=</span> <span class="cn">TRUE</span>,
+    ellipseLevel <span class="op">=</span> <span class="fl">0.95</span>,
+    ellipseLineSize <span class="op">=</span> <span class="fl">1</span>,
+    ellipseFill <span class="op">=</span> <span class="cn">TRUE</span>,
+    ellipseAlpha <span class="op">=</span> <span class="fl">.05</span>,
+    gridlines.minor <span class="op">=</span> <span class="cn">FALSE</span>,
+  <span class="op">)</span>
+
+<span class="va">p_PCA</span>
+    <span class="co"># theme(</span>
+    <span class="co">#   aspect.ratio = 1,</span>
+    <span class="co">#   panel.grid.major = element_line(size = .5),</span>
+    <span class="co">#   legend.position = c(.91, .93),</span>
+    <span class="co">#   legend.title = element_blank(),</span>
+    <span class="co">#   legend.background = element_rect(fill = alpha("white", 0.0), inherit.blank = TRUE)</span>
+    <span class="co"># )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="pca_plots_files/figure-html/pcaplot-4-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
 
