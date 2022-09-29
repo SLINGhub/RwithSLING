@@ -75,6 +75,7 @@ mydata <- read_xlsx(path = here::here("data/Testdata_wide.xlsx"),
                             trim_ws = TRUE, 
                             na = c("", "NA", "ND"), )
 ```
+
 **Output**
 
 A data frame (tibble)
@@ -100,7 +101,7 @@ Verify the integrity of imported data - do not just assume all is fine
 ### Missing Values {#sec-missingvalues}
 
 -   `read_csv()` or `read_xlsx()` assign empty/missing values as `NA` (*Not Available*).
--   Data files may contain specific text values for missing values (e.g.,"*ND"*, "*LOD"*, *"hemolytic")*. By default, `read_csv()` and `read_xlsx()` assign columns with such values as text (character) instead as numeric - even if there is just one such text value. You can use the `na` parameter to set text values to be interpreted as NA (see example)
+-   Data files may contain specific text values for missing values (e.g.,"*ND"*,"*LOD"*, *"hemolytic")*. By default, `read_csv()` and `read_xlsx()` assign columns with such values as text (character) instead as numeric - even if there is just one such text value. You can use the `na` parameter to set text values to be interpreted as NA (see example)
 -   Column that contain only missing values will be assigned the data type `logical`
 
 ### Data Types {#sec-datatypes}

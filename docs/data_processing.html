@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.629">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>RwithSLING - 8&nbsp; Post-processing/QC</title>
+<title>RwithSLING - 8&nbsp; My Document</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span>
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">My Document</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -196,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_processing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span></a>
+  <a href="./data_processing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">My Document</span></a>
   </div>
 </li>
     </ul>
@@ -272,16 +272,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">8.1</span> Libraries</a></li>
-  <li><a href="#data-format" id="toc-data-format" class="nav-link" data-scroll-target="#data-format"> <span class="header-section-number">8.2</span> Data Format</a></li>
-  <li><a href="#annotate" id="toc-annotate" class="nav-link" data-scroll-target="#annotate"> <span class="header-section-number">8.3</span> Annotate</a></li>
-  <li><a href="#runscatter" id="toc-runscatter" class="nav-link" data-scroll-target="#runscatter"> <span class="header-section-number">8.4</span> RunScatter</a></li>
+<li>
+<a href="#post-processingqc" id="toc-post-processingqc" class="nav-link active" data-scroll-target="#post-processingqc"> <span class="header-section-number">9</span> Post-processing/QC</a>
+  <ul class="collapse">
+<li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries"> <span class="header-section-number">9.1</span> Libraries</a></li>
+  <li><a href="#data-format" id="toc-data-format" class="nav-link" data-scroll-target="#data-format"> <span class="header-section-number">9.2</span> Data Format</a></li>
+  <li><a href="#annotate" id="toc-annotate" class="nav-link" data-scroll-target="#annotate"> <span class="header-section-number">9.3</span> Annotate</a></li>
+  <li><a href="#runscatter" id="toc-runscatter" class="nav-link" data-scroll-target="#runscatter"> <span class="header-section-number">9.4</span> RunScatter</a></li>
+  </ul>
+</li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SLINGhub/RwithSLING/edit/master/data_processing.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SLINGhub/RwithSLING/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Post-processing/QC</span>
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">My Document</span>
 </h1>
 </div>
 
@@ -294,17 +299,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><div class="cell">
+</header><section id="post-processingqc" class="level1" data-number="9"><h1 data-number="9">
+<span class="header-section-number">9</span> Post-processing/QC</h1>
+<div class="cell">
 
 </div>
-<section id="libraries" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="libraries">
-<span class="header-section-number">8.1</span> Libraries</h2>
+<section id="libraries" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="libraries">
+<span class="header-section-number">9.1</span> Libraries</h2>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data-format" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="data-format">
-<span class="header-section-number">8.2</span> Data Format</h2>
+</section><section id="data-format" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="data-format">
+<span class="header-section-number">9.2</span> Data Format</h2>
 <p>The examples below require a tidy (‘long-format’) table with following columns: <code>DataFileName</code>, <code>Feature</code> and <code>Area</code>. See chapters xxxx on how to prepare data in this format. For this chapter we use the example data</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Load and format test data</span>
@@ -319,8 +326,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mydataset</span> <span class="op">&lt;-</span> <span class="fu">SLINGtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SLINGtools/man/read_MassHunterCSV.html">read_MassHunterCSV</a></span><span class="op">(</span>
   file <span class="op">=</span> <span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/Testdata_MHQuant_Detailed_V3.csv"</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="annotate" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="annotate">
-<span class="header-section-number">8.3</span> Annotate</h2>
+</section><section id="annotate" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="annotate">
+<span class="header-section-number">9.3</span> Annotate</h2>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">mydataset</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">DataFileName</span>, Lipid <span class="op">=</span> <span class="va">Feature</span>, <span class="va">Area</span><span class="op">)</span> |&gt; 
@@ -331,8 +338,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
            remove <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>SampleName <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">SampleName</span>, <span class="st">".d"</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="runscatter" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="runscatter">
-<span class="header-section-number">8.4</span> RunScatter</h2>
+</section><section id="runscatter" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="runscatter">
+<span class="header-section-number">9.4</span> RunScatter</h2>
 <p>This is for one page (means one plot with n rows and m columns)</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">d_plot</span> <span class="op">&lt;-</span> <span class="va">d</span> |&gt;
@@ -351,17 +358,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">QCtype</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">Lipid</span><span class="op">)</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">qc_colors</span> <span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: Removed 3 rows containing missing values (geom_point).</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="data_processing_files/figure-html/plot-1-1.png" class="img-fluid" width="576"></p>
+<p><img src="data_processing_files/figure-html/plot-1-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">QCtype_levels_temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="st">"SBLK"</span>, <span class="st">"TBLK"</span>, <span class="st">"UBLK"</span>, <span class="st">"BQC"</span>, <span class="st">"TQC"</span>, <span class="st">"RQC"</span>, <span class="st">"EQC"</span>, <span class="st">"NIST"</span>, <span class="st">"LTR"</span>, <span class="st">"PBLK"</span>, <span class="st">"SPL"</span>, <span class="st">"SST"</span>, <span class="st">"MBLK"</span><span class="op">)</span>
+
+<span class="va">QCtype_col</span> <span class="op">&lt;-</span>         <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#1854f9"</span>,<span class="st">"#db0202"</span>, <span class="st">"#de21de"</span>,<span class="st">"#db0202"</span>,<span class="st">"#1854f9"</span>,<span class="st">"#96a4ff"</span>,<span class="st">"#513c3c"</span>,<span class="st">"#002e6b"</span>,<span class="st">"#880391"</span>,<span class="st">"#08c105"</span>,<span class="st">"#aaaeaf"</span>,<span class="st">"#bafc03"</span>, <span class="st">"black"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">QCtype_col</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">QCtype_levels_temp</span>
+
+
+<span class="va">QCtype_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">23</span>,<span class="fl">23</span>,<span class="fl">23</span>,<span class="fl">16</span>,<span class="fl">25</span>,<span class="fl">6</span>,<span class="fl">24</span>,<span class="fl">23</span>,<span class="fl">23</span>,<span class="fl">23</span>,<span class="fl">22</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">QCtype_shape</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">QCtype_levels_temp</span>
+
+
+<span class="va">QCtype_fillcol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#f891ff"</span>,<span class="st">"#fffb03"</span>,<span class="st">"#c1bd04"</span>,<span class="st">"#db0202"</span>,<span class="st">"#1854f9"</span>,<span class="st">"#688ff9"</span>,<span class="st">"NA"</span>, <span class="st">"#cce2ff"</span>,<span class="st">"#880391"</span>, <span class="st">"#08c105"</span>, <span class="st">"NA"</span>,<span class="st">"#aaaeaf"</span>,<span class="st">"black"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">QCtype_fillcol</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">QCtype_levels_temp</span>
+
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d_plot</span>,
+       mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">RunID</span>, y<span class="op">=</span><span class="va">Area</span>, color<span class="op">=</span> <span class="va">QCtype</span> , fill<span class="op">=</span> <span class="va">QCtype</span> , shape <span class="op">=</span> <span class="va">QCtype</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">Lipid</span><span class="op">)</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">QCtype_col</span>, drop<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">QCtype_fillcol</span>, drop<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_shape_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">QCtype_shape</span>, drop<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Warning: Removed 3 rows containing missing values (geom_point).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="data_processing_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="960"></p>
 </div>
 </div>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {

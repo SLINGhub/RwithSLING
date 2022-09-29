@@ -2,82 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://slinghub.github.io/RwithSLING/index.html</loc>
-    <lastmod>2022-07-28T07:29:03.857Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.337Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/intro.html</loc>
-    <lastmod>2022-07-28T07:29:12.829Z</lastmod>
+    <lastmod>2022-09-29T07:25:35.223Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tutorials.html</loc>
-    <lastmod>2022-07-28T07:29:03.873Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.354Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/import_data.html</loc>
-    <lastmod>2022-07-28T07:29:03.880Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.362Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/select_filter_data.html</loc>
-    <lastmod>2022-07-28T07:29:03.889Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.371Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/regular_expressions.html</loc>
-    <lastmod>2022-07-28T07:29:03.898Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.380Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/tables.html</loc>
-    <lastmod>2022-07-28T07:29:03.906Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.389Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/datawrangling.html</loc>
-    <lastmod>2022-07-28T07:29:03.915Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.398Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/plotting_basics.html</loc>
-    <lastmod>2022-07-28T07:29:03.932Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.414Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/data_processing.html</loc>
-    <lastmod>2022-07-28T07:29:03.950Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.433Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/workflows.html</loc>
-    <lastmod>2022-07-28T07:29:03.960Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.441Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/pca_plots.html</loc>
-    <lastmod>2022-07-28T07:29:03.973Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.452Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/barchart_lipidomics.html</loc>
-    <lastmod>2022-07-28T07:29:03.988Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.468Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/dotplot_lipidomics.html</loc>
-    <lastmod>2022-07-28T07:29:03.997Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.478Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/dilution_series.html</loc>
-    <lastmod>2022-07-28T07:29:04.007Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.488Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/multiple_models.html</loc>
-    <lastmod>2022-07-28T07:29:04.016Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.498Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/import_MSdatasets.html</loc>
-    <lastmod>2022-07-28T07:29:04.024Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.506Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/appendices.html</loc>
-    <lastmod>2022-07-28T07:29:04.032Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.514Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/data_types_formats.html</loc>
-    <lastmod>2022-07-28T07:29:04.039Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.523Z</lastmod>
   </url>
   <url>
     <loc>https://slinghub.github.io/RwithSLING/references.html</loc>
-    <lastmod>2022-07-28T07:29:04.047Z</lastmod>
+    <lastmod>2022-09-29T07:25:28.531Z</lastmod>
   </url>
 </urlset>

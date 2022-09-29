@@ -1,3 +1,11 @@
+---
+title: "My Document"
+format: 
+  html:
+    fig-width: 8
+    fig-height: 15
+---
+
 # Post-processing/QC
 
 ```{r}
@@ -6,7 +14,7 @@
 #| message: false
 source("_common.R")
 library(knitr)
-
+knitr::opts_chunk$set(echo = TRUE, fig.width = 10, fig.height = 15)
 ```
 
 ## Libraries
@@ -62,9 +70,6 @@ d <- mydataset |>
            sep = "_", 
            remove = FALSE) |> 
   mutate(SampleName = str_replace(SampleName, ".d", "")) 
-
-
-
 ```
 
 ## RunScatter
@@ -95,7 +100,36 @@ ggplot(data = d_plot,
   geom_point(aes(color = QCtype), size = 1.5) +
   facet_wrap(vars(Lipid), scales = "free_y") + 
   scale_color_manual(values = qc_colors ) +
-  theme_grey(base_size = 8)
+  theme_light(base_size = 8)
 
+```
+
+```{r}
+#| fig-height: 15
+#| fig-width: 10
+
+QCtype_levels_temp <- c( "SBLK", "TBLK", "UBLK", "BQC", "TQC", "RQC", "EQC", "NIST", "LTR", "PBLK", "SPL", "SST", "MBLK")
+
+QCtype_col <-         c("#1854f9","#db0202", "#de21de","#db0202","#1854f9","#96a4ff","#513c3c","#002e6b","#880391","#08c105","#aaaeaf","#bafc03", "black")
+names(QCtype_col) <- QCtype_levels_temp
+
+
+QCtype_shape <- c(23,23,23,16,25,6,24,23,23,23,22,10,10)
+names(QCtype_shape) <- QCtype_levels_temp
+
+
+QCtype_fillcol <- c("#f891ff","#fffb03","#c1bd04","#db0202","#1854f9","#688ff9","NA", "#cce2ff","#880391", "#08c105", "NA","#aaaeaf","black")
+names(QCtype_fillcol) <- QCtype_levels_temp
+
+
+ggplot(data = d_plot,
+       mapping = aes(x=RunID, y=Area, color= QCtype , fill= QCtype , shape = QCtype)) +
+  geom_point(size = 1.5) +
+  facet_wrap(vars(Lipid), scales = "free_y", ncol = 3) + 
+    expand_limits(y = 0) +
+    scale_color_manual(values=QCtype_col, drop=TRUE) +
+    scale_fill_manual(values=QCtype_fillcol, drop=TRUE)+
+    scale_shape_manual(values=QCtype_shape, drop=TRUE) +
+  theme_light(base_size = 8)
 
 ```

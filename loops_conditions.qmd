@@ -1,0 +1,198 @@
+---
+bibliography: references.bib
+number-sections: true
+suppress-bibliography: false
+---
+
+# Loops and Conditions in R
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("_common.R")
+```
+
+## Introduction
+
+Importing data is often the first step in a data analysis project. Quality and integrity of imported data is key for the subsequent analysis - *Quality In Quality Out*. A good overview of data import in R helps to ensure integrity, completeness and efficient import of data .
+
+## Libraries
+
+```{r}
+#| label: load-lib
+#| echo: true
+#| message: false
+library(here)
+library(tidyverse)
+library(readxl)
+```
+
+## For loops
+
+```{r}
+#| label: for_loops
+#| echo: true
+#| message: false
+
+for (i in c(1,2,3,4,5)) {
+  print(paste0("here number ", i, "-)"))
+  print(glue("here number {i}")) 
+}
+
+```
+
+## Import multiple sheets from an EXCEL file
+
+First let's test importing one sheet. We need the name of the file and sheet
+```{r}
+#| label: read-xlsx
+#| echo: false
+#| message: true
+mysheet1 <- readxl::read_excel(path = here("data/Test.xlsx"), sheet = "Sheet1") 
+
+```
+
+Now we get a list of sheets in an Excel file
+
+```{r}
+#| label: read-xlsx
+#| echo: false
+#| message: true
+
+my_sheets <- readxl::excel_sheets(here("data/Test.xlsx"))
+my_sheets
+```
+
+
+Now we import all of the sheets using a for loop
+
+```{r}
+#| label: loop-through-sheets
+#| echo: false
+#| message: true
+
+for (sheet_name in my_sheets) {
+  mysheet <- readxl::read_excel(path = here("data/Test.xlsx"), sheet = sheet_name) 
+  print(mysheet)
+}
+
+```
+However, while each sheet is imported and was printed out, the tables  have not been joined yet. 
+
+```{r}
+#| label: loop-through-sheets
+#| echo: false
+#| message: true
+
+for (sheet_name in my_sheets) {
+  
+  mysheet <- readxl::read_excel(path = here("data/Test.xlsx"), sheet = sheet_name) 
+  print(mysheet)
+  
+}
+
+```
+
+```{r}
+#| label: loop-through-sheets
+#| echo: false
+#| message: true
+
+
+# in the first loop data will be stacked to an empty dataframe. So we need to define it first
+final_table <- tibble()
+
+for (sheet_name in my_sheets) {
+  
+  mytable <- readxl::read_excel(path = here("data/Test.xlsx"), sheet = sheet_name) 
+  # Add sheet name as column
+  mytable <- mytable |> mutate(sheet = sheet_name, .before = ID)
+  
+  # Stack the table to the current stacked 
+  final_table <- bind_rows(final_table, mysheet)
+  
+}
+```
+
+
+```{r}
+# define function
+
+get_my_table <- function(filename, sheetname) {
+    mysheet <- readxl::read_excel(filename, sheet = sheetname) 
+    mysheet <- mysheet |> mutate(sheet = sheet_name, .before = ID)
+    # return result by calling it
+    mysheet
+}
+
+
+my_sheets <- readxl::excel_sheets(here("data/Test.xlsx"))
+
+for (sheet_name in my_sheets) {
+  
+  mysheet <- get_my_table(filename = here("data/Test.xlsx") ,sheetname = sheet_name)
+  
+  final_table <- bind_rows(final_table, mysheet)
+  
+}
+```
+
+
+```{r}
+library(purrr)
+
+myfunction <- function(x){print(x^2)}
+
+a <- purrr::walk(.x =  c(1,2,3,4,5), .f = ~ myfunction(.x))
+
+
+my_sheets <- readxl::excel_sheets(here("data/Test.xlsx"))
+
+# Define function
+get_my_table <- function(filename, sheetname) {
+    mysheet <- readxl::read_excel(filename, sheet = sheetname) 
+    mysheet <- mysheet |> mutate(sheet = sheet_name, .before = ID)
+    # return result by calling it
+    mysheet
+}
+
+#walk along the list of sheets, import them and bind them automatically
+
+purrr::map_df(.x = my_sheets ,.f = ~get_my_table(here("data/test.xlsx"),sheetname = .x))
+```
+
+
+```{r}
+
+
+sometext = "RQC"
+
+
+if (str_detect(sometext, "TQC")) {
+  print("Yes TQC")
+} else if (str_detect(sometext, "BQC")) {
+  print("yes BQC")
+} else {
+  print("nothing")
+}
+
+#...mutate( conc = if_else(tissue = "cells", conc *1000, conc)
+        
+
+ifelse("cells" == NA, 1,2)
+
+
+qctype <- "PQC"
+
+conc <- case_when(
+  qctype == "TQC" ~ 0,
+  qctype == "BQC" ~ 10,
+  qctype == "RQC" ~ 100,
+  qctype == "SPL" ~ 1000,
+  TRUE ~ 1111
+)
+
+
+```
+
+
